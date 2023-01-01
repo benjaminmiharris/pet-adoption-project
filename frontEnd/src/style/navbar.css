@@ -1,0 +1,7 @@
+.navbar-container {
+  background-color: rgba(81, 186, 212, 0.3);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #888888;
+}
