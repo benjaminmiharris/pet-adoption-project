@@ -3,8 +3,15 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 import "../style/home-banner.css";
+import { useNavigate } from "react-router-dom";
 
 const HomeBanner = () => {
+  const navigate = useNavigate();
+
+  const redirectSearch = () => {
+    navigate("/search");
+  };
+
   return (
     <div className="tester">
       <Row className=" align-items-center justify-content-center">
@@ -25,7 +32,9 @@ const HomeBanner = () => {
           className="home-banner banner-header"
         >
           <h1>Find your dream Pet here</h1>
-          <Button variant="primary">Get Started</Button>
+          <Button variant="primary" onClick={redirectSearch}>
+            Get Started
+          </Button>
         </Col>
       </Row>
     </div>

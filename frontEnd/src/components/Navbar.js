@@ -2,18 +2,24 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Button from "react-bootstrap/Button";
 
 import { FaPaw } from "react-icons/fa";
+
+import { LoginModalContext } from "../context/LoginModalContext";
+import { LoginModalPopup } from "./LoginModal";
+import { useContext } from "react";
 
 import "../style/navbar.css";
 
 const Navigationbar = () => {
+  const { setModalShow } = useContext(LoginModalContext);
   return (
     <Navbar
       collapseOnSelect
       expand="lg"
       variant="dark"
-      className="navbar-container"
+      className="navbar-container fixed-top"
     >
       <Container>
         <Navbar.Brand href="#home">
@@ -39,9 +45,14 @@ const Navigationbar = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+              <Button
+                variant="outline-light"
+                onClick={() => setModalShow(true)}
+              >
+                Login
+              </Button>
+              <LoginModalPopup onHide={() => setModalShow(false)} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
