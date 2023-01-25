@@ -1,0 +1,31 @@
+.about-container {
+  background-color: #f1f1f1;
+  height: 550px;
+  margin: 0;
+  padding: 0;
+}
+
+.top-header {
+  color: #ff6463;
+  font-size: 1.2rem;
+  margin-bottom: 0px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.second-header {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.2rem;
+
+  color: #6a6a6a;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.pets-carousel {
+  margin-left: 150px;
+}

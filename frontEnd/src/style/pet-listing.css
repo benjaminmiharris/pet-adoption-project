@@ -1,0 +1,55 @@
+.pet-card {
+  position: relative;
+}
+
+.pet-listing-container {
+  width: 200px;
+  height: 300px;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.pet-status-container {
+  width: 75px;
+  word-wrap: break-word;
+  height: 20px;
+  background-color: #ff6463;
+  position: relative;
+  top: -315px;
+  right: -110px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.pet-status-txt {
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.pet-name-container {
+  position: relative;
+  background-color: #ffffff;
+  width: 100px;
+  height: 30px;
+  border-radius: 20px;
+  text-align: center;
+  top: -60px;
+  left: 50px;
+  transition: background-color 0.5s;
+}
+
+.pet-name-txt {
+  padding-top: 3px;
+  font-weight: 500;
+  color: #565555;
+}
+
+.pet-name-container:hover {
+  background-color: #fec861;
+  content: "Here";
+  transition: background-color 0.5s;
+}

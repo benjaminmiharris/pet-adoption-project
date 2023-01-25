@@ -1,0 +1,16 @@
+.search-headers-container {
+  background-color: rgb(243, 243, 243);
+  margin-top: 60px;
+  padding-bottom: 50px;
+  padding-top: 20px;
+}
+
+.search-results-container {
+  height: 150px;
+}
+
+.search-results-null {
+  text-align: center;
+
+  margin-top: 100px;
+}

@@ -1,0 +1,27 @@
+.banner-image {
+  width: 80%;
+}
+
+.home-banner {
+  margin-top: 40px;
+}
+
+.banner-header {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+
+  color: #6a6a6a;
+  margin-bottom: 20px;
+}
+
+.sub-header-container {
+  margin-top: 80px;
+}
+
+.sub-header-banner {
+  color: #ff6463;
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+}
