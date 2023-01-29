@@ -1,10 +1,7 @@
-.footer-parent {
-  /* position: absolute; */
-  bottom: 0;
-}
-
 .footer-container {
-  position: relative;
+  position: absolute;
+  bottom: 0px;
+  /* position: relative; */
   left: 0;
   /* bottom: 0; */
   right: 0;
@@ -13,10 +10,10 @@
   height: 100px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .social-media-icons {
+  flex: 1;
   margin: 30px;
   width: 15%;
   text-align: center;
@@ -26,5 +23,7 @@
 
 .website-author {
   color: #6a6a6a;
+  flex: 1;
+
   margin-left: 8%;
 }

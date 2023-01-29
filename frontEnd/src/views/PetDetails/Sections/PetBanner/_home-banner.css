@@ -1,0 +1,85 @@
+.header-container {
+  position: relative;
+}
+
+.pet-container {
+  position: absolute;
+}
+
+.pet-container-img {
+  width: 100vw;
+
+  height: 500px;
+}
+
+.pet-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pet-img {
+  width: 70vw;
+  /* height: 70%; */
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
+  position: relative;
+  bottom: 0px;
+  right: 0;
+}
+
+.pet-heart-icon {
+  position: relative;
+  top: 5px;
+  right: 250px;
+  color: white;
+}
+
+.pet-actions {
+  background-color: #f1f1f1;
+  width: 45vw;
+  height: 15%;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.pet-actions-left {
+  width: 33.3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pet-actions-center {
+  width: 33.3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pet-actions-right {
+  width: 33.3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pet-info-box {
+  text-align: center;
+  background-color: white;
+  height: 70%;
+  width: 80%;
+  border-radius: 20px;
+}
+
+.pet-details-label {
+  font-size: 1rem;
+  color: #6a6a6a;
+}
+
+.pet-details-values {
+  font-size: 1.4rem;
+  color: #3d3d3d;
+
+  font-weight: 700;
+}

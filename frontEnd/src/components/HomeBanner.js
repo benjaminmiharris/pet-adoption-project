@@ -8,8 +8,14 @@ import { FaHeart } from "react-icons/fa";
 import "../style/home-banner.css";
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from "react";
+
+import { UserContext } from "../context/UserContext";
+
 const HomeBanner = () => {
   const navigate = useNavigate();
+
+  const { userFirstName } = useContext(UserContext);
 
   const redirectSearch = () => {
     navigate("/search");
@@ -42,7 +48,7 @@ const HomeBanner = () => {
         >
           <Row className="text-left mt-md-5 ">
             <p className="sub-header-banner">
-              Do you love me? <FaHeart size={18} />
+              {userFirstName + " "}Do you love me? <FaHeart size={18} />
             </p>
             <h1 className="banner-header">Let's help find a pet for you</h1>
           </Row>

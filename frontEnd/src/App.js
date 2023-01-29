@@ -7,6 +7,9 @@ import Error from "./views/Error";
 import Home from "./views/Home";
 import Search from "./views/Search";
 import Profile from "./views/Profile";
+import PetDetails from "./views/PetDetails/PetDetails";
+
+import "./index.css";
 
 function App() {
   return (
@@ -20,9 +23,11 @@ function App() {
 
           <Route path="/search" element={<Search />} />
           <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/pet/:id" element={<PetDetails />} />
+
           <Route path="*" element={<Error />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </>
   );
