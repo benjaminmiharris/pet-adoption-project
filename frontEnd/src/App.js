@@ -5,7 +5,7 @@ import CreateAccount from "./views/CreateAccount";
 
 import Error from "./views/Error";
 import Home from "./views/Home";
-import Search from "./views/Search";
+import Search from "./views/SearchView/Search";
 import Profile from "./views/Profile";
 import PetDetails from "./views/PetDetails/PetDetails";
 
