@@ -1,4 +1,10 @@
 body {
   margin: 0;
   padding: 0;
+  height: 1000px;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
 }

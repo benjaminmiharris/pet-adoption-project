@@ -9,15 +9,18 @@ import { UserContextProvider } from "./context/UserContext";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { ComponentContextProvider } from "./context/ComponentContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <UserContextProvider>
-      <LoginModalContextProvider>
-        <App />
-      </LoginModalContextProvider>
-    </UserContextProvider>
+    <ComponentContextProvider>
+      <UserContextProvider>
+        <LoginModalContextProvider>
+          <App />
+        </LoginModalContextProvider>
+      </UserContextProvider>
+    </ComponentContextProvider>
   </Provider>
 );
 

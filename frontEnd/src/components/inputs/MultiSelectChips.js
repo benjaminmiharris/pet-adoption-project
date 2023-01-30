@@ -19,19 +19,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -41,7 +28,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultiSelectChips() {
+export default function MultiSelectChips({ chipLabel, chipsArray }) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -58,14 +45,14 @@ export default function MultiSelectChips() {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 350 }}>
-        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+        <InputLabel id="demo-multiple-chip-label">{chipLabel}</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          input={<OutlinedInput id="select-multiple-chip" label={chipLabel} />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((value) => (
@@ -75,7 +62,7 @@ export default function MultiSelectChips() {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {chipsArray.map((name) => (
             <MenuItem
               key={name}
               value={name}
