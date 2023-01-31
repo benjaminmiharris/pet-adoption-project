@@ -3,14 +3,16 @@
 }
 
 .pet-listing-container {
-  width: 200px;
-  height: 300px;
+  width: 300px;
+  height: 480px;
   border-radius: 20px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.9;
+  margin: 50px;
+  margin-bottom: 10px;
 }
 
 .pet-status-container {
@@ -19,8 +21,8 @@
   height: 20px;
   background-color: #ff6463;
   position: relative;
-  top: -315px;
-  right: -110px;
+  top: -495px;
+  right: -240px;
   border-radius: 20px;
   text-align: center;
 }
@@ -33,12 +35,12 @@
 .pet-name-container {
   position: relative;
   background-color: #ffffff;
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 35px;
   border-radius: 20px;
   text-align: center;
-  top: -60px;
-  left: 50px;
+  bottom: 100px;
+  left: 145px;
   transition: background-color 0.5s;
 }
 

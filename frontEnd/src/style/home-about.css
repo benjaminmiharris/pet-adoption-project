@@ -1,6 +1,6 @@
 .about-container {
   background-color: #f1f1f1;
-  height: 550px;
+  height: 810px;
   margin: 0;
   padding: 0;
 }
@@ -27,5 +27,5 @@
 }
 
 .pets-carousel {
-  margin-left: 150px;
+  margin-left: 70px;
 }

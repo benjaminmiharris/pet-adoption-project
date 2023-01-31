@@ -10,7 +10,7 @@ import BasicSearch from "../SearchBanner/BasicSearch/BasicSearch";
 
 import SearchToggle from "../../../../components/inputs/SearchToggle";
 
-import PetListing from "../../../../components/PetListing";
+import PetListing from "../../../../components/petCard/PetListing";
 
 import "../../search-page.css";
 
