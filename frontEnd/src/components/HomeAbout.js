@@ -1,7 +1,7 @@
 import Row from "react-bootstrap/Row";
 
 import "../style/home-about.css";
-import PetListing from "./PetListing";
+import PetListing from "../components/petCard/PetListing";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";

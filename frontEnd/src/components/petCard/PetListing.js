@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/pet-listing.css";
+import "./pet-listing.css";
 
 const PetListing = ({ imageSrc, petName, petStatus }) => {
   const [buttonText, setButtonText] = useState(petName);

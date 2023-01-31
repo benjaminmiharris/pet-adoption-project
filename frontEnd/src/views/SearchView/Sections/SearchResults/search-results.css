@@ -1,0 +1,8 @@
+.pet-listing-container-search-results {
+  margin-top: 100px;
+  display: flex;
+  width: 100vw;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
