@@ -10,6 +10,7 @@ import Profile from "./views/Profile/Profile";
 import PetDetails from "./views/PetDetails/PetDetails";
 
 import "./index.css";
+import MyPets from "./views/MyPets/MyPets";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/my-pets" element={<MyPets />} />
 
           <Route path="/search" element={<Search />} />
           <Route path="/create-account" element={<CreateAccount />} />
