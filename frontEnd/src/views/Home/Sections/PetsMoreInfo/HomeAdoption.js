@@ -1,10 +1,12 @@
-import "../style/home-adoption.css";
-import InfoBox from "./InfoBox";
+import InfoBox from "../../../../components/InfoBox";
+
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/Col";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
+import "./home-adoption.css";
 
 const HomeAdoption = () => {
   const responsive = {
@@ -18,8 +20,8 @@ const HomeAdoption = () => {
       items: 2,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      breakpoint: { max: 900, min: 464 },
+      items: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },

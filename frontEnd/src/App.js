@@ -4,10 +4,13 @@ import Navigationbar from "./components/Navbar";
 import CreateAccount from "./views/CreateAccount";
 
 import Error from "./views/Error";
-import Home from "./views/Home";
+import Home from "./views/Home/Sections/Home";
+
 import Search from "./views/SearchView/Search";
 import Profile from "./views/Profile/Profile";
 import PetDetails from "./views/PetDetails/PetDetails";
+
+import MyPets from "./views/MyPets/MyPets";
 
 import "./index.css";
 
@@ -20,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/my-pets" element={<MyPets />} />
 
           <Route path="/search" element={<Search />} />
           <Route path="/create-account" element={<CreateAccount />} />

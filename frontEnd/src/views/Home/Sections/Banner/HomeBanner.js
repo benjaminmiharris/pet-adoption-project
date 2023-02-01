@@ -5,12 +5,12 @@ import Button from "@mui/material/Button";
 
 import { FaHeart } from "react-icons/fa";
 
-import "../style/home-banner.css";
+import "./home-banner.css";
 import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../../../context/UserContext";
 
 const HomeBanner = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const HomeBanner = () => {
           className="text-center banner-image"
         >
           <img
-            className=" banner-image"
+            className="banner-image"
             src="https://pet-adoption-project.s3.eu-west-2.amazonaws.com/New+Staff+Headshots+(6).png"
             alt="img of pug in pink circle"
           />
@@ -53,7 +53,7 @@ const HomeBanner = () => {
             <h1 className="banner-header">Let's help find a pet for you</h1>
           </Row>
           <Button
-            // className="custom-btn align-items-sm-center"
+            className="home-banner get-started-btn"
             variant="outlined"
             color="primary"
             onClick={redirectSearch}

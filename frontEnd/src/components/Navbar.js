@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { FaPaw } from "react-icons/fa";
 
 import { LoginModalContext } from "../context/LoginModalContext";
-import { LoginModalPopup } from "./LoginModal";
+import { LoginModalPopup } from "../components/LoginModal/LoginModal";
 import { useContext, useEffect } from "react";
 
 import "../style/navbar.css";
@@ -33,7 +33,7 @@ const Navigationbar = () => {
               id="collasible-nav-dropdown"
             >
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">My Pets </NavDropdown.Item>
+              <NavDropdown.Item href="/my-pets">My Pets </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Add Pet</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item>

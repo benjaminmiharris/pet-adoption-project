@@ -1,10 +1,11 @@
 import Row from "react-bootstrap/Row";
 
-import "../style/home-about.css";
-import PetListing from "../components/petCard/PetListing";
+import PetListing from "../../../../components/petCard/PetListing";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
+import "./home-about.css";
 
 const HomeAbout = () => {
   const responsive = {
@@ -18,7 +19,7 @@ const HomeAbout = () => {
       items: 3,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 648 },
       items: 2,
     },
     mobile: {
