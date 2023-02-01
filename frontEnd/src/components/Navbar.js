@@ -16,7 +16,12 @@ const Navigationbar = () => {
   const { setModalShow } = useContext(LoginModalContext);
 
   return (
-    <Navbar bg="custom-color" variant="dark" sticky="top">
+    <Navbar
+      bg="custom-color"
+      variant="dark"
+      sticky="top"
+      className="nav-bar-cstm"
+    >
       <Container>
         <Navbar.Brand href="/">
           <FaPaw size={40} />

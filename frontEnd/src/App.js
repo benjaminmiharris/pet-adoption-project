@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Navigationbar from "./components/Navbar";
 import CreateAccount from "./views/CreateAccount";
 
-import Error from "./views/Error";
+import Error from "./views/Error/Error";
 import Home from "./views/Home/Sections/Home";
 
 import Search from "./views/SearchView/Search";
@@ -13,6 +13,7 @@ import PetDetails from "./views/PetDetails/PetDetails";
 import MyPets from "./views/MyPets/MyPets";
 
 import "./index.css";
+import AddPetView from "./views/AddPets/AddPetView";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/my-pets" element={<MyPets />} />
+          <Route path="/create-pet" element={<AddPetView />} />
 
           <Route path="/search" element={<Search />} />
           <Route path="/create-account" element={<CreateAccount />} />

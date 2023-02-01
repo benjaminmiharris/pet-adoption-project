@@ -1,0 +1,83 @@
+.error-container {
+  display: flex;
+  position: relative;
+  top: 200px;
+
+  flex-direction: row;
+  justify-content: center;
+}
+
+.not-found-image {
+  width: 320px;
+  height: 320px;
+
+  margin-top: 60px;
+}
+
+.error-int {
+  font-size: 18em;
+}
+.left.error-int {
+  position: relative;
+  left: 2%;
+}
+
+.right.error-int {
+  position: relative;
+  right: 2%;
+}
+
+.error-sub-message {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 400;
+  position: relative;
+  top: 130px;
+  color: #6a6a6a;
+}
+
+.rtrn-home-btn {
+  position: relative;
+  top: 135px;
+  text-align: center;
+}
+
+@media (max-width: 730px) {
+  .not-found-image {
+    width: 150px;
+    height: 150px;
+    margin-top: 25px;
+  }
+  .error-int {
+    font-size: 8em;
+  }
+
+  .error-sub-message {
+    font-size: 1.5rem;
+    top: 180px;
+  }
+
+  .rtrn-home-btn {
+    top: 180px;
+  }
+}
+
+@media (max-width: 300px) {
+  .error-container {
+    top: 150px;
+  }
+  .not-found-image {
+    width: 100px;
+    height: 100px;
+    margin-top: 25px;
+  }
+  .error-int {
+    font-size: 6em;
+  }
+
+  .error-sub-message {
+    font-size: 1rem;
+    top: 130px;
+    font-weight: 700;
+  }
+}
