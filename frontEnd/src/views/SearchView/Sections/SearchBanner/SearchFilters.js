@@ -16,7 +16,7 @@ import "../../search-page.css";
 
 const SearchFilters = () => {
   const state = useSelector(showAdvancedSearch);
-  console.log("State IH", state.payload.search.value);
+  // console.log("State IH", state.payload.search.value);
   return (
     <>
       <div className="search-headers-container">
