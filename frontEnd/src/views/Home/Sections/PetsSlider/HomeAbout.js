@@ -48,14 +48,14 @@ const HomeAbout = () => {
             imageSrc={
               "https://aish.s3.eu-west-2.amazonaws.com/public/files/uploads/40c7db5af77db6783ef8625adda935282b544cc4.jpg"
             }
-            petName={"Charlie"}
+            petName={"Fluffy"}
             petStatus={"Foster"}
           />
           <PetListing
             imageSrc={
               "https://aish.s3.eu-west-2.amazonaws.com/public/files/uploads/aab7db1bc7ad3b7fd46bbee59f044463e568d5e1.jpg"
             }
-            petName={"Charlie"}
+            petName={"Mitsey"}
             petStatus={"Adopted"}
           />
         </Carousel>

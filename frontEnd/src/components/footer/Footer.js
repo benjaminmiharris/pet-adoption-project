@@ -2,7 +2,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { IoLogoTwitter } from "react-icons/io";
 
-import "../style/footer.css";
+import "./footer.css";
 
 const Footer = () => {
   return (
