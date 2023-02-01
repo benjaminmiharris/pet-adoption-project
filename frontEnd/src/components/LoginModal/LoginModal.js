@@ -2,10 +2,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 import { useContext, useState } from "react";
-import { LoginModalContext } from "../context/LoginModalContext";
+import { LoginModalContext } from "../../context/LoginModalContext";
 
-import Signin from "./Signin";
-import CreateAccount from "./CreateAccount";
+import Signin from "../Signin";
+import CreateAccount from "../CreateAccount";
 
 function LoginModalPopup() {
   const { modalShow, setModalShow } = useContext(LoginModalContext);

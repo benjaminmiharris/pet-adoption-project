@@ -15,7 +15,7 @@ const InfoBox = ({ image, header, subHeader }) => {
       // href="https://www.aish.org.uk/"
       sx={{ color: "text.tertiary" }}
     >
-      <Card sx={{ minHeight: "280px", width: 320 }}>
+      <Card sx={{ minHeight: "350px", width: 350 }}>
         <CardCover>
           <img
             src={image}
