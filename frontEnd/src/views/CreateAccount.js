@@ -22,7 +22,7 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import "../style/create-account.css";
+// import "../style/create-account.css";
 
 const CreateAccount = () => {
   const [showPassword, setShowPassword] = React.useState(false);

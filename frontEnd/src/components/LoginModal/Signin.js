@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/user";
+import { login } from "../../redux/user";
 
 import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";

@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { useContext } from "react";
 
-import { createAccount } from "../redux/user";
+import { createAccount } from "../../redux/user";
 import { useDispatch } from "react-redux";
 
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 import Button from "react-bootstrap/Button";
 
