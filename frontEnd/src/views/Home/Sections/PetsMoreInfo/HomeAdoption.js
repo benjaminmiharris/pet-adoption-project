@@ -1,10 +1,12 @@
-import "../style/home-adoption.css";
-import InfoBox from "./InfoBox";
+import InfoBox from "../../../../components/InfoBox";
+
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/Col";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
+import "./home-adoption.css";
 
 const HomeAdoption = () => {
   const responsive = {

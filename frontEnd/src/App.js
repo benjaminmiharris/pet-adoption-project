@@ -4,13 +4,15 @@ import Navigationbar from "./components/Navbar";
 import CreateAccount from "./views/CreateAccount";
 
 import Error from "./views/Error";
-import Home from "./views/Home";
+import Home from "./views/Home/Sections/Home";
+
 import Search from "./views/SearchView/Search";
 import Profile from "./views/Profile/Profile";
 import PetDetails from "./views/PetDetails/PetDetails";
 
-import "./index.css";
 import MyPets from "./views/MyPets/MyPets";
+
+import "./index.css";
 
 function App() {
   return (

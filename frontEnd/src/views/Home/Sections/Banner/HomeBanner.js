@@ -5,12 +5,12 @@ import Button from "@mui/material/Button";
 
 import { FaHeart } from "react-icons/fa";
 
-import "../style/home-banner.css";
+import "./home-banner.css";
 import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../../../context/UserContext";
 
 const HomeBanner = () => {
   const navigate = useNavigate();
