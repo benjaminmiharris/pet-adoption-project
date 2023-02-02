@@ -63,7 +63,7 @@ const CreateAccount = () => {
 
   const passwordMatch = (password, repeatPassword) => {
     let message;
-    if (password == repeatPassword) {
+    if (password === repeatPassword) {
       return message;
     } else {
       return notify();
