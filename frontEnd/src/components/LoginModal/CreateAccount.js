@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 // import { createAccount } from "../../redux/user";
 // import { useDispatch } from "react-redux";
@@ -21,9 +21,10 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-const CreateAccount = () => {
-  // const dispatch = useDispatch();
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const CreateAccount = () => {
   const {
     userEmail,
     setUserEmail,
@@ -41,6 +42,7 @@ const CreateAccount = () => {
   } = useContext(UserContext);
 
   const [showPassword, setShowPassword] = React.useState(false);
+  const [timer, setTimer] = useState(null);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -57,28 +59,25 @@ const CreateAccount = () => {
     event.preventDefault();
   };
 
-  const createAccount = async () => {
-    try {
-      const reponse = await fetch("http://localhost:3005/test", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          firstname: userFirstName,
-        }),
-      });
+  const notify = () => toast("Passwords do not match");
 
-      const json = await reponse.json();
-      console.log("success", json);
-    } catch (e) {
-      console.log(e);
+  const passwordMatch = (password, repeatPassword) => {
+    let message;
+    if (password == repeatPassword) {
+      return message;
+    } else {
+      return notify();
     }
-
-    // const result = await reponse.JSON();
-    // console.log(result);
   };
+
+  React.useEffect(() => {
+    clearTimeout(timer);
+    setTimer(
+      setTimeout(() => {
+        passwordMatch(userPassword, userPasswordConfirm);
+      }, 400)
+    );
+  }, [userPasswordConfirm]);
 
   const fieldWidth = "30ch";
 
@@ -119,6 +118,8 @@ const CreateAccount = () => {
             label="Password"
           />
         </FormControl>
+        <ToastContainer />
+
         <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
             Password Confirm
