@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { createAccountAPI } from "../helpers/createAccountAPI";
 
 const UserContext = createContext();
 
@@ -10,6 +11,18 @@ const UserContextProvider = ({ children }) => {
   const [userLastName, setUserLastName] = useState("");
   const [userMobile, setUserMobile] = useState("");
   const [userShortBio, setUserShortBio] = useState("");
+
+  const createUserAccount = () => {
+    const userDetails = {
+      firstname: userFirstName,
+      lastname: userLastName,
+      email: userEmail,
+      mobile: userMobile,
+      password: userPassword,
+    };
+    createAccountAPI(userDetails);
+    return console.log("create user function successful", userDetails);
+  };
 
   return (
     <UserContext.Provider
@@ -28,6 +41,7 @@ const UserContextProvider = ({ children }) => {
         setUserMobile,
         userShortBio,
         setUserShortBio,
+        createUserAccount,
       }}
     >
       {children}
