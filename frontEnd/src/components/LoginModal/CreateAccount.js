@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { useContext } from "react";
 
-import { createAccount } from "../../redux/user";
-import { useDispatch } from "react-redux";
+// import { createAccount } from "../../redux/user";
+// import { useDispatch } from "react-redux";
 
 import { UserContext } from "../../context/UserContext";
 
@@ -22,7 +22,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const CreateAccount = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const {
     userEmail,
@@ -37,6 +37,7 @@ const CreateAccount = () => {
     setUserLastName,
     userMobile,
     setUserMobile,
+    createUserAccount,
   } = useContext(UserContext);
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -163,22 +164,13 @@ const CreateAccount = () => {
         <Button
           variant="primary"
           type="submit"
-          onClick={
-            createAccount
-            // dispatch(
-            //   createAccount({
-            //     email: userEmail,
-            //     password: userPassword,
-            //     passwordVerify: userPasswordConfirm,
-            //     firstName: userFirstName,
-            //     lastName: userLastName,
-            //     mobile: userMobile,
-            //   })
-            // )
-          }
+          onClick={(e) => {
+            e.preventDefault();
+            createUserAccount();
+          }}
         >
-          Send{" "}
-        </Button>{" "}
+          Submit
+        </Button>
       </div>
     </Box>
   );
