@@ -1,5 +1,5 @@
 const Ajv = require("ajv");
-const ajv = new Ajv();
+const ajv = new Ajv({ allErrors: true });
 
 const newUserSchema = {
   type: "object",
@@ -8,21 +8,9 @@ const newUserSchema = {
     lastName: { type: "string" },
     mobile: { type: "number" },
     email: { type: "string" },
-    password: { type: "string", minLength: 8, maxLength: 24 },
+    password: { type: "string" },
   },
   required: ["firstName", "lastName", "email", "password"],
 };
-
-// const testerUser = {
-//   firstName: "Benj",
-//   lastName: "Harris",
-//   mobile: 073,
-//   email: "nemj@gmail.com",
-//   password: "jsdfdsjfjsf",
-// };
-
-// const userValidation = ajv.compile(newUserSchema);
-
-// console.log(userValidation(testerUser));
 
 module.exports.userValidation = ajv.compile(newUserSchema);
