@@ -2,12 +2,15 @@ require("dotenv").config();
 
 const express = require("express");
 const { initDB } = require("./models/init");
+const UsersController = require("./controllers/UsersController");
 
 initDB();
 const app = express();
 const cors = require("cors");
 app.use(express.json());
 app.use(cors());
+
+app.post("/register", UsersController.register);
 
 // const PetClass = require("./controllers/PetClass");
 // const petClass = new PetClass();

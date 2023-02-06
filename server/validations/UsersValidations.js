@@ -1,16 +1,15 @@
 const Ajv = require("ajv");
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv();
 
-const newUserSchema = {
+module.exports.RegisterValidation = ajv.compile({
   type: "object",
   properties: {
     firstName: { type: "string" },
     lastName: { type: "string" },
-    mobile: { type: "number" },
+    mobile: { type: "string" },
     email: { type: "string" },
     password: { type: "string" },
   },
   required: ["firstName", "lastName", "email", "password"],
-};
-
-module.exports.userValidation = ajv.compile(newUserSchema);
+  additionalProperties: false,
+});

@@ -9,4 +9,13 @@ module.exports = class UsersDAO {
       console.log(`Could not establish connection to users collection ${e}`);
     }
   }
+
+  static async createUser(userData) {
+    userData.created_on = new Date();
+    await collection.insertOne({ ...userData });
+  }
+
+  static async getUserByEmail(email) {
+    return await collection.findOne({ email });
+  }
 };

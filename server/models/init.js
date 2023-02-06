@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
 const UsersDAO = require("./UsersDAO");
 
-module.exports.initDB = async function initBD() {
+module.exports.initDB = async function initDB() {
   MongoClient.connect(process.env.MONGODB_URI)
     .then(async (connection) => {
       console.log("Connection to DB established");
@@ -9,7 +9,8 @@ module.exports.initDB = async function initBD() {
       return;
     })
     .catch((error) => {
-      console.log("DB Error" + error);
+      console.log(error);
+      console.log(`DB connection failed ${error}`);
       process.exit(1);
     });
 };
