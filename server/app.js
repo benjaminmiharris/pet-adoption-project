@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 app.post("/register", UsersController.register);
+app.post("/login", UsersController.login);
 
 // const PetClass = require("./controllers/PetClass");
 // const petClass = new PetClass();
