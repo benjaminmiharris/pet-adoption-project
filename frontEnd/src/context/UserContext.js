@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { createAccountAPI } from "../helpers/createAccountAPI";
+import { createAccountAPI, loginAPI } from "../helpers/createAccountAPI";
 
 const UserContext = createContext();
 
@@ -14,14 +14,21 @@ const UserContextProvider = ({ children }) => {
 
   const createUserAccount = () => {
     const userDetails = {
-      firstname: userFirstName,
-      lastname: userLastName,
-      email: userEmail,
+      firstName: userFirstName,
+      lastName: userLastName,
       mobile: userMobile,
+      email: userEmail,
       password: userPassword,
     };
     createAccountAPI(userDetails);
-    return console.log("create user function successful", userDetails);
+  };
+
+  const signIn = () => {
+    const user = {
+      email: userEmail,
+      password: userPassword,
+    };
+    loginAPI(user);
   };
 
   return (
@@ -42,6 +49,7 @@ const UserContextProvider = ({ children }) => {
         userShortBio,
         setUserShortBio,
         createUserAccount,
+        signIn,
       }}
     >
       {children}

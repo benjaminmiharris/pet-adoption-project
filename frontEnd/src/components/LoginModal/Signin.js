@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/user";
 
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
@@ -20,10 +18,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Signin = () => {
-  const dispatch = useDispatch();
-
-  const { userEmail, setUserEmail, userPassword, setUserPassword } =
-    useContext(UserContext);
+  const { setUserEmail, setUserPassword, signIn } = useContext(UserContext);
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -81,9 +76,9 @@ const Signin = () => {
       <Button
         variant="primary"
         type="submit"
-        onClick={() =>
-          dispatch(login({ email: userEmail, password: userPassword }))
-        }
+        onClick={() => {
+          signIn();
+        }}
       >
         Login
       </Button>{" "}

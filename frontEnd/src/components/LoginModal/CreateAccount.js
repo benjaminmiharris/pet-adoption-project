@@ -156,6 +156,7 @@ const CreateAccount = () => {
           onChange={(e) => setUserLastName(e.target.value)}
         />
         <TextField
+          type="number"
           label="Mobile"
           //   id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
