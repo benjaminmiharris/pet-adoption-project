@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { ComponentContext } from "../../context/ComponentContext";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,11 +29,20 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultiSelectChips({ chipLabel, chipsArray }) {
+export default function MultiSelectChips({
+  chipLabel,
+  chipsArray,
+  onChangeHandler,
+}) {
   const theme = useTheme();
+
   const [personName, setPersonName] = React.useState([]);
 
+  React.useEffect(() => {
+    onChangeHandler(personName);
+  }, [personName]);
   const handleChange = (event) => {
+    // console.log("event", event.target.value);
     const {
       target: { value },
     } = event;
@@ -44,7 +54,7 @@ export default function MultiSelectChips({ chipLabel, chipsArray }) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 350 }}>
+      <FormControl sx={{ m: 1, width: 350, display: "flex", flexWrap: "wrap" }}>
         <InputLabel id="demo-multiple-chip-label">{chipLabel}</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -54,7 +64,14 @@ export default function MultiSelectChips({ chipLabel, chipsArray }) {
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label={chipLabel} />}
           renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            <Box
+              sx={{
+                width: "35inch",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 0.5,
+              }}
+            >
               {selected.map((value) => (
                 <Chip key={value} label={value} />
               ))}

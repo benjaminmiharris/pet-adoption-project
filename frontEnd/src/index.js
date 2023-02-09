@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { LoginModalContextProvider } from "./context/LoginModalContext";
 import { UserContextProvider } from "./context/UserContext";
+import { PetContextProvider } from "./context/PetContext";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -17,7 +18,9 @@ root.render(
     <ComponentContextProvider>
       <UserContextProvider>
         <LoginModalContextProvider>
-          <App />
+          <PetContextProvider>
+            <App />
+          </PetContextProvider>
         </LoginModalContextProvider>
       </UserContextProvider>
     </ComponentContextProvider>
