@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const { initDB } = require("./models/init");
 const UsersController = require("./controllers/UsersController");
+const PetsController = require("./controllers/PetController");
 
 initDB();
 const app = express();
@@ -21,7 +22,7 @@ app.post("/login", UsersController.login);
 
 // app.post("/test", userClass.CreateUser);
 
-// app.post("/pet/create", petClass.CreatePet);
+app.post("/pet/create", PetsController.createPet);
 
 // app.get("/pet", petClass.GetPets);
 
