@@ -1,4 +1,6 @@
 const sha256 = require("js-sha256");
+const jwt = require("jsonwebtoken");
+
 const UsersDAO = require("../models/UsersDAO");
 const {
   RegisterValidation,
@@ -49,31 +51,45 @@ module.exports = class UsersController {
   };
 
   static login = async (req, res) => {
-    const isValid = LoginValidation(req.body);
+    try {
+      const isValid = LoginValidation(req.body);
 
-    if (!isValid) {
-      return res
-        .status(400)
-        .send({ success: false, message: "Please fill all fields" });
-    }
+      if (!isValid) {
+        return res
+          .status(400)
+          .send({ success: false, message: "Please fill all fields" });
+      }
 
-    const userObject = {
-      email: req.body.email,
-      password: req.body.password,
-    };
+      const userObject = {
+        email: req.body.email,
+        password: req.body.password,
+      };
 
-    const exisitingUser = await UsersDAO.getUserByEmail(userObject.email);
+      const exisitingUser = await UsersDAO.getUserByEmail(userObject.email);
 
-    if (exisitingUser.password != sha256(req.body.password)) {
-      return res.status(400).send({
-        success: false,
-        message: "unsuccessful login attempt try again.",
-      });
-    } else {
+      if (exisitingUser.password != sha256(req.body.password)) {
+        return res.status(400).send({
+          success: false,
+          message: "unsuccessful login attempt try again.",
+        });
+      }
+
+      const token = jwt.sign(
+        {
+          user_id: exisitingUser._id,
+        },
+        process.env.JWT_SECERET
+      );
+
       return res.status(200).send({
         success: true,
         message: "successful login.",
-        user: exisitingUser,
+        token: token,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        success: false,
+        message: "unsuccessful login attempt try again.",
       });
     }
   };

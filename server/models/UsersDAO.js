@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 let usersCollection;
 
 module.exports = class UsersDAO {
@@ -17,5 +18,9 @@ module.exports = class UsersDAO {
 
   static async getUserByEmail(email) {
     return await usersCollection.findOne({ email });
+  }
+
+  static async getUserById(userId) {
+    return await usersCollection.findOne({ _id: new ObjectId(userId) });
   }
 };

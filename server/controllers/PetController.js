@@ -1,4 +1,6 @@
 const { addPetValidation } = require("../validations/pet-schemas");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 const PetsDAO = require("../models/PetsDAO");
 
@@ -6,9 +8,12 @@ module.exports = class PetsController {
   static createPet = async (req, res) => {
     try {
       const petObject = req.body;
-      // taskObject.user_id = req.currentUser._id;
+      console.log(req.file);
 
-      console.log(petObject);
+      petObject.user_id = req.currentUser._id;
+
+      console.log("PETOBJECT", petObject);
+      console.log("petObject.user_id", petObject.user_id);
 
       await PetsDAO.createPet(petObject);
 
