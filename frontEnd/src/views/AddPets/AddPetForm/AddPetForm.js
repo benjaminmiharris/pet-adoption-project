@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 
 import Box from "@mui/material/Box";
 import MultiSelectChips from "../../../components/inputs/MultiSelectChips";
@@ -15,6 +15,12 @@ import { Button } from "@mui/material";
 const AddPetForm = () => {
   const [personName, setPersonName] = useState([]);
 
+  const inputRef = useRef();
+
+  const handleClick = () => {
+    inputRef.current.click();
+  };
+
   const {
     createPetObject,
     setpetAdoptionStatus,
@@ -27,6 +33,8 @@ const AddPetForm = () => {
     setPetWeight,
     setPetHeight,
     setPetName,
+    petImage,
+    setpetImage,
   } = useContext(PetContext);
 
   //   const { personName } = useContext(ComponentContext);
@@ -53,6 +61,8 @@ const AddPetForm = () => {
   const handleChangePets = (event) => {
     setPetType(event);
   };
+
+  console.log(petImage);
 
   return (
     <>
@@ -138,6 +148,14 @@ const AddPetForm = () => {
 
         <br />
         <br />
+
+        <input
+          type="file"
+          // value={inputRef}
+          onChange={(e) => {
+            setpetImage(e.target.files[0]);
+          }}
+        />
 
         <Button onClick={createPetObject}>Click</Button>
       </Box>

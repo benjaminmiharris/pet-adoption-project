@@ -1,13 +1,36 @@
-const createPetAPI = async (pet) => {
+import axios from "axios";
+
+const createPetAPI = async (token, img, pet) => {
   try {
-    const response = await fetch("http://localhost:3002/create-pet", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(pet),
-    });
+    console.log("IMG", img);
+
+    console.log("TOKEN", token);
+    console.log("PET", pet);
+
+    const formData = new FormData();
+    formData.append("text", pet);
+    formData.append("image", img);
+
+    const response = await axios.post(
+      "http://localhost:3002/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    // const response = await fetch("http://localhost:3002/upload", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "multipart/form-data",
+    //     // Authorization: `Bearer ${token}`,
+    //   },
+    //   body: JSON.stringify(formData),
+    // });
+
     if (response.ok) {
       return console.log("A new pet has been succesfully created");
     }

@@ -39,7 +39,7 @@ const Navigationbar = () => {
             >
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item href="/my-pets">My Pets </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Add Pet</NavDropdown.Item>
+              <NavDropdown.Item href="/create-pet">Add Pet</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.4">All Pets </NavDropdown.Item>
