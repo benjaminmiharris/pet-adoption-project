@@ -43,7 +43,7 @@ app.post("/login", UsersController.login);
 
 // app.get("/pet", petClass.GetPets);
 
-// app.get("/pet/:id", petClass.GetPetId);
+app.get("/pet/:id", PetsController.getPetId);
 
 // app.post("/create-user", user.CreateUser);
 
