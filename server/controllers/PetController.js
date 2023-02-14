@@ -16,13 +16,13 @@ module.exports = class PetsController {
       console.log("PETOBJECT", petObject);
       console.log("petObject.user_id", petObject.user_id);
 
-      // const isValid = addPetValidation(petObject);
+      const isValid = addPetValidation(petObject);
 
-      // if (!isValid) {
-      //   return res
-      //     .status(400)
-      //     .send({ success: false, message: "Please fill all fields" });
-      // }
+      if (!isValid) {
+        return res
+          .status(400)
+          .send({ success: false, message: "Please fill all fields" });
+      }
 
       await PetsDAO.createPet(petObject);
 
@@ -81,10 +81,20 @@ module.exports = class PetsController {
   };
 
   static getPetId = async (req, res) => {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
 
-    const resultsArray = this.petsArray.filter((pet) => pet.pet_id === id);
+      const response = await PetsDAO.getPetById(id);
 
-    return res.json(resultsArray);
+      return res.status(200).json({
+        success: true,
+        message: response,
+      });
+    } catch (error) {
+      return res.status(404).json({
+        success: false,
+        message: "Pet was not found. Please try again.",
+      });
+    }
   };
 };
