@@ -11,9 +11,18 @@ module.exports = class PetsController {
       console.log(req.file);
 
       petObject.user_id = req.currentUser._id;
+      petObject.petImage = req.petImage;
 
       console.log("PETOBJECT", petObject);
       console.log("petObject.user_id", petObject.user_id);
+
+      // const isValid = addPetValidation(petObject);
+
+      // if (!isValid) {
+      //   return res
+      //     .status(400)
+      //     .send({ success: false, message: "Please fill all fields" });
+      // }
 
       await PetsDAO.createPet(petObject);
 

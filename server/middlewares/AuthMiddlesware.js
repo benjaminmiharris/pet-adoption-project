@@ -7,7 +7,11 @@ module.exports.AuthMiddleware = async function AuthMiddleware(req, res, next) {
 
   console.log("authorization", authorization);
 
-  if (!authorization) return res.status(401).send();
+  if (!authorization)
+    return res.status(401).send({
+      success: false,
+      message: "please try and login again",
+    });
 
   authorization = authorization.replace("Bearer ", "");
 
