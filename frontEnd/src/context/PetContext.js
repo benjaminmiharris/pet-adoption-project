@@ -25,7 +25,6 @@ const PetContextProvider = ({ children }) => {
       pet_type: petType,
       pet_name: petName,
       pet_adoptionStatus: petAdoptionStatus,
-      //   pet_imageURL: petImage,
       pet_height: petHeight,
       pet_weight: petWeight,
       pet_color: petColor,
