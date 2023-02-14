@@ -6,7 +6,7 @@ module.exports.RegisterValidation = ajv.compile({
   properties: {
     firstName: { type: "string" },
     lastName: { type: "string" },
-    mobile: { type: "string" },
+    mobile: { type: "number" },
     email: { type: "string" },
     password: { type: "string" },
   },

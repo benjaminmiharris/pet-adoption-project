@@ -1,8 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { createPetAPI } from "../helpers/createPetAPI";
+import { AuthContext } from "./AuthContext";
+
 const PetContext = createContext();
 
 const PetContextProvider = ({ children }) => {
+  const { authToken } = useContext(AuthContext);
+
   const [petType, setPetType] = useState("");
 
   const [petName, setPetName] = useState("");
@@ -14,22 +18,25 @@ const PetContextProvider = ({ children }) => {
   const [petHypoallergenic, setPetHypoallergenic] = useState(false);
   const [petDiet, setPetDiet] = useState("");
   const [petBreed, setPetBreed] = useState("");
+  const [petImage, setpetImage] = useState([]);
 
   const createPetObject = () => {
     const petObject = {
-      petAdoptionStatus,
-      petType,
-      petName,
-      petHeight,
-      petWeight,
-      petColor,
-      petBio,
-      petHypoallergenic,
-      petDiet,
-      petBreed,
+      pet_type: petType,
+      pet_name: petName,
+      pet_adoptionStatus: petAdoptionStatus,
+      pet_height: petHeight,
+      pet_weight: petWeight,
+      pet_color: petColor,
+      pet_bio: petBio,
+      pet_hypoallergenic: petHypoallergenic,
+      pet_dietary: petDiet,
+      pet_breed: petBreed,
     };
 
-    createPetAPI(petObject);
+    console.log("AUTHTOEKN", authToken);
+
+    createPetAPI(authToken, petImage, petObject);
   };
 
   return (
@@ -56,6 +63,8 @@ const PetContextProvider = ({ children }) => {
         setPetDiet,
         petBreed,
         setPetBreed,
+        petImage,
+        setpetImage,
       }}
     >
       {children}

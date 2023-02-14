@@ -30,7 +30,8 @@ const loginAPI = async (user) => {
       body: JSON.stringify(user),
     });
     if (response.ok) {
-      return console.log("User logged in");
+      const results = await response.json();
+      return setUserTokenLocalStorage(results.token);
     }
     if (response.status == 400) {
       return console.log("Return the response body from the API...");
@@ -38,6 +39,11 @@ const loginAPI = async (user) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const setUserTokenLocalStorage = (token) => {
+  localStorage.setItem("userToken", token);
+  console.log("Token added to localStorage");
 };
 
 export { createAccountAPI, loginAPI };

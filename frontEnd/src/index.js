@@ -11,6 +11,7 @@ import { PetContextProvider } from "./context/PetContext";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ComponentContextProvider } from "./context/ComponentContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,9 +19,11 @@ root.render(
     <ComponentContextProvider>
       <UserContextProvider>
         <LoginModalContextProvider>
-          <PetContextProvider>
-            <App />
-          </PetContextProvider>
+          <AuthContextProvider>
+            <PetContextProvider>
+              <App />
+            </PetContextProvider>
+          </AuthContextProvider>
         </LoginModalContextProvider>
       </UserContextProvider>
     </ComponentContextProvider>
