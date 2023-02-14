@@ -13,14 +13,6 @@ import { ComponentContext } from "../../../context/ComponentContext";
 import { Button } from "@mui/material";
 
 const AddPetForm = () => {
-  const [personName, setPersonName] = useState([]);
-
-  const inputRef = useRef();
-
-  const handleClick = () => {
-    inputRef.current.click();
-  };
-
   const {
     createPetObject,
     setpetAdoptionStatus,

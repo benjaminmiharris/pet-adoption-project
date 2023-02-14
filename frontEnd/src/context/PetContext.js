@@ -23,7 +23,7 @@ const PetContextProvider = ({ children }) => {
   const createPetObject = () => {
     const petObject = {
       pet_type: petType,
-      pet_name: petName,
+      pet_name: petAdoptionStatus,
       pet_adoptionStatus: petAdoptionStatus,
       pet_height: petHeight,
       pet_weight: petWeight,
@@ -39,9 +39,26 @@ const PetContextProvider = ({ children }) => {
     createPetAPI(authToken, petImage, petObject);
   };
 
+  const searchPetObject = () => {
+    const petObject = {
+      pet_type: petType,
+      pet_name: petAdoptionStatus,
+      pet_adoptionStatus: petAdoptionStatus,
+      pet_height: petHeight,
+      pet_weight: petWeight,
+    };
+
+    console.log("AUTHTOEKN", petObject);
+
+    console.log("AUTHTOEKN", authToken);
+
+    // createPetAPI(authToken, petImage, petObject);
+  };
+
   return (
     <PetContext.Provider
       value={{
+        searchPetObject,
         createPetObject,
         petType,
         setPetType,

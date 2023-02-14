@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import MultiSelectChips from "../../../../../components/inputs/MultiSelectChips";
+import { PetContext } from "../../../../../context/PetContext";
 
 const BasicSearch = () => {
   const petsArray = [
@@ -14,9 +15,20 @@ const BasicSearch = () => {
     "Snakes",
     "Lizards",
   ];
+
+  const { setPetType } = useContext(PetContext);
+
+  const handleChangePets = (event) => {
+    setPetType(event);
+  };
+
   return (
     <div>
-      <MultiSelectChips chipLabel="Pets" chipsArray={petsArray} />
+      <MultiSelectChips
+        chipLabel="Pets"
+        chipsArray={petsArray}
+        onChangeHandler={handleChangePets}
+      />
     </div>
   );
 };

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 
 import { useSelector } from "react-redux";
 import { showAdvancedSearch } from "../../../../redux/search";
@@ -10,12 +11,21 @@ import BasicSearch from "../SearchBanner/BasicSearch/BasicSearch";
 
 import SearchToggle from "../../../../components/inputs/SearchToggle";
 
-import PetListing from "../../../../components/petCard/PetListing";
-
 import "../../search-page.css";
+import { PetContext } from "../../../../context/PetContext";
 
 const SearchFilters = () => {
   const state = useSelector(showAdvancedSearch);
+
+  const {
+    petType,
+    petAdoptionStatus,
+    petName,
+    petWeight,
+    petHeight,
+    searchPetObject,
+  } = useContext(PetContext);
+
   // console.log("State IH", state.payload.search.value);
   return (
     <>
@@ -24,6 +34,7 @@ const SearchFilters = () => {
         <Box display="flex" alignItems="center" justifyContent="center">
           <SearchToggle />
         </Box>
+
         {state.payload.search.value ? (
           <Box display="flex" alignItems="center" justifyContent="center">
             <BasicSearch />
@@ -31,6 +42,11 @@ const SearchFilters = () => {
         ) : (
           <AdvancedSearch />
         )}
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Button variant="outlined" onClick={searchPetObject}>
+            Search
+          </Button>
+        </Box>
       </div>
     </>
   );
