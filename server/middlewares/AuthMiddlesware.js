@@ -20,12 +20,7 @@ module.exports.AuthMiddleware = async function AuthMiddleware(req, res, next) {
   try {
     const tokenData = jwt.verify(authorization, process.env.JWT_SECERET);
 
-    console.log("tokenData", tokenData);
-    console.log("tokenData.user_id", tokenData.user_id);
-
     const userData = await UsersDAO.getUserById(tokenData.user_id);
-
-    console.log("USERDATA", userData);
 
     req.currentUser = userData;
   } catch (error) {
@@ -36,4 +31,19 @@ module.exports.AuthMiddleware = async function AuthMiddleware(req, res, next) {
   }
 
   next();
+};
+
+module.exports.RoleCheckerMiddleware = async function RoleCheckerMiddleware(
+  req,
+  res,
+  next
+) {
+  if (req.currentUser.role == "admin") {
+    next();
+  } else {
+    return res.status(401).send({
+      success: false,
+      message: "insufficent permissions to carry out this action",
+    });
+  }
 };

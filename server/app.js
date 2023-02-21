@@ -6,7 +6,10 @@ const UsersController = require("./controllers/UsersController");
 const PetsController = require("./controllers/PetController");
 const { S3PetUploadMiddleware } = require("./middlewares/S3PetImageUpload");
 
-const { AuthMiddleware } = require("./middlewares/AuthMiddlesware");
+const {
+  AuthMiddleware,
+  RoleCheckerMiddleware,
+} = require("./middlewares/AuthMiddlesware");
 
 initDB();
 const app = express();
@@ -30,6 +33,14 @@ const upload = multer({ storage: storage });
 
 app.post("/register", UsersController.register);
 app.post("/login", UsersController.login);
+app.post("/verify", (req, res) => {
+  console.log(req.headers.authorization);
+
+  return res.status(200).send({
+    success: true,
+    message: "authentic user",
+  });
+});
 
 // const PetClass = require("./controllers/PetClass");
 // const petClass = new PetClass();
@@ -41,7 +52,7 @@ app.post("/login", UsersController.login);
 
 // app.post("/pet/create", AuthMiddleware, PetsController.createPet);
 
-// app.get("/pet", petClass.GetPets);
+app.get("/pet", PetsController.getPets);
 
 app.get("/pet/:id", PetsController.getPetId);
 
@@ -49,31 +60,16 @@ app.get("/pet/:id", PetsController.getPetId);
 
 app.post(
   "/pet/create",
-  [upload.single("image"), AuthMiddleware, S3PetUploadMiddleware],
+  [
+    upload.single("image"),
+    AuthMiddleware,
+    RoleCheckerMiddleware,
+    S3PetUploadMiddleware,
+  ],
   PetsController.createPet
 );
 
-// app.post("/upload", upload.single("image"), (req, res, next) => {
-//   const text = req.body.text;
-//   const file = req.file;
-//   const s3Params = {
-//     Bucket: process.env.BUCKET_NAME,
-//     Key: `uploads/${uuid()}-${file.originalname}`,
-//     Body: file.buffer,
-//     ContentType: file.mimetype,
-//   };
-
-//   s3.upload(s3Params, (err, data) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send(err);
-//     }
-
-//     res.send(`Text: ${text}\nImage URL: ${data.Location}`);
-//   });
-// });
-
-// upload.array("files"),
+app.put("/pet/:id", (req, res) => {});
 
 app.listen(3002, async () => {
   console.log("Server is running on port 3002");
