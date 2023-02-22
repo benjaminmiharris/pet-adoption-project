@@ -13,6 +13,7 @@ module.exports = class PetsDAO {
   }
 
   static async createPet(petData) {
+    console.log("Create pet record", petData);
     petData.created_on = new Date();
     await petsCollection.insertOne({ ...petData });
   }
@@ -21,7 +22,7 @@ module.exports = class PetsDAO {
     return await petsCollection.findOne({ _id: new ObjectId(petId) });
   }
 
-  static async getPets(params) {
-    return await petsCollection.findOne({ _id: new ObjectId(petId) });
+  static async getPets(query) {
+    return await petsCollection.find(query).toArray();
   }
 };

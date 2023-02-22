@@ -16,13 +16,13 @@ module.exports = class PetsController {
       console.log("PETOBJECT", petObject);
       console.log("petObject.user_id", petObject.user_id);
 
-      const isValid = addPetValidation(petObject);
+      // const isValid = addPetValidation(petObject);
 
-      if (!isValid) {
-        return res
-          .status(400)
-          .send({ success: false, message: "Please fill all fields" });
-      }
+      // if (!isValid) {
+      //   return res
+      //     .status(400)
+      //     .send({ success: false, message: "Please fill all fields" });
+      // }
 
       await PetsDAO.createPet(petObject);
 
@@ -39,45 +39,31 @@ module.exports = class PetsController {
   };
 
   static getPets = async (req, res) => {
-    const { pet_name, pet_adoptionStatus, pet_type, pet_height, pet_weight } =
-      req.query;
+    const params = req.query;
 
-    const resultsArray = this.petsArray.filter((pet) => {
-      if (
-        pet_adoptionStatus.toLowerCase() &&
-        pet.pet_adoptionStatus.toLowerCase() !==
-          pet_adoptionStatus.toLowerCase()
-      )
-        return false;
-      if (
-        pet_type.toLowerCase() &&
-        pet.pet_type.toLowerCase() !== pet_type.toLowerCase()
-      )
-        return false;
-      if (
-        pet_height.toLowerCase() &&
-        pet.pet_height.toLowerCase() !== pet_height.toLowerCase()
-      )
-        return false;
-      if (
-        pet_weight.toLowerCase() &&
-        pet.pet_weight.toLowerCase() !== pet_weight.toLowerCase()
-      )
-        return false;
-      if (
-        pet_name.toLowerCase() &&
-        pet.pet_name.toLowerCase() !== pet_name.toLowerCase()
-      )
-        return false;
+    const query = {};
 
-      return true;
-    });
-
-    if (resultsArray.length > 0) {
-      return res.json(resultsArray);
-    } else {
-      return res.json(this.petsArray);
+    if (params.petType) {
+      query.pet_type = { $regex: new RegExp(params.petType, "i") };
     }
+    if (params.petStatus) {
+      query.pet_adoptionStatus = { $regex: new RegExp(params.petStatus, "i") };
+    }
+    if (params.petName) {
+      query.pet_name = { $regex: new RegExp(params.petName, "i") };
+    }
+    if (params.petHeight) {
+      query.pet_height = params.petHeight;
+    }
+    if (params.petWeight) {
+      query.pet_weight = params.petWeight;
+    }
+
+    const results = await PetsDAO.getPets(query);
+    console.log(results);
+    return res.json({
+      results,
+    });
   };
 
   static getPetId = async (req, res) => {
