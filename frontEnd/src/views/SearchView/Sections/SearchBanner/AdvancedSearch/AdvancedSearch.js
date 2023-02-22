@@ -6,12 +6,12 @@ import { PetContext } from "../../../../../context/PetContext";
 
 import MultiSelectChips from "../../../../../components/inputs/MultiSelectChips";
 
+import { ADOPTION_STATUS_ARRAY } from "../../../../../constants";
+
 import "./advanced-search.css";
 import BasicSearch from "../BasicSearch/BasicSearch";
 
 const AdvancedSearch = () => {
-  const adoptionStatusArray = ["Adopted", "Looking for home", "Foster"];
-
   const { setpetAdoptionStatus, setPetName, setPetHeight, setPetWeight } =
     useContext(PetContext);
 
@@ -27,7 +27,7 @@ const AdvancedSearch = () => {
       <Box display="flex" alignItems="center" justifyContent="center">
         <MultiSelectChips
           chipLabel="Status"
-          chipsArray={adoptionStatusArray}
+          chipsArray={ADOPTION_STATUS_ARRAY}
           onChangeHandler={handleChangeStatus}
         />
       </Box>

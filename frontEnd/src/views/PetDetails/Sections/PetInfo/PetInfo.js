@@ -28,7 +28,7 @@ const PetInfo = ({ petDetails }) => {
           <div className="pet-details-more-info-title">Further details:</div>
           <ul className="pet-details-more-info">
             <li className="pet-details-more-info-detail">
-              Name: {!petDetails.pet_bio ? "NA" : petDetails.pet_bio}{" "}
+              Name: {!petDetails.pet_name ? "NA" : petDetails.pet_name}{" "}
             </li>
 
             <li className="pet-details-more-info-detail">

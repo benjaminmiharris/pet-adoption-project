@@ -7,18 +7,16 @@ import { getPetsAPI } from "../../../../helpers/createPetAPI";
 import "./search-results.css";
 
 const SearchResults = () => {
-  const [petsResults, setPetResults] = useState([]);
+  const { setPetResults, petsResults } = useContext(PetContext);
 
   async function getPetResultsFromPetsAPI() {
-    const data = await getPetsAPI();
+    const data = await getPetsAPI("http://localhost:3002/pet");
     setPetResults(data);
   }
 
   useEffect(() => {
     getPetResultsFromPetsAPI();
   }, []);
-
-  console.log(petsResults);
 
   return (
     <>
@@ -33,7 +31,7 @@ const SearchResults = () => {
                 <PetListing
                   key={pet._id}
                   imageSrc={pet.petImage}
-                  petName={"Charlie"}
+                  petName={pet.pet_name}
                   petStatus={pet.pet_adoptionStatus}
                   petId={pet._id}
                 />

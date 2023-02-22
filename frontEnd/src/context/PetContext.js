@@ -9,6 +9,10 @@ const PetContextProvider = ({ children }) => {
 
   const [petType, setPetType] = useState("");
   const [petName, setPetName] = useState("");
+
+  const [petAge, setPetAge] = useState("");
+  const [petGender, setPetGender] = useState("");
+
   const [petAdoptionStatus, setpetAdoptionStatus] = useState("");
   const [petHeight, setPetHeight] = useState("");
   const [petWeight, setPetWeight] = useState("");
@@ -18,7 +22,7 @@ const PetContextProvider = ({ children }) => {
   const [petDiet, setPetDiet] = useState("");
   const [petBreed, setPetBreed] = useState("");
   const [petImage, setpetImage] = useState([]);
-  const [petsResults, setPetsResults] = useState([]);
+  const [petsResults, setPetResults] = useState([]);
 
   // useEffect(() => {
   //   getPetsResultsFromAPI();
@@ -31,7 +35,9 @@ const PetContextProvider = ({ children }) => {
   const createPetObject = () => {
     const petObject = {
       pet_type: petType,
-      pet_name: petAdoptionStatus,
+      pet_name: petName,
+      pet_age: petAge,
+      pet_gender: petGender,
       pet_adoptionStatus: petAdoptionStatus,
       pet_height: petHeight,
       pet_weight: petWeight,
@@ -47,26 +53,23 @@ const PetContextProvider = ({ children }) => {
     createPetAPI(authToken, petImage, petObject);
   };
 
-  const searchPetObject = () => {
-    const petObject = {
-      pet_type: petType,
-      pet_name: petAdoptionStatus,
-      pet_adoptionStatus: petAdoptionStatus,
-      pet_height: petHeight,
-      pet_weight: petWeight,
-    };
-
-    console.log("AUTHTOEKN", petObject);
-
-    console.log("AUTHTOEKN", authToken);
-
-    // createPetAPI(authToken, petImage, petObject);
-  };
+  // const searchPetObject = {
+  //   pet_type: petType,
+  //   pet_name: petName,
+  //   pet_adoptionStatus: petAdoptionStatus,
+  //   pet_height: petHeight,
+  //   pet_weight: petWeight,
+  // };
 
   return (
     <PetContext.Provider
       value={{
-        searchPetObject,
+        petsResults,
+        setPetResults,
+        petAge,
+        setPetAge,
+        petGender,
+        setPetGender,
         createPetObject,
         petType,
         setPetType,

@@ -35,9 +35,9 @@ const createPetAPI = async (token, img, pet) => {
   }
 };
 
-const getPetsAPI = async () => {
+const getPetsAPI = async (url) => {
   try {
-    const response = await fetch("http://localhost:3002/pet");
+    const response = await fetch(url);
     const results = await response.json();
 
     console.log("API", results);

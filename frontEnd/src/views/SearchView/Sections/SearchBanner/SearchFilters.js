@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
@@ -13,6 +13,7 @@ import SearchToggle from "../../../../components/inputs/SearchToggle";
 
 import "../../search-page.css";
 import { PetContext } from "../../../../context/PetContext";
+import { getPetsAPI } from "../../../../helpers/createPetAPI";
 
 const SearchFilters = () => {
   const state = useSelector(showAdvancedSearch);
@@ -21,12 +22,24 @@ const SearchFilters = () => {
     petType,
     petAdoptionStatus,
     petName,
-    petWeight,
     petHeight,
-    searchPetObject,
+    petWeight,
+    setPetResults,
+    petsResults,
   } = useContext(PetContext);
 
-  // console.log("State IH", state.payload.search.value);
+  const searchHandler = async () => {
+    const data = await getPetsAPI(
+      `http://localhost:3002/pet?petType=${petType}&petStatus=${petAdoptionStatus}&petName=${petName}&petHeight=${petHeight}&petWeight=${petWeight}`
+    );
+
+    return setPetResults(data);
+  };
+
+  useEffect(() => {
+    console.log("Resilts", petsResults);
+  }, [petsResults]);
+
   return (
     <>
       <div className="search-headers-container">
@@ -48,7 +61,12 @@ const SearchFilters = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Button variant="outlined" onClick={searchPetObject}>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              searchHandler();
+            }}
+          >
             Search
           </Button>
         </Box>

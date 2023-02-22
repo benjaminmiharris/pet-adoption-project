@@ -46,7 +46,7 @@ const ProfileForm = () => {
           id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
         />
-        <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
+        {/* <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
@@ -89,7 +89,7 @@ const ProfileForm = () => {
             }
             label="PasswordConfirm"
           />
-        </FormControl>
+        </FormControl> */}
         <TextField
           label="First name"
           //   id="outlined-start-adornment"
