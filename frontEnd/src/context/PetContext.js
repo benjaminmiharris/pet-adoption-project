@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { createPetAPI } from "../helpers/createPetAPI";
+import { createContext, useContext, useEffect, useState } from "react";
+import { createPetAPI, getPetsAPI } from "../helpers/createPetAPI";
 import { AuthContext } from "./AuthContext";
 
 const PetContext = createContext();
@@ -8,7 +8,6 @@ const PetContextProvider = ({ children }) => {
   const { authToken } = useContext(AuthContext);
 
   const [petType, setPetType] = useState("");
-
   const [petName, setPetName] = useState("");
   const [petAdoptionStatus, setpetAdoptionStatus] = useState("");
   const [petHeight, setPetHeight] = useState("");
@@ -19,6 +18,15 @@ const PetContextProvider = ({ children }) => {
   const [petDiet, setPetDiet] = useState("");
   const [petBreed, setPetBreed] = useState("");
   const [petImage, setpetImage] = useState([]);
+  const [petsResults, setPetsResults] = useState([]);
+
+  // useEffect(() => {
+  //   getPetsResultsFromAPI();
+  // }, []);
+
+  // const getPetsResultsFromAPI = async () => {
+  //   return await setPetsResults(getPetsAPI());
+  // };
 
   const createPetObject = () => {
     const petObject = {
@@ -82,6 +90,7 @@ const PetContextProvider = ({ children }) => {
         setPetBreed,
         petImage,
         setpetImage,
+        petsResults,
       }}
     >
       {children}

@@ -3,22 +3,16 @@ import { FaHeart } from "react-icons/fa";
 
 import "./_home-banner.css";
 
-const HomeBanner = () => {
+const HomeBanner = ({ petDetails }) => {
   const [heartStateCSS, setHeartStateCSS] = useState(false);
 
   return (
     <div className="pet-header-container">
       <div className="pet-container">
-        <img
-          className="pet-container-img"
-          src="https://pet-adoption-project.s3.eu-west-2.amazonaws.com/1600+x+840+Web+Banners+(3200+x+1680+px)+(4).png"
-        />
+        <img className="pet-container-img" src={petDetails.petImage} />
       </div>
       <div className="pet-cover">
-        <img
-          className="pet-img"
-          src="https://pet-adoption-project.s3.eu-west-2.amazonaws.com/1600+x+840+Web+Banners+(3200+x+1680+px)+(2).png"
-        />
+        <img className="pet-img" src={petDetails.petImage} />
 
         {heartStateCSS ? (
           <FaHeart
@@ -42,19 +36,27 @@ const HomeBanner = () => {
         <div className="pet-actions-left">
           <div className="pet-info-box">
             <div className="pet-details-label">Age</div>
-            <div className="pet-details-values">3 months</div>
+            <div className="pet-details-values">
+              {!petDetails.pet_age ? "NA" : petDetails.pet_age}
+            </div>
           </div>
         </div>
         <div className="pet-actions-center">
           <div className="pet-info-box">
-            <div className="pet-details-label">Weight</div>
-            <div className="pet-details-values">2 kg</div>
+            <div className="pet-details-label">Weight (kg)</div>
+            <div className="pet-details-values">
+              {" "}
+              {!petDetails.pet_weight ? "NA" : petDetails.pet_weight}
+            </div>
           </div>
         </div>
         <div className="pet-actions-right">
           <div className="pet-info-box">
             <div className="pet-details-label">Sex</div>
-            <div className="pet-details-values">Male</div>
+            <div className="pet-details-values">
+              {" "}
+              {!petDetails.pet_gender ? "NA" : petDetails.pet_gender}
+            </div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
+import { LoginModalContext } from "../../context/LoginModalContext";
 
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -19,6 +20,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Signin = () => {
   const { setUserEmail, setUserPassword, signIn } = useContext(UserContext);
+  const { setModalShow } = useContext(LoginModalContext);
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -26,6 +28,11 @@ const Signin = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleLogin = () => {
+    setModalShow(false);
+    signIn();
   };
   return (
     <>
@@ -77,11 +84,11 @@ const Signin = () => {
         variant="primary"
         type="submit"
         onClick={() => {
-          signIn();
+          handleLogin();
         }}
       >
         Login
-      </Button>{" "}
+      </Button>
     </>
   );
 };

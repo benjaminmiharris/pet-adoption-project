@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+import { authenticateUser } from "../helpers/createAccountAPI";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [authToken, setauthToken] = useState("");
-  //   const [authName, setAuthName] = useState("");
+  //   const [validUser, setValidUser] = useState(false);
 
   async function getFromStorage() {
     const creds = await localStorage.getItem("userToken");
+    console.log("creds", creds);
+    // authenticateUser(creds);
     // creds = JSON.stringify(creds);
 
     if (creds) {
@@ -17,20 +20,16 @@ function AuthContextProvider({ children }) {
     }
   }
 
+  function logoutStorage() {
+    localStorage.removeItem("userToken");
+  }
+
   useEffect(() => {
     getFromStorage();
   }, []);
 
-  //   useEffect(() => {
-  //     localStorage.setItem("userToken", {
-  //       userToken: authToken,
-  //     });
-  //   }, [authToken]);
-
-  console.log("authToken", authToken);
-
   return (
-    <AuthContext.Provider value={{ authToken, setauthToken }}>
+    <AuthContext.Provider value={{ authToken, setauthToken, logoutStorage }}>
       {children}
     </AuthContext.Provider>
   );

@@ -148,9 +148,9 @@ const AddPetForm = () => {
             setpetImage(e.target.files[0]);
           }}
         />
-
-        <Button onClick={createPetObject}>Click</Button>
       </Box>
+      <br />
+      <Button onClick={createPetObject}>Submit</Button>
     </>
   );
 };

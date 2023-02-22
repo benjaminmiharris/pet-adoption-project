@@ -35,4 +35,49 @@ const createPetAPI = async (token, img, pet) => {
   }
 };
 
-export { createPetAPI };
+const getPetsAPI = async () => {
+  try {
+    const response = await fetch("http://localhost:3002/pet");
+    const results = await response.json();
+
+    console.log("API", results);
+
+    if (results.results.length > 0) {
+      return {
+        success: true,
+        response: results,
+      };
+    } else {
+      return { success: false, message: "There is no data" };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: "There was an error when requesting pets data",
+    };
+  }
+};
+
+const getPetIdAPI = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:3002/pet/${id}`);
+    const results = await response.json();
+
+    console.log("API", results);
+
+    if (results.success == true) {
+      return {
+        results,
+      };
+    } else {
+      return { success: false, message: "There is no data" };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: "There was an error when requesting pets data",
+    };
+  }
+};
+
+export { createPetAPI, getPetsAPI, getPetIdAPI };

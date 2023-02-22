@@ -5,6 +5,8 @@
 .pet-container-img {
   width: 100vw;
   height: 500px;
+  object-fit: cover;
+  opacity: 0.5;
 }
 
 .pet-cover {

@@ -42,7 +42,12 @@ const SearchFilters = () => {
         ) : (
           <AdvancedSearch />
         )}
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box
+          sx={{ m: 2 }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Button variant="outlined" onClick={searchPetObject}>
             Search
           </Button>

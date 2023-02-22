@@ -1,11 +1,11 @@
 .footer-container {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0px;
-  /* position: relative; */
+  position: relative;
   left: 0;
   /* bottom: 0; */
   right: 0;
-  width: 100vw;
+  width: 100%;
   background-color: #ffc1c2;
   height: 100px;
   display: flex;
@@ -24,6 +24,5 @@
 .website-author {
   color: #6a6a6a;
   flex: 1;
-
   margin-left: 8%;
 }
