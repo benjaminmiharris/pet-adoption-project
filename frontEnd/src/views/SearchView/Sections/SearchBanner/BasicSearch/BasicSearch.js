@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import MultiSelectChips from "../../../../../components/inputs/MultiSelectChips";
+import { PetContext } from "../../../../../context/PetContext";
+
+import { PETS_ARRAY } from "../../../../../constants";
 
 const BasicSearch = () => {
-  const petsArray = [
-    "Dogs",
-    "Cats",
-    "Birds",
-    "Fish",
-    "Rabbits",
-    "Hamsters",
-    "Guinea Pigs",
-    "Turtles",
-    "Snakes",
-    "Lizards",
-  ];
+  const { setPetType } = useContext(PetContext);
+
+  const handleChangePets = (event) => {
+    setPetType(event);
+  };
+
   return (
     <div>
-      <MultiSelectChips chipLabel="Pets" chipsArray={petsArray} />
+      <MultiSelectChips
+        chipLabel="Pets"
+        chipsArray={PETS_ARRAY}
+        onChangeHandler={handleChangePets}
+      />
     </div>
   );
 };

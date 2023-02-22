@@ -20,4 +20,8 @@ module.exports = class PetsDAO {
   static async getPetById(petId) {
     return await petsCollection.findOne({ _id: new ObjectId(petId) });
   }
+
+  static async getPets(params) {
+    return await petsCollection.findOne({ _id: new ObjectId(petId) });
+  }
 };

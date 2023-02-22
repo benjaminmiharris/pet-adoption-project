@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { createPetAPI } from "../helpers/createPetAPI";
+import { createContext, useContext, useEffect, useState } from "react";
+import { createPetAPI, getPetsAPI } from "../helpers/createPetAPI";
 import { AuthContext } from "./AuthContext";
 
 const PetContext = createContext();
@@ -8,8 +8,11 @@ const PetContextProvider = ({ children }) => {
   const { authToken } = useContext(AuthContext);
 
   const [petType, setPetType] = useState("");
-
   const [petName, setPetName] = useState("");
+
+  const [petAge, setPetAge] = useState("");
+  const [petGender, setPetGender] = useState("");
+
   const [petAdoptionStatus, setpetAdoptionStatus] = useState("");
   const [petHeight, setPetHeight] = useState("");
   const [petWeight, setPetWeight] = useState("");
@@ -19,11 +22,22 @@ const PetContextProvider = ({ children }) => {
   const [petDiet, setPetDiet] = useState("");
   const [petBreed, setPetBreed] = useState("");
   const [petImage, setpetImage] = useState([]);
+  const [petsResults, setPetResults] = useState([]);
+
+  // useEffect(() => {
+  //   getPetsResultsFromAPI();
+  // }, []);
+
+  // const getPetsResultsFromAPI = async () => {
+  //   return await setPetsResults(getPetsAPI());
+  // };
 
   const createPetObject = () => {
     const petObject = {
       pet_type: petType,
       pet_name: petName,
+      pet_age: petAge,
+      pet_gender: petGender,
       pet_adoptionStatus: petAdoptionStatus,
       pet_height: petHeight,
       pet_weight: petWeight,
@@ -39,9 +53,23 @@ const PetContextProvider = ({ children }) => {
     createPetAPI(authToken, petImage, petObject);
   };
 
+  // const searchPetObject = {
+  //   pet_type: petType,
+  //   pet_name: petName,
+  //   pet_adoptionStatus: petAdoptionStatus,
+  //   pet_height: petHeight,
+  //   pet_weight: petWeight,
+  // };
+
   return (
     <PetContext.Provider
       value={{
+        petsResults,
+        setPetResults,
+        petAge,
+        setPetAge,
+        petGender,
+        setPetGender,
         createPetObject,
         petType,
         setPetType,
@@ -65,6 +93,7 @@ const PetContextProvider = ({ children }) => {
         setPetBreed,
         petImage,
         setpetImage,
+        petsResults,
       }}
     >
       {children}

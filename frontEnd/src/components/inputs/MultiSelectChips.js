@@ -57,9 +57,9 @@ export default function MultiSelectChips({
       <FormControl sx={{ m: 1, width: 350, display: "flex", flexWrap: "wrap" }}>
         <InputLabel id="demo-multiple-chip-label">{chipLabel}</InputLabel>
         <Select
+          multiple={true}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
-          multiple
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label={chipLabel} />}

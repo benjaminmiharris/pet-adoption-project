@@ -38,7 +38,7 @@ const HomeAbout = () => {
         <Carousel containerClass="carousel-container" responsive={responsive}>
           <PetListing
             imageSrc={
-              "https://aish.s3.eu-west-2.amazonaws.com/public/files/uploads/1dcd6719f6d458bbb91b2bf750c6df56fc97caa5.jpg"
+              "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/uploads/3f10a889-d0e5-4777-a3d6-fd88819472f1"
             }
             petName={"Charlie"}
             petStatus={"Adopted"}

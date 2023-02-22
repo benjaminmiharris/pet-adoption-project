@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const createAccountAPI = async (user) => {
   try {
     const response = await fetch("http://localhost:3002/register", {
@@ -45,5 +47,21 @@ const setUserTokenLocalStorage = (token) => {
   localStorage.setItem("userToken", token);
   console.log("Token added to localStorage");
 };
+
+// const authenticateUser = async (token) => {
+//   try {
+//     const response = await axios.post("http://localhost:3002/verify", {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     if (response.ok) {
+//       console.log("all good");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export { createAccountAPI, loginAPI };

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 
 import { useSelector } from "react-redux";
 import { showAdvancedSearch } from "../../../../redux/search";
@@ -10,13 +11,35 @@ import BasicSearch from "../SearchBanner/BasicSearch/BasicSearch";
 
 import SearchToggle from "../../../../components/inputs/SearchToggle";
 
-import PetListing from "../../../../components/petCard/PetListing";
-
 import "../../search-page.css";
+import { PetContext } from "../../../../context/PetContext";
+import { getPetsAPI } from "../../../../helpers/createPetAPI";
 
 const SearchFilters = () => {
   const state = useSelector(showAdvancedSearch);
-  // console.log("State IH", state.payload.search.value);
+
+  const {
+    petType,
+    petAdoptionStatus,
+    petName,
+    petHeight,
+    petWeight,
+    setPetResults,
+    petsResults,
+  } = useContext(PetContext);
+
+  const searchHandler = async () => {
+    const data = await getPetsAPI(
+      `http://localhost:3002/pet?petType=${petType}&petStatus=${petAdoptionStatus}&petName=${petName}&petHeight=${petHeight}&petWeight=${petWeight}`
+    );
+
+    return setPetResults(data);
+  };
+
+  useEffect(() => {
+    console.log("Resilts", petsResults);
+  }, [petsResults]);
+
   return (
     <>
       <div className="search-headers-container">
@@ -24,6 +47,7 @@ const SearchFilters = () => {
         <Box display="flex" alignItems="center" justifyContent="center">
           <SearchToggle />
         </Box>
+
         {state.payload.search.value ? (
           <Box display="flex" alignItems="center" justifyContent="center">
             <BasicSearch />
@@ -31,6 +55,21 @@ const SearchFilters = () => {
         ) : (
           <AdvancedSearch />
         )}
+        <Box
+          sx={{ m: 2 }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Button
+            variant="outlined"
+            onClick={() => {
+              searchHandler();
+            }}
+          >
+            Search
+          </Button>
+        </Box>
       </div>
     </>
   );

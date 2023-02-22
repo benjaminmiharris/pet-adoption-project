@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 
 import "./pet-info.css";
 
-const PetInfo = () => {
+const PetInfo = ({ petDetails }) => {
   return (
     <div>
       <div className="pet-details-container">
@@ -18,28 +18,44 @@ const PetInfo = () => {
           </div>
           <br />
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+            {!petDetails.pet_bio
+              ? "There is no bio for this pet!"
+              : petDetails.pet_bio}
           </div>
         </div>
 
         <div className="pet-details-more-info-container">
           <div className="pet-details-more-info-title">Further details:</div>
           <ul className="pet-details-more-info">
-            <li className="pet-details-more-info-detail">Name: </li>
-
-            <li className="pet-details-more-info-detail">Breed: </li>
-            <li className="pet-details-more-info-detail">Type: </li>
-            <li className="pet-details-more-info-detail">Adoption Status: </li>
-            <li className="pet-details-more-info-detail">Height: </li>
-            <li className="pet-details-more-info-detail">Color: </li>
-            <li className="pet-details-more-info-detail">Hyperallergenic: </li>
             <li className="pet-details-more-info-detail">
-              Dietary restrictions: {""}
+              Name: {!petDetails.pet_name ? "NA" : petDetails.pet_name}{" "}
+            </li>
+
+            <li className="pet-details-more-info-detail">
+              Breed: {!petDetails.pet_breed ? "NA" : petDetails.pet_breed}{" "}
+            </li>
+            <li className="pet-details-more-info-detail">
+              Type: {!petDetails.pet_type ? "NA" : petDetails.pet_type}
+            </li>
+            <li className="pet-details-more-info-detail">
+              Adoption Status:{" "}
+              {!petDetails.pet_adoptionStatus
+                ? "NA"
+                : petDetails.pet_adoptionStatus}
+            </li>
+            <li className="pet-details-more-info-detail">
+              Height (cm):{" "}
+              {!petDetails.pet_height ? "NA" : petDetails.pet_height}
+            </li>
+            <li className="pet-details-more-info-detail">
+              Color: {!petDetails.pet_color ? "NA" : petDetails.pet_color}
+            </li>
+            <li className="pet-details-more-info-detail">
+              Hyperallergenic: {!petDetails.pet_hypoallergenic ? "NA" : "Yes"}
+            </li>
+            <li className="pet-details-more-info-detail">
+              Dietary restrictions:{" "}
+              {!petDetails.pet_dietary ? "NA" : petDetails.pet_dietary}
             </li>
           </ul>
         </div>

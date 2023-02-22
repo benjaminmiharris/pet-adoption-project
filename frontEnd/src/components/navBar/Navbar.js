@@ -8,12 +8,24 @@ import { FaPaw } from "react-icons/fa";
 
 import { LoginModalContext } from "../../context/LoginModalContext";
 import { LoginModalPopup } from "../../components/LoginModal/LoginModal";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
+
+import { AuthContext } from "../../context/AuthContext";
 
 import "./navbar.css";
 
 const Navigationbar = () => {
   const { setModalShow } = useContext(LoginModalContext);
+  const { authToken, logoutStorage } = useContext(AuthContext);
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
+  const logoutHandler = () => {
+    logoutStorage();
+    refreshPage();
+  };
 
   return (
     <Navbar
@@ -32,27 +44,45 @@ const Navigationbar = () => {
             <Nav.Link className="nav-link wht" href="/search">
               Search
             </Nav.Link>
-            <NavDropdown
-              className="wht"
-              title="Dashboard"
-              id="collasible-nav-dropdown"
-            >
-              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="/my-pets">My Pets </NavDropdown.Item>
-              <NavDropdown.Item href="/create-pet">Add Pet</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">All Pets </NavDropdown.Item>
-            </NavDropdown>
+
+            {authToken && (
+              <NavDropdown
+                className="wht"
+                title="Dashboard"
+                id="collasible-nav-dropdown"
+              >
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/my-pets">My Pets </NavDropdown.Item>
+
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item>
+                <NavDropdown.Item href="/create-pet">Add Pet</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4">
+                  All Pets{" "}
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
           <Nav>
             <Nav.Link eventKey={2} href="#memes">
-              <Button
-                variant="outline-light"
-                onClick={() => setModalShow(true)}
-              >
-                Login
-              </Button>
+              {!authToken ? (
+                <Button
+                  variant="outline-light"
+                  onClick={() => setModalShow(true)}
+                >
+                  Login
+                </Button>
+              ) : (
+                <Button
+                  variant="outline-light"
+                  onClick={() => {
+                    logoutHandler();
+                  }}
+                >
+                  Logout
+                </Button>
+              )}
+
               <LoginModalPopup onHide={() => setModalShow(false)} />
             </Nav.Link>
           </Nav>
