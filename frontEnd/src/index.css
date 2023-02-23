@@ -22,3 +22,9 @@ body {
 :root{
 
 } */
+
+.main-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

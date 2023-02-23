@@ -48,6 +48,15 @@ const setUserTokenLocalStorage = (token) => {
   console.log("Token added to localStorage");
 };
 
+// const getCurrentUserProfileAPI = async () => {
+//   try {
+//     const response = await fetch("http://localhost:3002/user");
+//     const result = await response.json();
+
+//     console.log(result);
+//   } catch (error) {}
+// };
+
 // const authenticateUser = async (token) => {
 //   try {
 //     const response = await axios.post("http://localhost:3002/verify", {

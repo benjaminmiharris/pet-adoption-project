@@ -9,13 +9,7 @@ const Profile = () => {
   const user = useSelector((state) => state.user.value);
   return (
     <div className="profile-container">
-      <div className="dashboard-side-container">
-        {/* <div className="dashboard-nav-box">
-          <ul>
-            <li>Profile</li>
-          </ul>
-        </div> */}
-      </div>
+      <div className="dashboard-side-container"></div>
       <div className="profile-main-container">
         <div className="profile-header-container">
           <h2>My Profile</h2>
