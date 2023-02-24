@@ -93,4 +93,38 @@ module.exports = class UsersController {
       });
     }
   };
+
+  static getUserProfile = async (req, res) => {
+    try {
+      return res.status(200).send({
+        success: true,
+        message: "successful login.",
+        user: req.currentUser,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        success: false,
+        message: "unsuccessful retrieval of user data.",
+      });
+    }
+  };
+
+  static updateUserProfile = async (req, res) => {
+    try {
+      const userObject = req.body;
+
+      await UsersDAO.updateUser(req.params, userObject);
+
+      return res.status(200).send({
+        success: true,
+        message: "successful login.",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        success: false,
+        message: error,
+      });
+    }
+  };
 };

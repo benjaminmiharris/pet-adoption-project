@@ -6,9 +6,9 @@ import SearchFilters from "./Sections/SearchBanner/SearchFilters";
 
 const Search = () => {
   return (
-    <div>
-      <SearchFilters />
-      <SearchResults />
+    <div className="search-container">
+      <SearchFilters className="search-filter-container" />
+      <SearchResults className="search-results-container" />
     </div>
   );
 };

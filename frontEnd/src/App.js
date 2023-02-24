@@ -18,23 +18,29 @@ import AddPetView from "./views/AddPets/AddPetView";
 function App() {
   return (
     <>
-      <Router>
-        <Navigationbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/my-pets" element={<MyPets />} />
-          <Route path="/create-pet" element={<AddPetView />} />
+      <div className="main-body">
+        <div className="main-body-container">
+          <Router>
+            <Navigationbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/my-pets" element={<MyPets />} />
+              <Route path="/create-pet" element={<AddPetView />} />
 
-          <Route path="/search" element={<Search />} />
-          <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/pet/:id" element={<PetDetails />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/create-account" element={<CreateAccount />} />
+              <Route path="/pet/:id" element={<PetDetails />} />
 
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </Router>
-      {/* <Footer /> */}
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </Router>
+        </div>
+        <div className="main-footer-container">
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }

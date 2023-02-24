@@ -23,4 +23,14 @@ module.exports = class UsersDAO {
   static async getUserById(userId) {
     return await usersCollection.findOne({ _id: new ObjectId(userId) });
   }
+
+  static async updateUser(userId, userObject) {
+    console.log("userId", userId.id);
+    console.log("userObject", userObject);
+
+    await usersCollection.updateOne(
+      { _id: new ObjectId(userId.id) },
+      { $set: userObject }
+    );
+  }
 };

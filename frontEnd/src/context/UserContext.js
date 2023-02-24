@@ -1,9 +1,15 @@
 import { createContext, useState } from "react";
-import { createAccountAPI, loginAPI } from "../helpers/createAccountAPI";
+import {
+  createAccountAPI,
+  loginAPI,
+  updateUserAPI,
+} from "../helpers/createAccountAPI";
 
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
+  const [userId, setUserId] = useState("");
+
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userPasswordConfirm, setUserPasswordConfirm] = useState("");
@@ -23,6 +29,18 @@ const UserContextProvider = ({ children }) => {
     createAccountAPI(userDetails);
   };
 
+  const updateUserProfile = () => {
+    const userDetails = {
+      firstName: userFirstName,
+      lastName: userLastName,
+      mobile: userMobile,
+      email: userEmail,
+      userBio: userShortBio,
+    };
+
+    updateUserAPI(userId, userDetails);
+  };
+
   const signIn = () => {
     const user = {
       email: userEmail,
@@ -34,6 +52,9 @@ const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        userId,
+        setUserId,
+        updateUserProfile,
         userEmail,
         setUserEmail,
         userPassword,

@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ProfileForm from "./ProfileForm/ProfileForm";
 
-import { useSelector } from "react-redux";
-
 import "./profile.css";
+import { getCurrentUserProfileAPI } from "../../helpers/createAccountAPI";
+import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
 
 const Profile = () => {
-  const user = useSelector((state) => state.user.value);
+  const { authToken } = useContext(AuthContext);
+
+  const {
+    setUserFirstName,
+    setUserEmail,
+    setUserLastName,
+    setUserMobile,
+    setUserId,
+  } = useContext(UserContext);
+
+  const getProfileData = async () => {
+    try {
+      if (authToken) {
+        const userProfileData = await getCurrentUserProfileAPI(authToken);
+        setUserEmail(userProfileData.user.email);
+        setUserFirstName(userProfileData.user.firstName);
+        setUserLastName(userProfileData.user.lastName);
+        setUserMobile(userProfileData.user.mobile);
+        setUserId(userProfileData.user._id);
+      }
+    } catch (error) {
+      console.log(`There was an error getting user profile - ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, [authToken]);
+
   return (
     <div className="profile-container">
-      <div className="dashboard-side-container">
-        {/* <div className="dashboard-nav-box">
-          <ul>
-            <li>Profile</li>
-          </ul>
-        </div> */}
-      </div>
+      <div className="dashboard-side-container"></div>
       <div className="profile-main-container">
         <div className="profile-header-container">
           <h2>My Profile</h2>

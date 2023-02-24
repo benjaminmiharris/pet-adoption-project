@@ -14,3 +14,17 @@
 
   margin-top: 100px;
 }
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.search-filter-container {
+  height: 30%;
+}
+
+.search-results-container {
+  height: 70%;
+}

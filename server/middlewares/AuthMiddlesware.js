@@ -5,8 +5,6 @@ const UsersDAO = require("../models/UsersDAO");
 module.exports.AuthMiddleware = async function AuthMiddleware(req, res, next) {
   let { authorization } = req.headers;
 
-  console.log("authorization", authorization);
-
   if (!authorization)
     return res.status(401).send({
       success: false,
@@ -14,8 +12,6 @@ module.exports.AuthMiddleware = async function AuthMiddleware(req, res, next) {
     });
 
   authorization = authorization.replace("Bearer ", "");
-
-  console.log("authorization", authorization);
 
   try {
     const tokenData = jwt.verify(authorization, process.env.JWT_SECERET);
