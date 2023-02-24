@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const createAccountAPI = async (user) => {
   try {
     const response = await fetch("http://localhost:3002/register", {
@@ -43,19 +41,44 @@ const loginAPI = async (user) => {
   }
 };
 
+const updateUserAPI = async (userId, userObject) => {
+  try {
+    await fetch(`http://localhost:3002/user/${userId}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObject),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const setUserTokenLocalStorage = (token) => {
   localStorage.setItem("userToken", token);
   console.log("Token added to localStorage");
 };
 
-// const getCurrentUserProfileAPI = async () => {
-//   try {
-//     const response = await fetch("http://localhost:3002/user");
-//     const result = await response.json();
+const getCurrentUserProfileAPI = async (token) => {
+  try {
+    const settings = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-//     console.log(result);
-//   } catch (error) {}
-// };
+    const response = await fetch("http://localhost:3002/user", settings);
+    const result = await response.json();
+
+    console.log("User", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // const authenticateUser = async (token) => {
 //   try {
@@ -73,4 +96,4 @@ const setUserTokenLocalStorage = (token) => {
 //   }
 // };
 
-export { createAccountAPI, loginAPI };
+export { createAccountAPI, loginAPI, getCurrentUserProfileAPI, updateUserAPI };
