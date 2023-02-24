@@ -9,6 +9,7 @@ module.exports.RegisterValidation = ajv.compile({
     mobile: { type: "number" },
     email: { type: "string" },
     password: { type: "string" },
+    userBio: { type: "string" },
   },
   required: ["firstName", "lastName", "email", "password"],
   additionalProperties: false,

@@ -42,6 +42,10 @@ app.post("/verify", (req, res) => {
   });
 });
 
+app.get("/user", AuthMiddleware, UsersController.getUserProfile);
+
+app.put("/user/:id", UsersController.updateUserProfile);
+
 // const PetClass = require("./controllers/PetClass");
 // const petClass = new PetClass();
 
