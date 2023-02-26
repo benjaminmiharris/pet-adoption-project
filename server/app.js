@@ -73,6 +73,8 @@ app.post(
   PetsController.createPet
 );
 
+app.post("/pet/:id/save", AuthMiddleware, UsersController.savePetToUserProfile);
+
 app.put("/pet/:id", (req, res) => {});
 
 app.listen(3002, async () => {

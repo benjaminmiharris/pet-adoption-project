@@ -127,4 +127,52 @@ module.exports = class UsersController {
       });
     }
   };
+
+  static savePetToUserProfile = async (req, res) => {
+    try {
+      console.log("current user", req.currentUser._id);
+      console.log("petId", req.params.id);
+
+      const savePetId = req.params.id;
+
+      //Get user
+      //Check user to see if the liked pet already exisits in the array
+      //if not then add to array ELSE return 400
+
+      const currentUser = await UsersDAO.getUserById(req.currentUser._id);
+
+      const foundPetId = currentUser.savedPets.some(
+        (pet) => pet._id == savePetId
+      );
+
+      if (foundPetId) {
+        // The array contains an object with the specified key and value
+
+        await UsersDAO.removeLikedPetFromUser(
+          req.currentUser._id,
+          req.params.id
+        );
+
+        return res.status(400).send({
+          success: true,
+          message: "This pet has already been added and needs to be removed",
+        });
+      } else {
+        // The array doesn't contain an object with the specified key and value
+
+        await UsersDAO.addLikedPetToUser(req.currentUser._id, req.params.id);
+
+        return res.status(200).send({
+          success: true,
+          message: "Pet added",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        success: false,
+        message: error,
+      });
+    }
+  };
 };

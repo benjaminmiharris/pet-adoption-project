@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongodb");
+const PetsDAO = require("./PetsDAO");
 let usersCollection;
 
 module.exports = class UsersDAO {
@@ -31,6 +32,25 @@ module.exports = class UsersDAO {
     await usersCollection.updateOne(
       { _id: new ObjectId(userId.id) },
       { $set: userObject }
+    );
+  }
+
+  static async addLikedPetToUser(userId, petId) {
+    console.log("userId", userId);
+    console.log("petId", petId);
+
+    const petObject = await PetsDAO.getPetById(petId);
+
+    await usersCollection.updateOne(
+      { _id: new ObjectId(userId.id) },
+      { $push: { savedPets: petObject } }
+    );
+  }
+
+  static async removeLikedPetFromUser(userId, petId) {
+    await usersCollection.updateOne(
+      { _id: new ObjectId(userId.id) },
+      { $pull: { savedPets: { _id: new ObjectId(petId) } } }
     );
   }
 };
