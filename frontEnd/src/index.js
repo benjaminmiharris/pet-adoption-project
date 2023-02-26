@@ -17,15 +17,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ComponentContextProvider>
-      <UserContextProvider>
-        <LoginModalContextProvider>
-          <AuthContextProvider>
+      <AuthContextProvider>
+        <UserContextProvider>
+          <LoginModalContextProvider>
             <PetContextProvider>
               <App />
             </PetContextProvider>
-          </AuthContextProvider>
-        </LoginModalContextProvider>
-      </UserContextProvider>
+          </LoginModalContextProvider>
+        </UserContextProvider>
+      </AuthContextProvider>
     </ComponentContextProvider>
   </Provider>
 );

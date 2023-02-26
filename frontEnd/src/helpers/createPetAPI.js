@@ -80,4 +80,25 @@ const getPetIdAPI = async (id) => {
   }
 };
 
-export { createPetAPI, getPetsAPI, getPetIdAPI };
+const savePetToMyPetsAPI = async (token, petId) => {
+  try {
+    const response = await fetch(`http://localhost:3002/pet/${petId}/save`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      return console.log("Pet has been saved or deleted");
+    }
+    if (response.status == 400) {
+      return console.log("Return the response body from the API...");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { createPetAPI, getPetsAPI, getPetIdAPI, savePetToMyPetsAPI };

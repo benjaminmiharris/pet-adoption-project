@@ -2,30 +2,18 @@ import React, { useContext, useEffect } from "react";
 import ProfileForm from "./ProfileForm/ProfileForm";
 
 import "./profile.css";
-import { getCurrentUserProfileAPI } from "../../helpers/createAccountAPI";
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 
 const Profile = () => {
   const { authToken } = useContext(AuthContext);
 
-  const {
-    setUserFirstName,
-    setUserEmail,
-    setUserLastName,
-    setUserMobile,
-    setUserId,
-  } = useContext(UserContext);
+  const { setProfileState } = useContext(UserContext);
 
   const getProfileData = async () => {
     try {
       if (authToken) {
-        const userProfileData = await getCurrentUserProfileAPI(authToken);
-        setUserEmail(userProfileData.user.email);
-        setUserFirstName(userProfileData.user.firstName);
-        setUserLastName(userProfileData.user.lastName);
-        setUserMobile(userProfileData.user.mobile);
-        setUserId(userProfileData.user._id);
+        await setProfileState();
       }
     } catch (error) {
       console.log(`There was an error getting user profile - ${error}`);

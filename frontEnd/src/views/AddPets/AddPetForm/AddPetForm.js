@@ -158,6 +158,7 @@ const AddPetForm = () => {
               setpetImage(e.target.files[0]);
             }}
           />
+          <td title="tooltip"> 1200px x 700px</td>
         </Box>
         <br />
         <Button onClick={createPetObject}>Submit</Button>
