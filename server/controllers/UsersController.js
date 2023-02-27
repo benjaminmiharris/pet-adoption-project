@@ -1,5 +1,6 @@
 const sha256 = require("js-sha256");
 const jwt = require("jsonwebtoken");
+const PetsDAO = require("../models/PetsDAO");
 
 const UsersDAO = require("../models/UsersDAO");
 const {
@@ -130,9 +131,6 @@ module.exports = class UsersController {
 
   static savePetToUserProfile = async (req, res) => {
     try {
-      console.log("current user", req.currentUser._id);
-      console.log("petId", req.params.id);
-
       const savePetId = req.params.id;
 
       //Get user
@@ -167,6 +165,53 @@ module.exports = class UsersController {
           message: "Pet added",
         });
       }
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        success: false,
+        message: error,
+      });
+    }
+  };
+
+  static adoptOrFosterAPet = async (req, res) => {
+    try {
+      const petId = req.params.id;
+
+      const adoptionStatus = req.body.status;
+
+      await PetsDAO.updatePetStatus(petId, adoptionStatus);
+
+      //Check if pet is in liked pets
+
+      const currentUser = await UsersDAO.getUserById(req.currentUser._id);
+
+      console.log("currentUser", currentUser);
+
+      let foundPetIdSavedPets;
+
+      if (currentUser.myPets) {
+        foundPetIdSavedPets = currentUser.savedPets.some(
+          (pet) => pet._id == petId
+        );
+      }
+
+      if (foundPetIdSavedPets) {
+        // The array contains an object with the specified key and value
+
+        await UsersDAO.removeLikedPetFromUser(
+          req.currentUser._id,
+          req.params.id
+        );
+      }
+
+      await UsersDAO.adoptOrFosterPet(req.currentUser._id, petId);
+
+      return res.status(200).send({
+        success: true,
+      });
+
+      //Check if pet is in My pets and if it is replace with new object
     } catch (error) {
       console.log(error);
       return res.status(400).send({

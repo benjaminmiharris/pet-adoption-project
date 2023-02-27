@@ -36,9 +36,6 @@ module.exports = class UsersDAO {
   }
 
   static async addLikedPetToUser(userId, petId) {
-    console.log("userId", userId);
-    console.log("petId", petId);
-
     const petObject = await PetsDAO.getPetById(petId);
 
     await usersCollection.updateOne(
@@ -51,6 +48,20 @@ module.exports = class UsersDAO {
     await usersCollection.updateOne(
       { _id: new ObjectId(userId.id) },
       { $pull: { savedPets: { _id: new ObjectId(petId) } } }
+    );
+  }
+
+  static async adoptOrFosterPet(userId, petId) {
+    //update pet status in the
+
+    const petObject = await PetsDAO.getPetById(petId);
+
+    await usersCollection.updateOne(
+      { _id: new ObjectId(userId.id) },
+      {
+        $addToSet: { myPets: petObject._id },
+      },
+      { upsert: true }
     );
   }
 };
