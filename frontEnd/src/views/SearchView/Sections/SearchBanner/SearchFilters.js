@@ -62,6 +62,7 @@ const SearchFilters = () => {
           justifyContent="center"
         >
           <Button
+            sx={{ backgroundColor: "#FCC1C2", color: "white" }}
             variant="outlined"
             onClick={() => {
               searchHandler();

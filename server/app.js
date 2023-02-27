@@ -31,36 +31,25 @@ const upload = multer({ storage: storage });
 //   secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 // });
 
+// app.post("/verify", (req, res) => {
+//   console.log(req.headers.authorization);
+
+//   return res.status(200).send({
+//     success: true,
+//     message: "authentic user",
+//   });
+// });
+
 app.post("/register", UsersController.register);
 app.post("/login", UsersController.login);
-app.post("/verify", (req, res) => {
-  console.log(req.headers.authorization);
-
-  return res.status(200).send({
-    success: true,
-    message: "authentic user",
-  });
-});
 
 app.get("/user", AuthMiddleware, UsersController.getUserProfile);
 
 app.put("/user/:id", UsersController.updateUserProfile);
 
-// const PetClass = require("./controllers/PetClass");
-// const petClass = new PetClass();
-
-// const User = require("./controllers/User");
-// const user = new User();
-
-// app.post("/test", userClass.CreateUser);
-
-// app.post("/pet/create", AuthMiddleware, PetsController.createPet);
-
 app.get("/pet", PetsController.getPets);
 
 app.get("/pet/:id", PetsController.getPetId);
-
-// app.post("/create-user", user.CreateUser);
 
 app.post(
   "/pet/create",
@@ -72,6 +61,10 @@ app.post(
   ],
   PetsController.createPet
 );
+
+app.post("/pet/:id/save", AuthMiddleware, UsersController.savePetToUserProfile);
+
+app.post("/pet/:id/adopt", AuthMiddleware, UsersController.adoptOrFosterAPet);
 
 app.put("/pet/:id", (req, res) => {});
 

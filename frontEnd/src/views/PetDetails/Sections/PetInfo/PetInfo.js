@@ -1,19 +1,61 @@
-import React from "react";
+import React, { useContext } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 import "./pet-info.css";
+import { AuthContext } from "../../../../context/AuthContext";
+import { adoptOrFosterPetAPI } from "../../../../helpers/createPetAPI";
+import { useParams } from "react-router-dom";
 
 const PetInfo = ({ petDetails }) => {
+  const { authToken } = useContext(AuthContext);
+
+  let { id } = useParams();
+
+  const adoptClickHandler = () => {
+    const status = { status: "Adopted" };
+    adoptOrFosterPetAPI(authToken, id, status);
+  };
+
+  const fosterClickHandler = () => {
+    const status = { status: "Foster" };
+    adoptOrFosterPetAPI(authToken, id, status);
+  };
+
+  const returnClickHandler = () => {
+    const status = { status: "Looking for home" };
+    adoptOrFosterPetAPI(authToken, id, status);
+  };
   return (
     <div>
       <div className="pet-details-container">
         <div className="pet-details-bio">
           <div className="pet-buttons-stack">
             <Stack direction="row" spacing={2}>
-              <Button color="secondary">Adopt</Button>
-              <Button color="secondary">Foster</Button>
-              <Button color="secondary">Return Pet</Button>
+              <Button
+                color="secondary"
+                onClick={() => {
+                  adoptClickHandler();
+                }}
+              >
+                Adopt
+              </Button>
+              <Button
+                color="secondary"
+                onClick={() => {
+                  fosterClickHandler();
+                }}
+              >
+                Foster
+              </Button>
+              <Button
+                color="secondary"
+                onClick={() => {
+                  returnClickHandler();
+                }}
+              >
+                Return Pet
+              </Button>
             </Stack>
           </div>
           <br />

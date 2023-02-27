@@ -1,34 +1,53 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import SearchToggle from "../../components/inputs/SearchToggle";
 
-// import MyPetsResults from "./Sections/Results/MyPetsResults";
+import MySavedPets from "./Sections/Results/MySavedPets";
 
 import { showAdvancedSearch } from "../../redux/search";
 
 import { useSelector } from "react-redux";
 
+import { UserContext } from "../../context/UserContext";
+import { AuthContext } from "../../context/AuthContext";
+
 import "./my-pets-view.css";
 
 const MyPets = () => {
   const state = useSelector(showAdvancedSearch);
-  console.log("State IH", state.payload.search.value);
+  const { authToken } = useContext(AuthContext);
+  const { setProfileState, userSavedPets } = useContext(UserContext);
+
+  const getProfileData = async () => {
+    try {
+      if (authToken) {
+        await setProfileState();
+      }
+    } catch (error) {
+      console.log(`There was an error getting user profile - ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, [authToken]);
 
   return (
     <div className="my-pets-container">
-      <div className="dashboard-side-container my-pets"></div>
-      <div className="my-pets-main-container">
+      <div className="profile-main-container">
         <div className="my-pets-header-container">
           {state.payload.search.value ? <h2>Saved Pets</h2> : <h2>My Pets</h2>}
         </div>
-        <div className="my-pets-form-container">
+        <div className="my-pets-toggle-container">
           <SearchToggle />
         </div>
         <div className="my-pets-results-container">
           {state.payload.search.value ? (
-            <h3 className="my-pets-search-type-header">Saved Pets Listings</h3>
+            <MySavedPets userSavedPets={userSavedPets} />
           ) : (
-            <h3 className="my-pets-search-type-header">My Pets Listing</h3>
+            <>
+              <h3 className="my-pets-search-type-header">No Pets!</h3>{" "}
+            </>
           )}
         </div>
       </div>

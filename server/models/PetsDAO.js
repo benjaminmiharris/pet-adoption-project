@@ -25,4 +25,15 @@ module.exports = class PetsDAO {
   static async getPets(query) {
     return await petsCollection.find(query).toArray();
   }
+
+  static async updatePetStatus(petId, adoptionStatus) {
+    let petStatus = adoptionStatus;
+
+    await petsCollection.updateOne(
+      { _id: new ObjectId(petId) },
+      { $set: { pet_adoptionStatus: petStatus } }
+    );
+
+    //add pet id to user document
+  }
 };
