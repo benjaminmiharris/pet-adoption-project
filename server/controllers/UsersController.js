@@ -180,32 +180,37 @@ module.exports = class UsersController {
 
       const adoptionStatus = req.body.status;
 
+      console.log("adoptionStatus", adoptionStatus);
+
       await PetsDAO.updatePetStatus(petId, adoptionStatus);
 
       //Check if pet is in liked pets
 
       const currentUser = await UsersDAO.getUserById(req.currentUser._id);
 
-      console.log("currentUser", currentUser);
+      if (adoptionStatus !== "Looking for home") {
+        let foundPetIdSavedPets;
 
-      let foundPetIdSavedPets;
+        if (currentUser.myPets) {
+          foundPetIdSavedPets = currentUser.savedPets.some(
+            (pet) => pet._id == petId
+          );
+        }
 
-      if (currentUser.myPets) {
-        foundPetIdSavedPets = currentUser.savedPets.some(
-          (pet) => pet._id == petId
-        );
+        if (foundPetIdSavedPets) {
+          // The array contains an object with the specified key and value
+
+          await UsersDAO.removeLikedPetFromUser(
+            req.currentUser._id,
+            req.params.id
+          );
+        }
+
+        await UsersDAO.adoptOrFosterPet(req.currentUser._id, petId);
+      } else {
+        console.log("Removed Pet");
+        await UsersDAO.removeAdoptedPetFromUser(req.currentUser._id, petId);
       }
-
-      if (foundPetIdSavedPets) {
-        // The array contains an object with the specified key and value
-
-        await UsersDAO.removeLikedPetFromUser(
-          req.currentUser._id,
-          req.params.id
-        );
-      }
-
-      await UsersDAO.adoptOrFosterPet(req.currentUser._id, petId);
 
       return res.status(200).send({
         success: true,

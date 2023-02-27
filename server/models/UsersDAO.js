@@ -64,4 +64,11 @@ module.exports = class UsersDAO {
       { upsert: true }
     );
   }
+
+  static async removeAdoptedPetFromUser(userId, petId) {
+    await usersCollection.updateOne(
+      { _id: new ObjectId(userId.id) },
+      { $pull: { myPets: new ObjectId(petId) } }
+    );
+  }
 };
