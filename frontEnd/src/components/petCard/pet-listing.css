@@ -22,9 +22,9 @@
 }
 
 .pet-status-container {
-  width: 100px;
+  width: 22%;
   word-wrap: break-word;
-  height: 40px;
+  height: auto;
   background-color: #ff6463;
   position: relative;
   top: -495px;

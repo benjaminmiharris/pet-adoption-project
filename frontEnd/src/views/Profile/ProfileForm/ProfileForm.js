@@ -90,6 +90,7 @@ const ProfileForm = () => {
         <br />
         <br />
         <Button
+          sx={{ backgroundColor: "#fec861" }}
           onClick={() => {
             updateUserProfile();
           }}
