@@ -57,9 +57,7 @@ const Navigationbar = () => {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item>
                 <NavDropdown.Item href="/create-pet">Add Pet</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">
-                  All Pets{" "}
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/all-pets">All Pets </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

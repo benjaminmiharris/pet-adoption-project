@@ -15,6 +15,7 @@ import MyPets from "./views/MyPets/MyPets";
 import "./index.css";
 import AddPetView from "./views/AddPets/AddPetView";
 import UsersDashboard from "./views/Users/UsersDashboard";
+import AllPets from "./views/AllPets/AllPets";
 
 function App() {
   return (
@@ -29,7 +30,10 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/my-pets" element={<MyPets />} />
               <Route path="/create-pet" element={<AddPetView />} />
+              <Route path="/create-pet/:id" element={<AddPetView />} />
+
               <Route path="/users" element={<UsersDashboard />} />
+              <Route path="/all-pets" element={<AllPets />} />
 
               <Route path="/search" element={<Search />} />
               <Route path="/create-account" element={<CreateAccount />} />
