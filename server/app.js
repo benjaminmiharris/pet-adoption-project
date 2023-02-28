@@ -51,6 +51,10 @@ app.get("/pet", PetsController.getPets);
 
 app.get("/pet/:id", PetsController.getPetId);
 
+app.get("/pets/many", PetsController.getPetIds);
+
+app.put("/pet/:id", AuthMiddleware, PetsController.updatePetObject);
+
 app.post(
   "/pet/create",
   [
@@ -65,8 +69,6 @@ app.post(
 app.post("/pet/:id/save", AuthMiddleware, UsersController.savePetToUserProfile);
 
 app.post("/pet/:id/adopt", AuthMiddleware, UsersController.adoptOrFosterAPet);
-
-app.put("/pet/:id", (req, res) => {});
 
 app.listen(3002, async () => {
   console.log("Server is running on port 3002");

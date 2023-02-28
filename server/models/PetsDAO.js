@@ -22,6 +22,14 @@ module.exports = class PetsDAO {
     return await petsCollection.findOne({ _id: new ObjectId(petId) });
   }
 
+  static async getPetByIds(myPets) {
+    return await petsCollection
+      .find({
+        _id: { $in: myPets.map((id) => new ObjectId(id)) },
+      })
+      .toArray();
+  }
+
   static async getPets(query) {
     return await petsCollection.find(query).toArray();
   }
@@ -35,5 +43,12 @@ module.exports = class PetsDAO {
     );
 
     //add pet id to user document
+  }
+
+  static async updatePet(petId, petObject) {
+    await petsCollection.updateOne(
+      { _id: new ObjectId(petId) },
+      { $set: petObject }
+    );
   }
 };

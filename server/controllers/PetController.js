@@ -3,6 +3,7 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
 const PetsDAO = require("../models/PetsDAO");
+const UsersDAO = require("../models/UsersDAO");
 
 module.exports = class PetsController {
   static createPet = async (req, res) => {
@@ -80,6 +81,64 @@ module.exports = class PetsController {
       return res.status(404).json({
         success: false,
         message: "Pet was not found. Please try again.",
+      });
+    }
+  };
+
+  static getPetIds = async (req, res) => {
+    const idArray = ["63f5cb25a98883b3d7611ed8", "63f5c9a1a98883b3d7611ed6"];
+    try {
+      const response = await PetsDAO.getPetByIds(idArray);
+      console.log("response", response);
+
+      return res.status(200).json({
+        success: true,
+        message: response,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({
+        success: false,
+        message: "Pet was not found. Please try again.",
+      });
+    }
+  };
+
+  static updatePetObject = async (req, res) => {
+    try {
+      const currentUser = await UsersDAO.getUserById(req.currentUser._id);
+
+      const petId = req.params.id;
+
+      const petObject = req.body;
+
+      console.log("petId", petId);
+      console.log("petObject", petObject);
+
+      if (currentUser.role == "admin") {
+        try {
+          await PetsDAO.updatePet(petId, petObject);
+        } catch (error) {
+          console.log(error);
+        }
+        console.log("This user is an admin");
+      } else {
+        return res.status(400).send({
+          success: false,
+          message:
+            "This user does not have admin rights to carry out this action.",
+        });
+      }
+
+      return res.status(200).send({
+        success: true,
+        message: "Worked",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        success: false,
+        message: "Error",
       });
     }
   };
