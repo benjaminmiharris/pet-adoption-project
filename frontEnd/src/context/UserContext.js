@@ -60,7 +60,7 @@ const UserContextProvider = ({ children }) => {
       userBio: userShortBio,
     };
 
-    updateUserAPI(userId, userDetails);
+    updateUserAPI(userId, userDetails, authToken);
   };
 
   const signIn = () => {

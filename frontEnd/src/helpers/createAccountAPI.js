@@ -45,13 +45,14 @@ const loginAPI = async (user) => {
   }
 };
 
-const updateUserAPI = async (userId, userObject) => {
+const updateUserAPI = async (userId, userObject, token) => {
   try {
     await fetch(`http://localhost:3002/user/${userId}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(userObject),
     });
