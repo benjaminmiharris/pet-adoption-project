@@ -6,9 +6,11 @@ import "./pet-info.css";
 import { AuthContext } from "../../../../context/AuthContext";
 import { adoptOrFosterPetAPI } from "../../../../helpers/createPetAPI";
 import { useParams } from "react-router-dom";
+import { LoginModalContext } from "../../../../context/LoginModalContext";
 
 const PetInfo = ({ petDetails }) => {
   const { authToken } = useContext(AuthContext);
+  const { setModalShow } = useContext(LoginModalContext);
 
   let { id } = useParams();
 
@@ -34,25 +36,31 @@ const PetInfo = ({ petDetails }) => {
             <Stack direction="row" spacing={2}>
               <Button
                 color="secondary"
-                onClick={() => {
-                  adoptClickHandler();
-                }}
+                onClick={
+                  authToken
+                    ? () => adoptClickHandler()
+                    : () => setModalShow(true)
+                }
               >
                 Adopt
               </Button>
               <Button
                 color="secondary"
-                onClick={() => {
-                  fosterClickHandler();
-                }}
+                onClick={
+                  authToken
+                    ? () => fosterClickHandler()
+                    : () => setModalShow(true)
+                }
               >
                 Foster
               </Button>
               <Button
                 color="secondary"
-                onClick={() => {
-                  returnClickHandler();
-                }}
+                onClick={
+                  authToken
+                    ? () => returnClickHandler()
+                    : () => setModalShow(true)
+                }
               >
                 Return Pet
               </Button>

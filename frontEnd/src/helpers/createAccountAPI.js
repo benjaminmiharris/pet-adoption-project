@@ -1,4 +1,5 @@
 const createAccountAPI = async (user) => {
+  let outcome;
   try {
     const response = await fetch("http://localhost:3002/register", {
       method: "POST",
@@ -9,10 +10,13 @@ const createAccountAPI = async (user) => {
       body: JSON.stringify(user),
     });
     if (response.ok) {
-      return console.log("A new account has been succesfully created");
+      console.log(response.status);
+      return response.status;
     }
     if (response.status == 400) {
-      return console.log("Return the response body from the API...");
+      console.log(response.status);
+
+      return response.status;
     }
   } catch (e) {
     console.log(e);

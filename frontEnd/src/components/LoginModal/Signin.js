@@ -17,8 +17,10 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const navigate = useNavigate();
   const { setUserEmail, setUserPassword, signIn } = useContext(UserContext);
   const { setModalShow } = useContext(LoginModalContext);
 
@@ -33,6 +35,7 @@ const Signin = () => {
   const handleLogin = () => {
     setModalShow(false);
     signIn();
+    navigate("/search");
   };
   return (
     <>

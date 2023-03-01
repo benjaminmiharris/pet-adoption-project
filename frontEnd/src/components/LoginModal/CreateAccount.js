@@ -24,16 +24,17 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CreateAccount = () => {
+const CreateAccount = ({ handler }) => {
   const {
     setUserEmail,
     userPassword,
     setUserPassword,
     userPasswordConfirm,
     setUserPasswordConfirm,
-
+    userEmail,
     setUserFirstName,
-
+    userFirstName,
+    userLastName,
     setUserLastName,
 
     setUserMobile,
@@ -42,6 +43,7 @@ const CreateAccount = () => {
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [timer, setTimer] = useState(null);
+  const [formValid, setFormValid] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -58,14 +60,14 @@ const CreateAccount = () => {
     event.preventDefault();
   };
 
-  const notify = () => toast("Passwords do not match");
+  const notify = (message) => toast(message);
 
   const passwordMatch = (password, repeatPassword) => {
     let message;
     if (password === repeatPassword) {
       return message;
     } else {
-      return notify();
+      return notify("Passwords do not match");
     }
   };
 
@@ -78,6 +80,40 @@ const CreateAccount = () => {
     );
   }, [userPasswordConfirm]);
 
+  const validateForm = () => {
+    if (
+      userPassword !== userPasswordConfirm ||
+      !userEmail ||
+      !userFirstName ||
+      !userLastName
+    ) {
+      // form is not valid
+      return false;
+    }
+    setFormValid(true);
+    // form is valid
+    return true;
+  };
+
+  React.useEffect(() => {
+    validateForm();
+  }, [
+    userEmail,
+    userLastName,
+    userFirstName,
+    userPasswordConfirm,
+    userPassword,
+  ]);
+
+  const submitHandler = async () => {
+    await createUserAccount();
+    await handler();
+
+    // if (outcome == 400) {
+    //   notify("Error. Please try again");
+    // }
+  };
+
   const fieldWidth = "30ch";
 
   return (
@@ -88,17 +124,13 @@ const CreateAccount = () => {
       autoComplete="off"
     >
       <div>
-        <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
-          <TextField
-            error
-            helperText="Incorrect entry."
-            required
-            label="Email"
-            id="outlined-start-adornment"
-            sx={{ m: 1, width: fieldWidth }}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-        </FormControl>
+        <TextField
+          required
+          label="Email"
+          id="outlined-start-adornment"
+          sx={{ m: 1, width: fieldWidth }}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
 
         <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
           <InputLabel required htmlFor="outlined-adornment-password">
@@ -163,7 +195,6 @@ const CreateAccount = () => {
           onChange={(e) => setUserLastName(e.target.value)}
         />
         <TextField
-          required
           type="number"
           label="Mobile"
           //   id="outlined-start-adornment"
@@ -172,11 +203,12 @@ const CreateAccount = () => {
         />
         <br />
         <Button
+          disabled={!formValid}
           variant="primary"
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            createUserAccount();
+            submitHandler();
           }}
         >
           Submit

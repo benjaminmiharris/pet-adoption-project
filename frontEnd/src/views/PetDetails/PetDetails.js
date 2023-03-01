@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HomeBanner from "./Sections/PetBanner/HomeBanner";
+import PetBanner from "./Sections/PetBanner/PetBanner";
 import "./pet-details.css";
 import PetInfo from "./Sections/PetInfo/PetInfo";
 
@@ -23,7 +23,7 @@ const PetDetails = () => {
 
   return (
     <div className="page">
-      <HomeBanner petDetails={petDetails} />
+      <PetBanner petDetails={petDetails} />
       <PetInfo petDetails={petDetails} />
     </div>
   );

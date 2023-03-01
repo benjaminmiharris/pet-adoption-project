@@ -46,6 +46,8 @@ const UserContextProvider = ({ children }) => {
       email: userEmail,
       password: userPassword,
     };
+
+    console.log("userDetails", userDetails);
     createAccountAPI(userDetails);
   };
 
