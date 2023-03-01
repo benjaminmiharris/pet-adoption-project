@@ -84,6 +84,7 @@ const AddPetForm = () => {
     setPetHypoallergenic(petData.pet_hypoallergenic);
     setPetDiet(petData.pet_dietary);
     setPetBreed(petData.pet_breed);
+    setpetImage(petData.petImage);
   };
 
   const handleChangeStatus = (event) => {
@@ -100,7 +101,6 @@ const AddPetForm = () => {
 
   const fieldWidth = "35ch";
 
-  console.log("petAdoptionStatus", petAdoptionStatus);
   return (
     <>
       <Box
@@ -120,18 +120,21 @@ const AddPetForm = () => {
           chipLabel="Status"
           chipsArray={ADOPTION_STATUS_ARRAY}
           onChangeHandler={handleChangeStatus}
+          defaultTileValueProp={petAdoptionStatus}
         />
 
         <MultiSelectChips
           chipLabel="Pets"
           chipsArray={PETS_ARRAY}
           onChangeHandler={handleChangePets}
+          defaultTileValueProp={petType}
         />
 
         <MultiSelectChips
           chipLabel="Gender"
           chipsArray={GENDER_ARRAY}
           onChangeHandler={handleChangeGender}
+          defaultTileValueProp={petGender}
         />
 
         <TextField
@@ -210,7 +213,6 @@ const AddPetForm = () => {
 
         <input
           type="file"
-          // value={inputRef}
           onChange={(e) => {
             setpetImage(e.target.files[0]);
           }}
@@ -222,7 +224,13 @@ const AddPetForm = () => {
       {id == null ? (
         <Button onClick={createPetObject}>Submit</Button>
       ) : (
-        <Button onClick={updatePetObject}>Update</Button>
+        <Button
+          onClick={() => {
+            updatePetObject(id);
+          }}
+        >
+          Update
+        </Button>
       )}
     </>
   );

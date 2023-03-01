@@ -1,5 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createPetAPI, getPetsAPI } from "../helpers/createPetAPI";
+import {
+  createPetAPI,
+  getPetsAPI,
+  updatePetObjectAPI,
+} from "../helpers/createPetAPI";
 import { AuthContext } from "./AuthContext";
 
 const PetContext = createContext();
@@ -45,7 +49,7 @@ const PetContextProvider = ({ children }) => {
     createPetAPI(authToken, petImage, petObject);
   };
 
-  const updatePetObject = () => {
+  const updatePetObject = (id) => {
     const petObject = {
       pet_type: petType,
       pet_name: petName,
@@ -59,7 +63,13 @@ const PetContextProvider = ({ children }) => {
       pet_hypoallergenic: petHypoallergenic,
       pet_dietary: petDiet,
       pet_breed: petBreed,
+      petImage: petImage,
     };
+
+    console.log("petObject", petObject);
+    console.log("petObjectId", id);
+
+    updatePetObjectAPI(authToken, petObject, id);
   };
   return (
     <PetContext.Provider

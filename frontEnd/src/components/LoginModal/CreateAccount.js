@@ -26,17 +26,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CreateAccount = () => {
   const {
-    userEmail,
     setUserEmail,
     userPassword,
     setUserPassword,
     userPasswordConfirm,
     setUserPasswordConfirm,
-    userFirstName,
+
     setUserFirstName,
-    userLastName,
+
     setUserLastName,
-    userMobile,
+
     setUserMobile,
     createUserAccount,
   } = useContext(UserContext);
@@ -89,14 +88,20 @@ const CreateAccount = () => {
       autoComplete="off"
     >
       <div>
-        <TextField
-          label="Email"
-          id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
         <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
+          <TextField
+            error
+            helperText="Incorrect entry."
+            required
+            label="Email"
+            id="outlined-start-adornment"
+            sx={{ m: 1, width: fieldWidth }}
+            onChange={(e) => setUserEmail(e.target.value)}
+          />
+        </FormControl>
+
+        <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
+          <InputLabel required htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
           <OutlinedInput
@@ -121,7 +126,7 @@ const CreateAccount = () => {
         <ToastContainer />
 
         <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
+          <InputLabel required htmlFor="outlined-adornment-password">
             Password Confirm
           </InputLabel>
           <OutlinedInput
@@ -144,18 +149,21 @@ const CreateAccount = () => {
           />
         </FormControl>
         <TextField
+          required
           label="First name"
           //   id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
           onChange={(e) => setUserFirstName(e.target.value)}
         />
         <TextField
+          required
           label="Last name"
           //   id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
           onChange={(e) => setUserLastName(e.target.value)}
         />
         <TextField
+          required
           type="number"
           label="Mobile"
           //   id="outlined-start-adornment"

@@ -2,11 +2,6 @@ import axios from "axios";
 
 const createPetAPI = async (token, img, pet) => {
   try {
-    console.log("IMG", img);
-
-    console.log("TOKEN", token);
-    console.log("PET", pet);
-
     const formData = new FormData();
     formData.append("text", JSON.stringify(pet));
     formData.append("image", img);
@@ -23,6 +18,29 @@ const createPetAPI = async (token, img, pet) => {
         },
       }
     );
+
+    if (response.ok) {
+      return console.log("A new pet has been succesfully created");
+    }
+    if (response.status == 400) {
+      return console.log("Return the response body from the API...");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const updatePetObjectAPI = async (token, petObject, petId) => {
+  try {
+    const response = await fetch(`http://localhost:3002/pet/${petId}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(petObject),
+    });
 
     if (response.ok) {
       return console.log("A new pet has been succesfully created");
@@ -101,6 +119,32 @@ const savePetToMyPetsAPI = async (token, petId) => {
   }
 };
 
+const getMyPetsAPI = async (token) => {
+  try {
+    const response = await fetch(`http://localhost:3002/my-pets`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const results = await response.json();
+
+    console.log("My Pets Results", results.message);
+
+    if (response.ok) {
+      return results.message;
+    }
+    if (response.status == 400) {
+      return console.log("Return the response body from the API...");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const adoptOrFosterPetAPI = async (token, petId, status) => {
   try {
     const response = await fetch(`http://localhost:3002/pet/${petId}/adopt`, {
@@ -129,4 +173,6 @@ export {
   getPetIdAPI,
   savePetToMyPetsAPI,
   adoptOrFosterPetAPI,
+  getMyPetsAPI,
+  updatePetObjectAPI,
 };
