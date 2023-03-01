@@ -86,10 +86,13 @@ module.exports = class PetsController {
   };
 
   static getPetIds = async (req, res) => {
-    const idArray = ["63f5cb25a98883b3d7611ed8", "63f5c9a1a98883b3d7611ed6"];
+    const idArray = req.currentUser.myPets;
+
+    //get request user id
+
+    //set variable with the petsId from the user object
     try {
       const response = await PetsDAO.getPetByIds(idArray);
-      console.log("response", response);
 
       return res.status(200).json({
         success: true,

@@ -31,15 +31,6 @@ const upload = multer({ storage: storage });
 //   secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 // });
 
-// app.post("/verify", (req, res) => {
-//   console.log(req.headers.authorization);
-
-//   return res.status(200).send({
-//     success: true,
-//     message: "authentic user",
-//   });
-// });
-
 app.post("/register", UsersController.register);
 app.post("/login", UsersController.login);
 
@@ -51,7 +42,7 @@ app.get("/pet", PetsController.getPets);
 
 app.get("/pet/:id", PetsController.getPetId);
 
-app.get("/pets/many", PetsController.getPetIds);
+app.get("/my-pets", AuthMiddleware, PetsController.getPetIds);
 
 app.put("/pet/:id", AuthMiddleware, PetsController.updatePetObject);
 

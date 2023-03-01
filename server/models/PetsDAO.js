@@ -25,7 +25,7 @@ module.exports = class PetsDAO {
   static async getPetByIds(myPets) {
     return await petsCollection
       .find({
-        _id: { $in: myPets.map((id) => new ObjectId(id)) },
+        _id: { $in: myPets.map((id) => id) },
       })
       .toArray();
   }
