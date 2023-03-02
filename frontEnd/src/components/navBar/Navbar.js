@@ -8,24 +8,42 @@ import { FaPaw } from "react-icons/fa";
 
 import { LoginModalContext } from "../../context/LoginModalContext";
 import { LoginModalPopup } from "../../components/LoginModal/LoginModal";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { AuthContext } from "../../context/AuthContext";
 
 import "./navbar.css";
+import { UserContext } from "../../context/UserContext";
 
 const Navigationbar = () => {
   const { setModalShow } = useContext(LoginModalContext);
   const { authToken, logoutStorage } = useContext(AuthContext);
+  const { setProfileState, userRole } = useContext(UserContext);
 
   function refreshPage() {
     window.location.reload(false);
   }
 
+  const getProfileData = async () => {
+    try {
+      if (authToken) {
+        await setProfileState();
+      }
+    } catch (error) {
+      console.log(`There was an error getting user profile - ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, [authToken]);
+
   const logoutHandler = () => {
     logoutStorage();
     refreshPage();
   };
+
+  console.log("userRole", userRole);
 
   return (
     <Navbar
@@ -51,13 +69,27 @@ const Navigationbar = () => {
                 title="Dashboard"
                 id="collasible-nav-dropdown"
               >
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/my-pets">My Pets </NavDropdown.Item>
+                {authToken && (
+                  <>
+                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                    <NavDropdown.Item href="/my-pets">
+                      My Pets{" "}
+                    </NavDropdown.Item>
+                  </>
+                )}
 
-                <NavDropdown.Divider />
-                {/* <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item> */}
-                <NavDropdown.Item href="/create-pet">Add Pet</NavDropdown.Item>
-                <NavDropdown.Item href="/all-pets">All Pets </NavDropdown.Item>
+                {userRole == "admin" && (
+                  <>
+                    <NavDropdown.Divider />
+                    {/* <NavDropdown.Item href="#action/3.4">Users </NavDropdown.Item> */}
+                    <NavDropdown.Item href="/create-pet">
+                      Add Pet
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/all-pets">
+                      All Pets{" "}
+                    </NavDropdown.Item>
+                  </>
+                )}
               </NavDropdown>
             )}
           </Nav>

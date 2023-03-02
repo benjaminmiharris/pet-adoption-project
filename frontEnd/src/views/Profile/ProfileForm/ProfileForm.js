@@ -7,6 +7,9 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { UserContext } from "../../../context/UserContext";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const ProfileForm = () => {
   const {
     updateUserProfile,
@@ -43,62 +46,71 @@ const ProfileForm = () => {
     setUserShortBio(e.target.value);
   };
 
-  return (
-    <Box
-      component="form"
-      sx={{ display: "flex", flexWrap: "wrap" }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          value={userEmail}
-          label="Email"
-          onChange={(e) => setEmailHandler(e)}
-          id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-        />
+  const updateProfileHandler = async () => {
+    const response = await updateUserProfile();
+    notify(response.message);
+  };
 
-        <TextField
-          label="First name"
-          value={userFirstName}
-          onChange={(e) => setFirstNameHandler(e)}
-          sx={{ m: 1, width: fieldWidth }}
-        />
-        <TextField
-          label="Last name"
-          value={userLastName}
-          onChange={(e) => setLastNameHandler(e)}
-          sx={{ m: 1, width: fieldWidth }}
-        />
-        <TextField
-          label="Mobile"
-          value={userMobile}
-          onChange={(e) => setMobileHandler(e)}
-          sx={{ m: 1, width: fieldWidth }}
-        />
-        <TextField
-          id="outlined-textarea"
-          label="Short bio"
-          placeholder="Placeholder"
-          value={userShortBio}
-          multiline
-          rows={6}
-          onChange={(e) => setUserBioHandler(e)}
-          sx={{ m: 1, width: fieldWidth }}
-        />
-        <br />
-        <br />
-        <Button
-          sx={{ backgroundColor: "#fec861" }}
-          onClick={() => {
-            updateUserProfile();
-          }}
-        >
-          Update
-        </Button>
-      </div>
-    </Box>
+  const notify = async (message) => await toast(message);
+
+  return (
+    <>
+      <ToastContainer />
+
+      <Box
+        component="form"
+        sx={{ display: "flex", flexWrap: "wrap" }}
+        noValidate
+        autoComplete="off"
+      >
+        <div>
+          <TextField
+            value={userEmail}
+            label="Email"
+            onChange={(e) => setEmailHandler(e)}
+            id="outlined-start-adornment"
+            sx={{ m: 1, width: fieldWidth }}
+          />
+
+          <TextField
+            label="First name"
+            value={userFirstName}
+            onChange={(e) => setFirstNameHandler(e)}
+            sx={{ m: 1, width: fieldWidth }}
+          />
+          <TextField
+            label="Last name"
+            value={userLastName}
+            onChange={(e) => setLastNameHandler(e)}
+            sx={{ m: 1, width: fieldWidth }}
+          />
+          <TextField
+            label="Mobile"
+            value={userMobile}
+            onChange={(e) => setMobileHandler(e)}
+            sx={{ m: 1, width: fieldWidth }}
+          />
+          <TextField
+            id="outlined-textarea"
+            label="Short bio"
+            placeholder="Placeholder"
+            value={userShortBio}
+            multiline
+            rows={6}
+            onChange={(e) => setUserBioHandler(e)}
+            sx={{ m: 1, width: fieldWidth }}
+          />
+          <br />
+          <br />
+          <Button
+            sx={{ backgroundColor: "#fec861" }}
+            onClick={() => updateProfileHandler()}
+          >
+            Update
+          </Button>
+        </div>
+      </Box>
+    </>
   );
 };
 

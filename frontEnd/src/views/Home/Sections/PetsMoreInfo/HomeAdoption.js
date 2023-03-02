@@ -39,14 +39,14 @@ const HomeAdoption = () => {
                 "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/Untitled+design+(32).png"
               }
               header={"Bringing your pet home"}
-              subHeader={"sub-header"}
+              subHeader={"A Guide for a new owner"}
             />
             <InfoBox
               image={
                 "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/3.png"
               }
               header={"Keeping your family member fed"}
-              subHeader={"sub-header"}
+              subHeader={"Looking at the pets diet..."}
             />
           </Carousel>
         </Col>

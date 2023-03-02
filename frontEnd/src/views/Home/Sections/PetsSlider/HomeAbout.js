@@ -41,7 +41,7 @@ const HomeAbout = () => {
               "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/uploads/3f10a889-d0e5-4777-a3d6-fd88819472f1"
             }
             petName={"Charlie"}
-            petStatus={"Adopted"}
+            petId={"search"}
           />
 
           <PetListing
@@ -49,14 +49,14 @@ const HomeAbout = () => {
               "https://aish.s3.eu-west-2.amazonaws.com/public/files/uploads/40c7db5af77db6783ef8625adda935282b544cc4.jpg"
             }
             petName={"Fluffy"}
-            petStatus={"Foster"}
+            petId={"search"}
           />
           <PetListing
             imageSrc={
               "https://aish.s3.eu-west-2.amazonaws.com/public/files/uploads/aab7db1bc7ad3b7fd46bbee59f044463e568d5e1.jpg"
             }
             petName={"Mitsey"}
-            petStatus={"Adopted"}
+            petId={"search"}
           />
         </Carousel>
       </div>

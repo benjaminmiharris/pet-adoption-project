@@ -34,6 +34,7 @@ function App() {
 
               <Route path="/users" element={<UsersDashboard />} />
               <Route path="/all-pets" element={<AllPets />} />
+              <Route path="/pet/search" element={<Search />} />
 
               <Route path="/search" element={<Search />} />
               <Route path="/create-account" element={<CreateAccount />} />

@@ -60,25 +60,7 @@ const CreateAccount = ({ handler }) => {
     event.preventDefault();
   };
 
-  const notify = (message) => toast(message);
-
-  const passwordMatch = (password, repeatPassword) => {
-    let message;
-    if (password === repeatPassword) {
-      return message;
-    } else {
-      return notify("Passwords do not match");
-    }
-  };
-
-  React.useEffect(() => {
-    clearTimeout(timer);
-    setTimer(
-      setTimeout(() => {
-        passwordMatch(userPassword, userPasswordConfirm);
-      }, 400)
-    );
-  }, [userPasswordConfirm]);
+  const notify = async (message) => await toast(message);
 
   const validateForm = () => {
     if (
@@ -87,7 +69,6 @@ const CreateAccount = ({ handler }) => {
       !userFirstName ||
       !userLastName
     ) {
-      // form is not valid
       return false;
     }
     setFormValid(true);
@@ -106,12 +87,13 @@ const CreateAccount = ({ handler }) => {
   ]);
 
   const submitHandler = async () => {
-    await createUserAccount();
-    await handler();
+    const response = await createUserAccount();
 
-    // if (outcome == 400) {
-    //   notify("Error. Please try again");
-    // }
+    if (response.success) {
+      notify(response.message);
+    } else {
+      return notify(response.message);
+    }
   };
 
   const fieldWidth = "30ch";

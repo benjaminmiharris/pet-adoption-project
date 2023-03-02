@@ -73,10 +73,10 @@ export default function MultiSelectChips({
         <Select
           multiple={true}
           labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
+          // id="demo-multiple-chip"
           value={personName.length > 0 ? personName : defaultValue}
           onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label={chipLabel} />}
+          input={<OutlinedInput label={chipLabel} />}
           renderValue={(selected) => (
             <Box
               sx={{

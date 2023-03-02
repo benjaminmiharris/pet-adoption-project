@@ -1,5 +1,4 @@
 const createAccountAPI = async (user) => {
-  let outcome;
   try {
     const response = await fetch("http://localhost:3002/register", {
       method: "POST",
@@ -9,14 +8,15 @@ const createAccountAPI = async (user) => {
       },
       body: JSON.stringify(user),
     });
-    if (response.ok) {
-      console.log(response.status);
-      return response.status;
-    }
-    if (response.status == 400) {
-      console.log(response.status);
 
-      return response.status;
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    }
+    if (response.status === 400) {
+      console.log(result);
+
+      return result;
     }
   } catch (e) {
     console.log(e);
@@ -33,12 +33,18 @@ const loginAPI = async (user) => {
       },
       body: JSON.stringify(user),
     });
-    if (response.ok) {
-      const results = await response.json();
-      return setUserTokenLocalStorage(results.token);
+
+    const results = await response.json();
+
+    if (response.status === 200) {
+      setUserTokenLocalStorage(results.token);
+
+      console.log("Success Login", results);
+      return results;
     }
-    if (response.status == 400) {
-      return console.log("Return the response body from the API...");
+    if (response.status === 400) {
+      console.log("Not good Login", results);
+      return results;
     }
   } catch (error) {
     console.log(error);
@@ -47,7 +53,7 @@ const loginAPI = async (user) => {
 
 const updateUserAPI = async (userId, userObject, token) => {
   try {
-    await fetch(`http://localhost:3002/user/${userId}`, {
+    const response = await fetch(`http://localhost:3002/user/${userId}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -56,6 +62,15 @@ const updateUserAPI = async (userId, userObject, token) => {
       },
       body: JSON.stringify(userObject),
     });
+
+    const results = await response.json();
+
+    if (response.status === 200) {
+      return results;
+    }
+    if (response.status === 400) {
+      return results;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -63,7 +78,6 @@ const updateUserAPI = async (userId, userObject, token) => {
 
 const setUserTokenLocalStorage = (token) => {
   localStorage.setItem("userToken", token);
-  console.log("Token added to localStorage");
 };
 
 const getCurrentUserProfileAPI = async (token) => {
@@ -78,27 +92,10 @@ const getCurrentUserProfileAPI = async (token) => {
     const response = await fetch("http://localhost:3002/user", settings);
     const result = await response.json();
 
-    console.log("User", result);
     return result;
   } catch (error) {
     console.log(error);
   }
 };
-
-// const authenticateUser = async (token) => {
-//   try {
-//     const response = await axios.post("http://localhost:3002/verify", {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     if (response.ok) {
-//       console.log("all good");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export { createAccountAPI, loginAPI, getCurrentUserProfileAPI, updateUserAPI };
