@@ -36,7 +36,7 @@ app.post("/login", UsersController.login);
 
 app.get("/user", AuthMiddleware, UsersController.getUserProfile);
 
-app.put("/user/:id", UsersController.updateUserProfile);
+app.put("/user/:id", AuthMiddleware, UsersController.updateUserProfile);
 
 app.get("/pet", PetsController.getPets);
 

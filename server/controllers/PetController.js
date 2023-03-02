@@ -60,10 +60,19 @@ module.exports = class PetsController {
       query.pet_weight = params.petWeight;
     }
 
+    try {
+      const results = await PetsDAO.getPets(query);
+      console.log(results);
+      return res.status(200).json({
+        results,
+      });
+    } catch (error) {}
+
     const results = await PetsDAO.getPets(query);
     console.log(results);
-    return res.json({
-      results,
+    return res.status(400).send({
+      success: false,
+      message: error,
     });
   };
 
