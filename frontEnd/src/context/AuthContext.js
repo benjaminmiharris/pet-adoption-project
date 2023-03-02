@@ -1,19 +1,12 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { createContext } from "react";
-import { authenticateUser } from "../helpers/createAccountAPI";
+import { createContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [authToken, setauthToken] = useState("");
-  //   const [validUser, setValidUser] = useState(false);
 
   async function getFromStorage() {
     const creds = await localStorage.getItem("userToken");
-    console.log("creds", creds);
-    // authenticateUser(creds);
-    // creds = JSON.stringify(creds);
 
     if (creds) {
       setauthToken(creds);

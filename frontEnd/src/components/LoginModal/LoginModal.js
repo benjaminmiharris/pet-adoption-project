@@ -12,6 +12,10 @@ function LoginModalPopup() {
 
   const [createAccount, setCreateAccount] = useState(false);
 
+  const showLoginAfterAccountCreatedHandler = () => {
+    setCreateAccount(false);
+  };
+
   return (
     <Modal
       show={modalShow}
@@ -44,7 +48,7 @@ function LoginModalPopup() {
                 Log in{" "}
               </a>
             </p>{" "}
-            <CreateAccount />{" "}
+            <CreateAccount handler={showLoginAfterAccountCreatedHandler} />{" "}
           </>
         ) : (
           <>

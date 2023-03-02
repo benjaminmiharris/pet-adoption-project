@@ -17,8 +17,15 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
+  const navigate = useNavigate();
+  const notify = async (message) => await toast(message);
+
   const { setUserEmail, setUserPassword, signIn } = useContext(UserContext);
   const { setModalShow } = useContext(LoginModalContext);
 
@@ -30,12 +37,22 @@ const Signin = () => {
     event.preventDefault();
   };
 
-  const handleLogin = () => {
-    setModalShow(false);
-    signIn();
+  const handleLogin = async () => {
+    const result = await signIn();
+
+    if (result.success) {
+      setModalShow(false);
+      window.location.reload();
+      navigate("/search");
+    } else {
+      notify(result.message);
+    }
   };
+
   return (
     <>
+      <ToastContainer />
+
       <Box
         component="form"
         sx={{ display: "flex", flexWrap: "wrap" }}
@@ -47,9 +64,6 @@ const Signin = () => {
           label="Email"
           id="outlined-start-adornment"
           sx={{ m: 1, width: "25ch" }}
-          // onChange={(e) => {
-          //   setEmail(e.target.value);
-          // }}
           onChange={(e) => {
             setUserEmail(e.target.value);
           }}

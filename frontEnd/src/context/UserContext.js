@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import {
   createAccountAPI,
   getCurrentUserProfileAPI,
@@ -20,6 +20,7 @@ const UserContextProvider = ({ children }) => {
   const [userMobile, setUserMobile] = useState("");
   const [userShortBio, setUserShortBio] = useState("");
   const [userSavedPets, setUserSavedPets] = useState([]);
+  const [userRole, setUserRole] = useState("");
 
   const setProfileState = async () => {
     try {
@@ -32,13 +33,14 @@ const UserContextProvider = ({ children }) => {
         setUserId(userProfileData.user._id);
         setUserShortBio(userProfileData.user.userBio);
         setUserSavedPets(userProfileData.user.savedPets);
+        setUserRole(userProfileData.user.role);
       }
     } catch (error) {
       console.log(`There was an error getting user profile - ${error}`);
     }
   };
 
-  const createUserAccount = () => {
+  const createUserAccount = async () => {
     const userDetails = {
       firstName: userFirstName,
       lastName: userLastName,
@@ -46,10 +48,13 @@ const UserContextProvider = ({ children }) => {
       email: userEmail,
       password: userPassword,
     };
-    createAccountAPI(userDetails);
+
+    const result = await createAccountAPI(userDetails);
+
+    return result;
   };
 
-  const updateUserProfile = () => {
+  const updateUserProfile = async () => {
     const userDetails = {
       firstName: userFirstName,
       lastName: userLastName,
@@ -58,20 +63,22 @@ const UserContextProvider = ({ children }) => {
       userBio: userShortBio,
     };
 
-    updateUserAPI(userId, userDetails);
+    return await updateUserAPI(userId, userDetails, authToken);
   };
 
-  const signIn = () => {
+  const signIn = async () => {
     const user = {
       email: userEmail,
       password: userPassword,
     };
-    loginAPI(user);
+
+    return await loginAPI(user);
   };
 
   return (
     <UserContext.Provider
       value={{
+        userRole,
         setProfileState,
         userSavedPets,
         setUserSavedPets,

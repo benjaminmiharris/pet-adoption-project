@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import SearchToggle from "../../components/inputs/SearchToggle";
 
 import MySavedPets from "./Sections/Results/MySavedPets";
+import MyPetsResults from "./Sections/Results/MyPets";
 
 import { showAdvancedSearch } from "../../redux/search";
 
@@ -12,11 +13,14 @@ import { UserContext } from "../../context/UserContext";
 import { AuthContext } from "../../context/AuthContext";
 
 import "./my-pets-view.css";
+import { getMyPetsAPI } from "../../helpers/createPetAPI";
 
 const MyPets = () => {
   const state = useSelector(showAdvancedSearch);
   const { authToken } = useContext(AuthContext);
   const { setProfileState, userSavedPets } = useContext(UserContext);
+
+  const [myPetsResult, setMyPetsResults] = useState([]);
 
   const getProfileData = async () => {
     try {
@@ -28,8 +32,13 @@ const MyPets = () => {
     }
   };
 
+  const setMyPetsFromAPI = async () => {
+    const myPetsFromAPI = await getMyPetsAPI(authToken);
+    setMyPetsResults(myPetsFromAPI);
+  };
   useEffect(() => {
     getProfileData();
+    setMyPetsFromAPI();
   }, [authToken]);
 
   return (
@@ -45,9 +54,7 @@ const MyPets = () => {
           {state.payload.search.value ? (
             <MySavedPets userSavedPets={userSavedPets} />
           ) : (
-            <>
-              <h3 className="my-pets-search-type-header">No Pets!</h3>{" "}
-            </>
+            myPetsResult && <MyPetsResults myPetsResult={myPetsResult} />
           )}
         </div>
       </div>

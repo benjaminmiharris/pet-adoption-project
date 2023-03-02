@@ -2,17 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../../context/AuthContext";
+import { LoginModalContext } from "../../../../context/LoginModalContext";
 import { UserContext } from "../../../../context/UserContext";
 import { savePetToMyPetsAPI } from "../../../../helpers/createPetAPI";
 
 import "./_home-banner.css";
 
-const HomeBanner = ({ petDetails }) => {
+const PetBanner = ({ petDetails }) => {
   const [heartStateCSS, setHeartStateCSS] = useState(true);
 
   let { id } = useParams();
 
   const { authToken } = useContext(AuthContext);
+
+  const { setModalShow } = useContext(LoginModalContext);
 
   const { setProfileState, userSavedPets } = useContext(UserContext);
 
@@ -28,7 +31,6 @@ const HomeBanner = ({ petDetails }) => {
   };
 
   const checkIfPetIsSaved = () => {
-    console.log("userSavedPets", userSavedPets);
     const petExists = userSavedPets.some((pet) => pet._id === id);
     console.log("petExists", petExists);
 
@@ -63,17 +65,17 @@ const HomeBanner = ({ petDetails }) => {
           <FaHeart
             className={"pet-heart-icon"}
             size={35}
-            onClick={() => {
-              savePetHandler();
-            }}
+            onClick={
+              authToken ? () => savePetHandler() : () => setModalShow(true)
+            }
           />
         ) : (
           <FaHeart
             className={"pet-heart-icon clicked"}
             size={35}
-            onClick={() => {
-              savePetHandler();
-            }}
+            onClick={
+              authToken ? () => savePetHandler() : () => setModalShow(true)
+            }
           />
         )}
       </div>
@@ -109,4 +111,4 @@ const HomeBanner = ({ petDetails }) => {
   );
 };
 
-export default HomeBanner;
+export default PetBanner;

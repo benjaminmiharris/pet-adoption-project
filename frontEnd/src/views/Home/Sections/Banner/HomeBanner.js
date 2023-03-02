@@ -8,18 +8,25 @@ import { FaHeart } from "react-icons/fa";
 import "./home-banner.css";
 import { useNavigate } from "react-router-dom";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { UserContext } from "../../../../context/UserContext";
+import { AuthContext } from "../../../../context/AuthContext";
+import { LoginModalContext } from "../../../../context/LoginModalContext";
 
 const HomeBanner = () => {
   const navigate = useNavigate();
 
-  const { userFirstName } = useContext(UserContext);
+  const { authToken } = useContext(AuthContext);
+  const { setModalShow } = useContext(LoginModalContext);
 
   const redirectSearch = () => {
     navigate("/search");
   };
+
+  // useEffect(() => {
+  //   setProfileState();
+  // }, []);
 
   return (
     <div>
@@ -48,18 +55,33 @@ const HomeBanner = () => {
         >
           <Row className="text-left mt-md-5 ">
             <p className="sub-header-banner">
-              {userFirstName + " "}Do you love me? <FaHeart size={18} />
+              {" "}
+              Do you love me? <FaHeart size={18} />
             </p>
             <h1 className="banner-header">Let's help find a pet for you</h1>
           </Row>
-          <Button
-            className="home-banner get-started-btn"
-            variant="outlined"
-            color="primary"
-            onClick={redirectSearch}
-          >
-            Get Started
-          </Button>
+
+          {authToken ? (
+            <Button
+              className="home-banner get-started-btn"
+              variant="outlined"
+              color="primary"
+              onClick={redirectSearch}
+            >
+              Find a Pet{" "}
+            </Button>
+          ) : (
+            <Button
+              className="home-banner get-started-btn"
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                setModalShow(true);
+              }}
+            >
+              Get Started
+            </Button>
+          )}
         </Col>
       </Row>
     </div>

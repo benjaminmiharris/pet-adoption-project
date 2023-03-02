@@ -31,25 +31,20 @@ const upload = multer({ storage: storage });
 //   secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 // });
 
-// app.post("/verify", (req, res) => {
-//   console.log(req.headers.authorization);
-
-//   return res.status(200).send({
-//     success: true,
-//     message: "authentic user",
-//   });
-// });
-
 app.post("/register", UsersController.register);
 app.post("/login", UsersController.login);
 
 app.get("/user", AuthMiddleware, UsersController.getUserProfile);
 
-app.put("/user/:id", UsersController.updateUserProfile);
+app.put("/user/:id", AuthMiddleware, UsersController.updateUserProfile);
 
 app.get("/pet", PetsController.getPets);
 
 app.get("/pet/:id", PetsController.getPetId);
+
+app.get("/my-pets", AuthMiddleware, PetsController.getPetIds);
+
+app.put("/pet/:id", AuthMiddleware, PetsController.updatePetObject);
 
 app.post(
   "/pet/create",
@@ -65,8 +60,6 @@ app.post(
 app.post("/pet/:id/save", AuthMiddleware, UsersController.savePetToUserProfile);
 
 app.post("/pet/:id/adopt", AuthMiddleware, UsersController.adoptOrFosterAPet);
-
-app.put("/pet/:id", (req, res) => {});
 
 app.listen(3002, async () => {
   console.log("Server is running on port 3002");

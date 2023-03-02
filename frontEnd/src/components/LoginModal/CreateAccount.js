@@ -24,25 +24,26 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CreateAccount = () => {
+const CreateAccount = ({ handler }) => {
   const {
-    userEmail,
     setUserEmail,
     userPassword,
     setUserPassword,
     userPasswordConfirm,
     setUserPasswordConfirm,
-    userFirstName,
+    userEmail,
     setUserFirstName,
+    userFirstName,
     userLastName,
     setUserLastName,
-    userMobile,
+
     setUserMobile,
     createUserAccount,
   } = useContext(UserContext);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [timer, setTimer] = useState(null);
+  const [formValid, setFormValid] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -59,25 +60,41 @@ const CreateAccount = () => {
     event.preventDefault();
   };
 
-  const notify = () => toast("Passwords do not match");
+  const notify = async (message) => await toast(message);
 
-  const passwordMatch = (password, repeatPassword) => {
-    let message;
-    if (password === repeatPassword) {
-      return message;
-    } else {
-      return notify();
+  const validateForm = () => {
+    if (
+      userPassword !== userPasswordConfirm ||
+      !userEmail ||
+      !userFirstName ||
+      !userLastName
+    ) {
+      return false;
     }
+    setFormValid(true);
+    // form is valid
+    return true;
   };
 
   React.useEffect(() => {
-    clearTimeout(timer);
-    setTimer(
-      setTimeout(() => {
-        passwordMatch(userPassword, userPasswordConfirm);
-      }, 400)
-    );
-  }, [userPasswordConfirm]);
+    validateForm();
+  }, [
+    userEmail,
+    userLastName,
+    userFirstName,
+    userPasswordConfirm,
+    userPassword,
+  ]);
+
+  const submitHandler = async () => {
+    const response = await createUserAccount();
+
+    if (response.success) {
+      notify(response.message);
+    } else {
+      return notify(response.message);
+    }
+  };
 
   const fieldWidth = "30ch";
 
@@ -90,13 +107,15 @@ const CreateAccount = () => {
     >
       <div>
         <TextField
+          required
           label="Email"
           id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
           onChange={(e) => setUserEmail(e.target.value)}
         />
+
         <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
+          <InputLabel required htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
           <OutlinedInput
@@ -121,7 +140,7 @@ const CreateAccount = () => {
         <ToastContainer />
 
         <FormControl sx={{ m: 1, width: fieldWidth }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
+          <InputLabel required htmlFor="outlined-adornment-password">
             Password Confirm
           </InputLabel>
           <OutlinedInput
@@ -144,12 +163,14 @@ const CreateAccount = () => {
           />
         </FormControl>
         <TextField
+          required
           label="First name"
           //   id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
           onChange={(e) => setUserFirstName(e.target.value)}
         />
         <TextField
+          required
           label="Last name"
           //   id="outlined-start-adornment"
           sx={{ m: 1, width: fieldWidth }}
@@ -164,11 +185,12 @@ const CreateAccount = () => {
         />
         <br />
         <Button
+          disabled={!formValid}
           variant="primary"
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            createUserAccount();
+            submitHandler();
           }}
         >
           Submit

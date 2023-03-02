@@ -1,0 +1,28 @@
+.my-pets-container .profile-main-container {
+  height: 1030px;
+  width: 70%;
+  /* border: 1px solid red; */
+}
+
+.my-saved-pets-header-container {
+  position: relative;
+  top: 60px;
+  left: 50px;
+  /* height: 20%; */
+  /* height: 1000px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: stretch; */
+  justify-content: space-between;
+}
+
+.saved-pets-header {
+  width: 95%;
+  border-bottom: 2.5px solid #fec861;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.saved-pets-container {
+  margin-top: 40px;
+}

@@ -33,14 +33,21 @@ export default function MultiSelectChips({
   chipLabel,
   chipsArray,
   onChangeHandler,
+  defaultTileValueProp,
 }) {
   const theme = useTheme();
 
   const [personName, setPersonName] = React.useState([]);
+  const [defaultValue, setDefaultValue] = React.useState([]);
+
+  React.useEffect(() => {
+    defaultTileValueProp && setDefaultValueHandler();
+  }, [defaultTileValueProp]);
 
   React.useEffect(() => {
     onChangeHandler(personName);
   }, [personName]);
+
   const handleChange = (event) => {
     // console.log("event", event.target.value);
     const {
@@ -52,6 +59,13 @@ export default function MultiSelectChips({
     );
   };
 
+  const setDefaultValueHandler = () => {
+    if (typeof defaultTileValueProp != "object") {
+      return setDefaultValue([defaultTileValueProp]);
+    }
+    setDefaultValue(defaultTileValueProp);
+  };
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: 350, display: "flex", flexWrap: "wrap" }}>
@@ -59,10 +73,10 @@ export default function MultiSelectChips({
         <Select
           multiple={true}
           labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          value={personName}
+          // id="demo-multiple-chip"
+          value={personName.length > 0 ? personName : defaultValue}
           onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label={chipLabel} />}
+          input={<OutlinedInput label={chipLabel} />}
           renderValue={(selected) => (
             <Box
               sx={{
