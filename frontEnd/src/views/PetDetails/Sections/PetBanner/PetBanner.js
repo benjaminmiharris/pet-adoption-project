@@ -6,7 +6,7 @@ import { LoginModalContext } from "../../../../context/LoginModalContext";
 import { UserContext } from "../../../../context/UserContext";
 import { savePetToMyPetsAPI } from "../../../../helpers/createPetAPI";
 
-import "./_home-banner.css";
+import "./pet-banner.css";
 
 const PetBanner = ({ petDetails }) => {
   const [heartStateCSS, setHeartStateCSS] = useState(true);

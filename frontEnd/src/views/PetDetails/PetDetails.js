@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PetBanner from "./Sections/PetBanner/PetBanner";
-import "./pet-details.css";
 import PetInfo from "./Sections/PetInfo/PetInfo";
 
 import { useParams } from "react-router-dom";
@@ -19,10 +18,8 @@ const PetDetails = () => {
     getPetResultsFromPetsAPI();
   }, []);
 
-  console.log("pee", petDetails);
-
   return (
-    <div className="page">
+    <div>
       <PetBanner petDetails={petDetails} />
       <PetInfo petDetails={petDetails} />
     </div>

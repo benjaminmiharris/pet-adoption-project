@@ -30,7 +30,7 @@ const HomeAbout = () => {
 
   return (
     <div className="about-container">
-      <Row className="pt-5">
+      <Row className="about-headings-container pt-5">
         <p className="top-header">Lets learn something about pets.</p>
         <h2 className="second-header">Ready to fill your home with love? </h2>
       </Row>

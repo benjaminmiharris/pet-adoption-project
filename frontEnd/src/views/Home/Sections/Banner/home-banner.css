@@ -1,3 +1,7 @@
+.home-banner-container {
+  width: 100%;
+}
+
 .banner-image {
   width: 95%;
 }
@@ -34,6 +38,7 @@
 .home-banner.get-started-btn {
   position: relative;
   top: 25%;
+  width: 180px;
 }
 
 @media (max-width: 1000px) {

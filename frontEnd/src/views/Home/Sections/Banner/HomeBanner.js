@@ -8,9 +8,8 @@ import { FaHeart } from "react-icons/fa";
 import "./home-banner.css";
 import { useNavigate } from "react-router-dom";
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
-import { UserContext } from "../../../../context/UserContext";
 import { AuthContext } from "../../../../context/AuthContext";
 import { LoginModalContext } from "../../../../context/LoginModalContext";
 
@@ -30,7 +29,7 @@ const HomeBanner = () => {
 
   return (
     <div>
-      <Row>
+      <Row className="home-banner-container">
         <Col
           xs={{ span: 1, order: 2 }}
           sm={{ span: 2, order: 2 }}
@@ -59,29 +58,28 @@ const HomeBanner = () => {
               Do you love me? <FaHeart size={18} />
             </p>
             <h1 className="banner-header">Let's help find a pet for you</h1>
+            {authToken ? (
+              <Button
+                className="home-banner get-started-btn"
+                variant="outlined"
+                color="primary"
+                onClick={redirectSearch}
+              >
+                Find a Pet{" "}
+              </Button>
+            ) : (
+              <Button
+                className="home-banner get-started-btn"
+                variant="outlined"
+                color="primary"
+                onClick={() => {
+                  setModalShow(true);
+                }}
+              >
+                Get Started
+              </Button>
+            )}
           </Row>
-
-          {authToken ? (
-            <Button
-              className="home-banner get-started-btn"
-              variant="outlined"
-              color="primary"
-              onClick={redirectSearch}
-            >
-              Find a Pet{" "}
-            </Button>
-          ) : (
-            <Button
-              className="home-banner get-started-btn"
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                setModalShow(true);
-              }}
-            >
-              Get Started
-            </Button>
-          )}
         </Col>
       </Row>
     </div>

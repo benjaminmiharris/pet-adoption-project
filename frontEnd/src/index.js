@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
 import { LoginModalContextProvider } from "./context/LoginModalContext";
 import { UserContextProvider } from "./context/UserContext";
 import { PetContextProvider } from "./context/PetContext";

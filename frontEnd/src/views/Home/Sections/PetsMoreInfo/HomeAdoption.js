@@ -30,27 +30,29 @@ const HomeAdoption = () => {
   };
 
   return (
-    <div className="home-adoption-container swiper">
-      <Row className="text-left mt-5 ">
-        <Col>
-          <Carousel responsive={responsive}>
-            <InfoBox
-              image={
-                "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/Untitled+design+(32).png"
-              }
-              header={"Bringing your pet home"}
-              subHeader={"A Guide for a new owner"}
-            />
-            <InfoBox
-              image={
-                "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/3.png"
-              }
-              header={"Keeping your family member fed"}
-              subHeader={"Looking at the pets diet..."}
-            />
-          </Carousel>
-        </Col>
-      </Row>
+    <div className="home-resources-boxes-container">
+      <div className="home-adoption-container swiper">
+        <Row className="text-left mt-5 ">
+          <Col>
+            <Carousel responsive={responsive}>
+              <InfoBox
+                image={
+                  "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/Untitled+design+(32).png"
+                }
+                header={"Bringing your pet home"}
+                subHeader={"A Guide for a new owner"}
+              />
+              <InfoBox
+                image={
+                  "https://pet-adoption-project.s3.eu-west-2.amazonaws.com/3.png"
+                }
+                header={"Keeping your family member fed"}
+                subHeader={"Looking at the pets diet..."}
+              />
+            </Carousel>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 };

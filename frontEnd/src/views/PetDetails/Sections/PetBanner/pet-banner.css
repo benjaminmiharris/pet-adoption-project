@@ -2,6 +2,10 @@
   position: absolute;
 }
 
+.pet-header-container {
+  border: 1px solid red;
+}
+
 .pet-container-img {
   width: 100vw;
   height: 500px;
@@ -12,11 +16,12 @@
 .pet-cover {
   position: relative;
   bottom: -50px;
-  margin-left: 14%;
+  margin-left: 22%;
+  width: 80%;
 }
 
 .pet-img {
-  width: 70vw;
+  /* width: 70vw; */
   height: 450px;
   border-top-right-radius: 50px;
   border-top-left-radius: 50px;

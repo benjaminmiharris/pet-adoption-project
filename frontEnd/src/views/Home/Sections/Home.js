@@ -6,7 +6,7 @@ import "./home-view.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home-page-container">
       <HomeBanner />
       <HomeAbout />
       <HomeAdoption />

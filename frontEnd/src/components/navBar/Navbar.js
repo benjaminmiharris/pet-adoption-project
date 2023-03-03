@@ -43,14 +43,12 @@ const Navigationbar = () => {
     refreshPage();
   };
 
-  console.log("userRole", userRole);
-
   return (
     <Navbar
       bg="custom-color"
       variant="dark"
       sticky="top"
-      className="nav-bar-cstm"
+      // className="nav-bar-cstm"
     >
       <Container>
         <Navbar.Brand href="/">

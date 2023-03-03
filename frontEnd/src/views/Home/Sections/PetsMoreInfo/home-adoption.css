@@ -1,8 +1,12 @@
+.home-resources-boxes-container {
+  display: flex;
+  justify-content: center;
+}
+
 .home-adoption-container {
   background-color: white;
   height: 500px;
-}
-
-.swiper {
-  margin-left: 40px;
+  width: 80vw;
+  padding: 0 20px;
+  margin-bottom: 100px;
 }
