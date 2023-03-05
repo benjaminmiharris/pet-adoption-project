@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const UsersDAO = require("../models/UsersDAO");
+const { addPetValidation } = require("../validations/pet-schemas");
 
 module.exports.AuthMiddleware = async function AuthMiddleware(req, res, next) {
   let { authorization } = req.headers;
@@ -43,3 +44,18 @@ module.exports.RoleCheckerMiddleware = async function RoleCheckerMiddleware(
     });
   }
 };
+
+module.exports.ValidatePetObjectMiddleware =
+  async function ValidatePetObjectMiddleware(req, res, next) {
+    console.log("req", req);
+
+    const isValid = addPetValidation(req.body);
+
+    if (!isValid) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Please fill all fields" });
+    }
+
+    next();
+  };
