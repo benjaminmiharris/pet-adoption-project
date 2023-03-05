@@ -16,6 +16,9 @@ import {
 import { useParams } from "react-router-dom";
 import { getPetIdAPI } from "../../../helpers/createPetAPI";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./add-pet-form.css";
 
 const AddPetForm = () => {
@@ -98,10 +101,18 @@ const AddPetForm = () => {
     setPetGender(event);
   };
 
+  const createNewPetHandler = async () => {
+    const response = await createPetObject();
+    await notify(response);
+  };
+
+  const notify = async (message) => await toast(message);
+
   const fieldWidth = "35ch";
 
   return (
     <form className="add-pet-form-container">
+      <ToastContainer />
       <TextField
         value={petName || ""}
         label="Name"
@@ -213,7 +224,7 @@ const AddPetForm = () => {
       <br />
 
       {id == null ? (
-        <Button onClick={createPetObject}>Submit</Button>
+        <Button onClick={createNewPetHandler}>Submit</Button>
       ) : (
         <Button
           onClick={() => {

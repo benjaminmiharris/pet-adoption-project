@@ -6,8 +6,6 @@ const createPetAPI = async (token, img, pet) => {
     formData.append("text", JSON.stringify(pet));
     formData.append("image", img);
 
-    console.log("formData", formData);
-
     const response = await axios.post(
       "http://localhost:3002/pet/create",
       formData,
@@ -19,14 +17,15 @@ const createPetAPI = async (token, img, pet) => {
       }
     );
 
-    if (response.ok) {
-      return console.log("A new pet has been succesfully created");
+    if (response.status == 200) {
+      return response.data.message;
     }
-    if (response.status === 400) {
-      return console.log("Return the response body from the API...");
+    if (response.status == 400) {
+      console.log(response.data.message.message);
+      return response.data.message;
     }
   } catch (e) {
-    console.log(e);
+    return e.message;
   }
 };
 
