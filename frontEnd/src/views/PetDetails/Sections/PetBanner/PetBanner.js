@@ -56,10 +56,14 @@ const PetBanner = ({ petDetails }) => {
   return (
     <div className="pet-header-container">
       <div className="pet-container">
-        <img className="pet-container-img" src={petDetails.petImage} />
+        <img
+          className="pet-container-img"
+          src={petDetails.petImage}
+          alt="pet"
+        />
       </div>
       <div className="pet-cover">
-        <img className="pet-img" src={petDetails.petImage} />
+        <img className="pet-img" src={petDetails.petImage} alt="pet" />
 
         {heartStateCSS ? (
           <FaHeart
@@ -79,7 +83,7 @@ const PetBanner = ({ petDetails }) => {
           />
         )}
       </div>
-      <div className="pet-actions">
+      <div className="pet-actions-container">
         <div className="pet-actions-left">
           <div className="pet-info-box">
             <div className="pet-details-label">Age</div>

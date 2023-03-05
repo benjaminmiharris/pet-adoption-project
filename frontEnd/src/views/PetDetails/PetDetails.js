@@ -19,10 +19,10 @@ const PetDetails = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <PetBanner petDetails={petDetails} />
       <PetInfo petDetails={petDetails} />
-    </div>
+    </>
   );
 };
 

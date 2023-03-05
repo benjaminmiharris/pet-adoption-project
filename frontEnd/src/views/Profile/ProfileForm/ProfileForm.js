@@ -2,13 +2,14 @@ import * as React from "react";
 
 import Box from "@mui/material/Box";
 
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { UserContext } from "../../../context/UserContext";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import "./profile-form.css";
 
 const ProfileForm = () => {
   const {
@@ -54,7 +55,7 @@ const ProfileForm = () => {
   const notify = async (message) => await toast(message);
 
   return (
-    <>
+    <form className="profile-form">
       <ToastContainer />
 
       <Box
@@ -71,6 +72,7 @@ const ProfileForm = () => {
             id="outlined-start-adornment"
             sx={{ m: 1, width: fieldWidth }}
           />
+          <br />
 
           <TextField
             label="First name"
@@ -84,12 +86,16 @@ const ProfileForm = () => {
             onChange={(e) => setLastNameHandler(e)}
             sx={{ m: 1, width: fieldWidth }}
           />
+          <br />
+
           <TextField
             label="Mobile"
             value={userMobile}
             onChange={(e) => setMobileHandler(e)}
             sx={{ m: 1, width: fieldWidth }}
           />
+          <br />
+
           <TextField
             id="outlined-textarea"
             label="Short bio"
@@ -110,7 +116,7 @@ const ProfileForm = () => {
           </Button>
         </div>
       </Box>
-    </>
+    </form>
   );
 };
 

@@ -33,7 +33,7 @@
   margin-bottom: 20px;
   padding-bottom: 8px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   border-bottom: 1px solid;
   width: 60%;
 }
@@ -45,7 +45,7 @@
 }
 
 .pet-details-more-info-detail {
-  font-size: 1.2rem;
+  font-size: 1rem;
   list-style-type: none;
   margin-left: 8px;
 }
@@ -62,7 +62,10 @@
   .pet-details-bio {
     flex-wrap: wrap;
     width: 80%;
-    margin-left: 10%;
+  }
+
+  .pets-bio-container {
+    text-align: center;
   }
 
   .pet-details-more-info-container {
@@ -79,11 +82,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    width: 90%;
   }
 
   .pet-buttons-stack {
     position: relative;
-    left: 20%;
+    left: 17%;
   }
 }
 

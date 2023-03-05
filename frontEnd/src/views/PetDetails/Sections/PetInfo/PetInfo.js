@@ -32,7 +32,12 @@ const PetInfo = ({ petDetails }) => {
     <div className="pet-details-container">
       <div className="pet-details-bio">
         <div className="pet-buttons-stack">
-          <Stack direction="row" spacing={2}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={2}
+          >
             <Button
               color="secondary"
               onClick={
@@ -64,7 +69,7 @@ const PetInfo = ({ petDetails }) => {
           </Stack>
         </div>
         <br />
-        <div>
+        <div className="pets-bio-container">
           {!petDetails.pet_bio
             ? "There is no bio for this pet!"
             : petDetails.pet_bio}

@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import SearchToggle from "../../components/inputs/SearchToggle";
 
 import MySavedPets from "./Sections/Results/MySavedPets";
-import MyPetsResults from "./Sections/Results/MyPets";
 
 import { showAdvancedSearch } from "../../redux/search";
 
@@ -16,11 +15,10 @@ import "./my-pets-view.css";
 import { getMyPetsAPI } from "../../helpers/createPetAPI";
 
 const MyPets = () => {
+  const [myPetsResult, setMyPetsResults] = useState([]);
   const state = useSelector(showAdvancedSearch);
   const { authToken } = useContext(AuthContext);
   const { setProfileState, userSavedPets } = useContext(UserContext);
-
-  const [myPetsResult, setMyPetsResults] = useState([]);
 
   const getProfileData = async () => {
     try {
@@ -36,27 +34,44 @@ const MyPets = () => {
     const myPetsFromAPI = await getMyPetsAPI(authToken);
     setMyPetsResults(myPetsFromAPI);
   };
+
   useEffect(() => {
     getProfileData();
     setMyPetsFromAPI();
   }, [authToken]);
 
+  const mySavedPetsRendering = () => {
+    return userSavedPets.length === 0 ? (
+      <div className="default-results-container">
+        <h3 className="default-results-message">Currently no pets...</h3>
+      </div>
+    ) : (
+      <MySavedPets userSavedPets={userSavedPets} />
+    );
+  };
+
+  const myPetsRendering = () => {
+    return myPetsResult.length === 0 ? (
+      <div className="default-results-container">
+        <h3 className="default-results-message">Currently no pets...</h3>
+      </div>
+    ) : (
+      <MySavedPets userSavedPets={myPetsResult} />
+    );
+  };
+
   return (
-    <div className="my-pets-container">
-      <div className="profile-main-container">
-        <div className="my-pets-header-container">
-          {state.payload.search.value ? <h2>Saved Pets</h2> : <h2>My Pets</h2>}
-        </div>
-        <div className="my-pets-toggle-container">
-          <SearchToggle />
-        </div>
-        <div className="my-pets-results-container">
-          {state.payload.search.value ? (
-            <MySavedPets userSavedPets={userSavedPets} />
-          ) : (
-            myPetsResult && <MyPetsResults myPetsResult={myPetsResult} />
-          )}
-        </div>
+    <div className="profile-main-container">
+      <div className="my-pets-header-container">
+        {state.payload.search.value ? <h2>Saved Pets</h2> : <h2>My Pets</h2>}
+      </div>
+      <div className="my-pets-toggle-container">
+        <SearchToggle />
+      </div>
+      <div className="my-pets-results-container">
+        {state.payload.search.value
+          ? userSavedPets && mySavedPetsRendering()
+          : myPetsResult && myPetsRendering()}
       </div>
     </div>
   );

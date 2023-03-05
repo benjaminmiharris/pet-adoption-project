@@ -1,24 +1,17 @@
-/* .pet-create-form-container {
-  border: 2px solid red;
-  height: 60vh;
-  width: 35vw;
-} */
-
 .my-pets-main-container {
-  width: 80%;
-  height: 80%;
-  margin-left: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.my-pets-header-container {
+  width: 60%;
+  border-bottom: 2.5px solid #fec861;
+  margin-bottom: 90px;
 }
 
 .my-pets-form-container {
-  width: 95%;
-  border-top: 2.5px solid #fec861;
-  padding-top: 40px;
-  position: relative;
-  top: 80px;
-  /* border: 1px solid red; */
-}
-
-.pet-create-form-container {
-  height: 1050px;
+  height: 100%;
+  width: 100%;
 }

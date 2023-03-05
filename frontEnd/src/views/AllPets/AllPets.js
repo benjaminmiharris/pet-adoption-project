@@ -41,15 +41,15 @@ const AllPets = () => {
       ),
     };
   });
+
   return (
-    <div className="my-pets-container">
-      <div className="profile-main-container">
-        <div className="my-saved-pets-header-container">
-          <h2 className="saved-pets-header">All Pets</h2>
-          <div className="saved-pets-container">
-            <TableComponent columns={columns} data={petArrayWithEditButton} />
-          </div>
-        </div>
+    <div className="admin-all-pets-container">
+      <div className="admin-pets-header-container">
+        <h2 className="admin-pets-header">All Pets</h2>
+      </div>
+
+      <div className="admin-pets-container">
+        <TableComponent columns={columns} data={petArrayWithEditButton} />
       </div>
     </div>
   );

@@ -1,11 +1,8 @@
-import * as React from "react";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useEffect } from "react";
 
-import Box from "@mui/material/Box";
 import MultiSelectChips from "../../../components/inputs/MultiSelectChips";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
 
 import TextField from "@mui/material/TextField";
 import { PetContext } from "../../../context/PetContext";
@@ -19,12 +16,14 @@ import {
 import { useParams } from "react-router-dom";
 import { getPetIdAPI } from "../../../helpers/createPetAPI";
 
+import "./add-pet-form.css";
+
 const AddPetForm = () => {
   const [petData, setPetData] = useState([]);
 
   const {
     updatePetObject,
-    setPetResults,
+    // setPetResults,
     petAge,
     setPetAge,
     petGender,
@@ -50,7 +49,7 @@ const AddPetForm = () => {
     setPetDiet,
     petBreed,
     setPetBreed,
-    petImage,
+    // petImage,
     setpetImage,
   } = useContext(PetContext);
 
@@ -61,13 +60,13 @@ const AddPetForm = () => {
     await setPetData(results.results.message);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (id) {
       getPetDataFromAPI(id);
     }
   }, [id]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     populateFieldsWithPetData();
   }, [petData]);
 
@@ -102,123 +101,115 @@ const AddPetForm = () => {
   const fieldWidth = "35ch";
 
   return (
-    <>
-      <Box
-        component="form"
-        sx={{ display: "flex", flexWrap: "wrap" }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          value={petName || ""}
-          label="Name"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetName(e.target.value)}
-        />
-        <MultiSelectChips
-          chipLabel="Status"
-          chipsArray={ADOPTION_STATUS_ARRAY}
-          onChangeHandler={handleChangeStatus}
-          defaultTileValueProp={petAdoptionStatus}
-        />
+    <form className="add-pet-form-container">
+      <TextField
+        value={petName || ""}
+        label="Name"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetName(e.target.value)}
+      />
+      <MultiSelectChips
+        chipLabel="Status"
+        chipsArray={ADOPTION_STATUS_ARRAY}
+        onChangeHandler={handleChangeStatus}
+        defaultTileValueProp={petAdoptionStatus}
+      />
 
-        <MultiSelectChips
-          chipLabel="Pets"
-          chipsArray={PETS_ARRAY}
-          onChangeHandler={handleChangePets}
-          defaultTileValueProp={petType}
-        />
+      <MultiSelectChips
+        chipLabel="Pets"
+        chipsArray={PETS_ARRAY}
+        onChangeHandler={handleChangePets}
+        defaultTileValueProp={petType}
+      />
 
-        <MultiSelectChips
-          chipLabel="Gender"
-          chipsArray={GENDER_ARRAY}
-          onChangeHandler={handleChangeGender}
-          defaultTileValueProp={petGender}
-        />
+      <MultiSelectChips
+        chipLabel="Gender"
+        chipsArray={GENDER_ARRAY}
+        onChangeHandler={handleChangeGender}
+        defaultTileValueProp={petGender}
+      />
 
-        <TextField
-          value={petAge || ""}
-          label="Age"
-          type="number"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetAge(e.target.value)}
-        />
+      <TextField
+        value={petAge || ""}
+        label="Age"
+        type="number"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetAge(e.target.value)}
+      />
 
-        <TextField
-          value={petHeight || ""}
-          label="Height (cm)"
-          type="number"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetHeight(e.target.value)}
-        />
-        <TextField
-          value={petWeight || ""}
-          label="Weight (kg)"
-          type="number"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetWeight(e.target.value)}
-        />
+      <TextField
+        value={petHeight || ""}
+        label="Height (cm)"
+        type="number"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetHeight(e.target.value)}
+      />
+      <TextField
+        value={petWeight || ""}
+        label="Weight (kg)"
+        type="number"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetWeight(e.target.value)}
+      />
 
-        <TextField
-          value={petColor || ""}
-          label="Color"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetColor(e.target.value)}
-        />
+      <TextField
+        value={petColor || ""}
+        label="Color"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetColor(e.target.value)}
+      />
 
-        <TextField
-          value={petBio || ""}
-          id="outlined-textarea"
-          label="Short bio"
-          placeholder="Placeholder"
-          multiline
-          rows={6}
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetBio(e.target.value)}
-        />
+      <TextField
+        value={petBio || ""}
+        id="outlined-textarea"
+        label="Short bio"
+        placeholder="Placeholder"
+        multiline
+        rows={6}
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetBio(e.target.value)}
+      />
 
-        <FormControlLabel
-          value={petHypoallergenic || ""}
-          control={
-            <Checkbox
-              onChange={(e) => setPetHypoallergenic(e.target.checked)}
-            />
-          }
-          label="Hypoallergenic"
-          sx={{ m: 1, width: fieldWidth }}
-        />
+      <FormControlLabel
+        value={petHypoallergenic || ""}
+        control={
+          <Checkbox onChange={(e) => setPetHypoallergenic(e.target.checked)} />
+        }
+        label="Hypoallergenic"
+        sx={{ m: 1, width: fieldWidth }}
+      />
 
-        <TextField
-          value={petDiet || ""}
-          label="Diet"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetDiet(e.target.value)}
-        />
-        <TextField
-          value={petBreed || ""}
-          label="Breed"
-          //   id="outlined-start-adornment"
-          sx={{ m: 1, width: fieldWidth }}
-          onChange={(e) => setPetBreed(e.target.value)}
-        />
+      <TextField
+        value={petDiet || ""}
+        label="Diet"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetDiet(e.target.value)}
+      />
+      <TextField
+        value={petBreed || ""}
+        label="Breed"
+        //   id="outlined-start-adornment"
+        sx={{ m: 1, width: fieldWidth }}
+        onChange={(e) => setPetBreed(e.target.value)}
+      />
 
-        <br />
-        <br />
+      <br />
+      <br />
 
-        <input
-          type="file"
-          onChange={(e) => {
-            setpetImage(e.target.files[0]);
-          }}
-        />
-        {/* <td title="tooltip"> 1200px x 700px</td> */}
-      </Box>
+      <input
+        type="file"
+        onChange={(e) => {
+          setpetImage(e.target.files[0]);
+        }}
+      />
+      {/* <td title="tooltip"> 1200px x 700px</td> */}
+      {/* </Box> */}
       <br />
 
       {id == null ? (
@@ -232,7 +223,7 @@ const AddPetForm = () => {
           Update
         </Button>
       )}
-    </>
+    </form>
   );
 };
 
