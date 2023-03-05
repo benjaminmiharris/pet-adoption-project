@@ -22,7 +22,7 @@ const createPetAPI = async (token, img, pet) => {
     if (response.ok) {
       return console.log("A new pet has been succesfully created");
     }
-    if (response.status == 400) {
+    if (response.status === 400) {
       return console.log("Return the response body from the API...");
     }
   } catch (e) {
@@ -45,7 +45,7 @@ const updatePetObjectAPI = async (token, petObject, petId) => {
     if (response.ok) {
       return console.log("A new pet has been succesfully created");
     }
-    if (response.status == 400) {
+    if (response.status === 400) {
       return console.log("Return the response body from the API...");
     }
   } catch (e) {
@@ -57,8 +57,6 @@ const getPetsAPI = async (url) => {
   try {
     const response = await fetch(url);
     const results = await response.json();
-
-    console.log("API", results);
 
     if (results.results.length > 0) {
       return {
@@ -81,9 +79,7 @@ const getPetIdAPI = async (id) => {
     const response = await fetch(`http://localhost:3002/pet/${id}`);
     const results = await response.json();
 
-    console.log("API", results);
-
-    if (results.success == true) {
+    if (results.success === true) {
       return {
         results,
       };
@@ -111,7 +107,7 @@ const savePetToMyPetsAPI = async (token, petId) => {
     if (response.ok) {
       return console.log("Pet has been saved or deleted");
     }
-    if (response.status == 400) {
+    if (response.status === 400) {
       return console.log("Return the response body from the API...");
     }
   } catch (e) {
@@ -132,12 +128,10 @@ const getMyPetsAPI = async (token) => {
 
     const results = await response.json();
 
-    console.log("My Pets Results", results.message);
-
     if (response.ok) {
       return results.message;
     }
-    if (response.status == 400) {
+    if (response.status === 400) {
       return console.log("Return the response body from the API...");
     }
   } catch (e) {
@@ -156,11 +150,16 @@ const adoptOrFosterPetAPI = async (token, petId, status) => {
       },
       body: JSON.stringify(status),
     });
+
+    const results = await response.json();
+
     if (response.ok) {
-      return console.log("Pet has been saved or deleted");
+      console.log(results.message);
+      return results.message;
     }
-    if (response.status == 400) {
-      return console.log("Return the response body from the API...");
+    if (response.status === 400) {
+      console.log(results.message);
+      return results.message;
     }
   } catch (e) {
     console.log(e);

@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import Box from "@mui/material/Box";
-
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { UserContext } from "../../../context/UserContext";
@@ -58,64 +56,57 @@ const ProfileForm = () => {
     <form className="profile-form">
       <ToastContainer />
 
-      <Box
-        component="form"
-        sx={{ display: "flex", flexWrap: "wrap" }}
-        noValidate
-        autoComplete="off"
-      >
-        <div>
-          <TextField
-            value={userEmail}
-            label="Email"
-            onChange={(e) => setEmailHandler(e)}
-            id="outlined-start-adornment"
-            sx={{ m: 1, width: fieldWidth }}
-          />
-          <br />
+      <div>
+        <TextField
+          value={userEmail}
+          label="Email"
+          onChange={(e) => setEmailHandler(e)}
+          id="outlined-start-adornment"
+          sx={{ m: 1, width: fieldWidth }}
+        />
+        <br />
 
-          <TextField
-            label="First name"
-            value={userFirstName}
-            onChange={(e) => setFirstNameHandler(e)}
-            sx={{ m: 1, width: fieldWidth }}
-          />
-          <TextField
-            label="Last name"
-            value={userLastName}
-            onChange={(e) => setLastNameHandler(e)}
-            sx={{ m: 1, width: fieldWidth }}
-          />
-          <br />
+        <TextField
+          label="First name"
+          value={userFirstName}
+          onChange={(e) => setFirstNameHandler(e)}
+          sx={{ m: 1, width: fieldWidth }}
+        />
+        <TextField
+          label="Last name"
+          value={userLastName}
+          onChange={(e) => setLastNameHandler(e)}
+          sx={{ m: 1, width: fieldWidth }}
+        />
+        <br />
 
-          <TextField
-            label="Mobile"
-            value={userMobile}
-            onChange={(e) => setMobileHandler(e)}
-            sx={{ m: 1, width: fieldWidth }}
-          />
-          <br />
+        <TextField
+          label="Mobile"
+          value={userMobile}
+          onChange={(e) => setMobileHandler(e)}
+          sx={{ m: 1, width: fieldWidth }}
+        />
+        <br />
 
-          <TextField
-            id="outlined-textarea"
-            label="Short bio"
-            placeholder="Placeholder"
-            value={userShortBio}
-            multiline
-            rows={6}
-            onChange={(e) => setUserBioHandler(e)}
-            sx={{ m: 1, width: fieldWidth }}
-          />
-          <br />
-          <br />
-          <Button
-            sx={{ backgroundColor: "#fec861" }}
-            onClick={() => updateProfileHandler()}
-          >
-            Update
-          </Button>
-        </div>
-      </Box>
+        <TextField
+          id="outlined-textarea"
+          label="Short bio"
+          placeholder="Placeholder"
+          value={userShortBio}
+          multiline
+          rows={6}
+          onChange={(e) => setUserBioHandler(e)}
+          sx={{ m: 1, width: fieldWidth }}
+        />
+        <br />
+        <br />
+        <Button
+          sx={{ backgroundColor: "#fec861" }}
+          onClick={() => updateProfileHandler()}
+        >
+          Update
+        </Button>
+      </div>
     </form>
   );
 };

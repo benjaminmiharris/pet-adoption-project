@@ -24,7 +24,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CreateAccount = ({ handler }) => {
+const CreateAccount = () => {
   const {
     setUserEmail,
     userPassword,
@@ -42,7 +42,6 @@ const CreateAccount = ({ handler }) => {
   } = useContext(UserContext);
 
   const [showPassword, setShowPassword] = React.useState(false);
-  const [timer, setTimer] = useState(null);
   const [formValid, setFormValid] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

@@ -14,11 +14,14 @@ import { AuthContext } from "../../context/AuthContext";
 
 import "./navbar.css";
 import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Navigationbar = () => {
   const { setModalShow } = useContext(LoginModalContext);
   const { authToken, logoutStorage } = useContext(AuthContext);
   const { setProfileState, userRole } = useContext(UserContext);
+
+  const nav = useNavigate();
 
   function refreshPage() {
     window.location.reload(false);
@@ -38,18 +41,14 @@ const Navigationbar = () => {
     getProfileData();
   }, [authToken]);
 
-  const logoutHandler = () => {
-    logoutStorage();
+  const logoutHandler = async () => {
+    await logoutStorage();
+    nav("/");
     refreshPage();
   };
 
   return (
-    <Navbar
-      bg="custom-color"
-      variant="dark"
-      sticky="top"
-      // className="nav-bar-cstm"
-    >
+    <Navbar bg="custom-color" variant="dark" sticky="top">
       <Container>
         <Navbar.Brand href="/">
           <FaPaw size={40} />

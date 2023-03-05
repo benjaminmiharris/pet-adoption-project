@@ -44,8 +44,6 @@ const PetContextProvider = ({ children }) => {
       pet_breed: petBreed,
     };
 
-    console.log("AUTHTOEKN", authToken);
-
     createPetAPI(authToken, petImage, petObject);
   };
 
@@ -65,9 +63,6 @@ const PetContextProvider = ({ children }) => {
       pet_breed: petBreed,
       petImage: petImage,
     };
-
-    console.log("petObject", petObject);
-    console.log("petObjectId", id);
 
     updatePetObjectAPI(authToken, petObject, id);
   };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
@@ -8,26 +8,76 @@ import { adoptOrFosterPetAPI } from "../../../../helpers/createPetAPI";
 import { useParams } from "react-router-dom";
 import { LoginModalContext } from "../../../../context/LoginModalContext";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../../../../context/UserContext";
+
 const PetInfo = ({ petDetails }) => {
   const { authToken } = useContext(AuthContext);
   const { setModalShow } = useContext(LoginModalContext);
+  const { setProfileState, userMyPets } = useContext(UserContext);
 
   let { id } = useParams();
 
-  const adoptClickHandler = () => {
+  const getProfileData = async () => {
+    try {
+      if (authToken) {
+        await setProfileState();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const checkIfCurrentPetIsUsersPet = () => {
+    const arr = userMyPets;
+    const valueToFind = id;
+
+    if (arr.includes(valueToFind)) {
+      console.log("Value found in array!");
+      return (
+        <Button
+          color="secondary"
+          onClick={
+            authToken ? () => returnClickHandler() : () => setModalShow(true)
+          }
+        >
+          Return Pet
+        </Button>
+      );
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, [authToken]);
+
+  useEffect(() => {
+    checkIfCurrentPetIsUsersPet();
+  }, [userMyPets]);
+
+  const adoptClickHandler = async () => {
     const status = { status: "Adopted" };
-    adoptOrFosterPetAPI(authToken, id, status);
+    const response = await adoptOrFosterPetAPI(authToken, id, status);
+    notify(response);
   };
 
-  const fosterClickHandler = () => {
+  const fosterClickHandler = async () => {
     const status = { status: "Foster" };
-    adoptOrFosterPetAPI(authToken, id, status);
+    const response = await adoptOrFosterPetAPI(authToken, id, status);
+    notify(response);
   };
 
-  const returnClickHandler = () => {
+  const returnClickHandler = async () => {
     const status = { status: "Looking for home" };
-    adoptOrFosterPetAPI(authToken, id, status);
+    const response = await adoptOrFosterPetAPI(authToken, id, status);
+    notify(response);
   };
+
+  const notify = async (message) => await toast(message);
+
+  console.log("my pets", userMyPets);
+
   return (
     <div className="pet-details-container">
       <div className="pet-details-bio">
@@ -56,16 +106,7 @@ const PetInfo = ({ petDetails }) => {
             >
               Foster
             </Button>
-            <Button
-              color="secondary"
-              onClick={
-                authToken
-                  ? () => returnClickHandler()
-                  : () => setModalShow(true)
-              }
-            >
-              Return Pet
-            </Button>
+            {checkIfCurrentPetIsUsersPet()}
           </Stack>
         </div>
         <br />
@@ -110,6 +151,7 @@ const PetInfo = ({ petDetails }) => {
           </li>
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 };

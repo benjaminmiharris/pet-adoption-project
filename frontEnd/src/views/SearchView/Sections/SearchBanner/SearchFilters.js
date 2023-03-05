@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
@@ -35,10 +35,6 @@ const SearchFilters = () => {
 
     return setPetResults(data);
   };
-
-  useEffect(() => {
-    console.log("Resilts", petsResults);
-  }, [petsResults]);
 
   return (
     <>

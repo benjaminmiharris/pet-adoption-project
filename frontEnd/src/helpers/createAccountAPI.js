@@ -39,11 +39,9 @@ const loginAPI = async (user) => {
     if (response.status === 200) {
       setUserTokenLocalStorage(results.token);
 
-      console.log("Success Login", results);
       return results;
     }
     if (response.status === 400) {
-      console.log("Not good Login", results);
       return results;
     }
   } catch (error) {
