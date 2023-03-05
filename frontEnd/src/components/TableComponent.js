@@ -8,7 +8,6 @@ const TableComponent = ({ columns, data }) => {
     setCurrentPage(page);
   };
 
-  const paginatedData = data.slice((currentPage - 1) * 10, currentPage * 10);
   return (
     <DataTable
       columns={columns}
