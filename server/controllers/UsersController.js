@@ -238,4 +238,19 @@ module.exports = class UsersController {
       });
     }
   };
+
+  static getAllUsersFromDB = async (req, res) => {
+    try {
+      const results = await UsersDAO.getAllUsers();
+      return res.status(200).send({
+        success: true,
+        message: results,
+      });
+    } catch (error) {
+      return res.status(500).send({
+        success: false,
+        message: `Error getting user data - ${error}`,
+      });
+    }
+  };
 };

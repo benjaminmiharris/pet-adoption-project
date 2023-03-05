@@ -69,4 +69,8 @@ module.exports = class UsersDAO {
       { $pull: { myPets: new ObjectId(petId) } }
     );
   }
+
+  static async getAllUsers() {
+    return await usersCollection.find({}).toArray();
+  }
 };
