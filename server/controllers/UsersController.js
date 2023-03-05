@@ -191,8 +191,6 @@ module.exports = class UsersController {
 
       const adoptionStatus = req.body.status;
 
-      console.log("adoptionStatus", adoptionStatus);
-
       await PetsDAO.updatePetStatus(petId, adoptionStatus);
 
       //Check if pet is in liked pets
@@ -219,12 +217,16 @@ module.exports = class UsersController {
 
         await UsersDAO.adoptOrFosterPet(req.currentUser._id, petId);
       } else {
-        console.log("Removed Pet");
         await UsersDAO.removeAdoptedPetFromUser(req.currentUser._id, petId);
+        return res.status(200).send({
+          success: true,
+          message: `Pet removed `,
+        });
       }
 
       return res.status(200).send({
         success: true,
+        message: `Congrats: ${adoptionStatus} `,
       });
 
       //Check if pet is in My pets and if it is replace with new object

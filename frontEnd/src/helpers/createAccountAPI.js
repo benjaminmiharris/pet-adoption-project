@@ -39,11 +39,9 @@ const loginAPI = async (user) => {
     if (response.status === 200) {
       setUserTokenLocalStorage(results.token);
 
-      console.log("Success Login", results);
       return results;
     }
     if (response.status === 400) {
-      console.log("Not good Login", results);
       return results;
     }
   } catch (error) {
@@ -98,4 +96,28 @@ const getCurrentUserProfileAPI = async (token) => {
   }
 };
 
-export { createAccountAPI, loginAPI, getCurrentUserProfileAPI, updateUserAPI };
+const getAllUsersAPI = async (token) => {
+  try {
+    const settings = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await fetch("http://localhost:3002/users", settings);
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  createAccountAPI,
+  loginAPI,
+  getCurrentUserProfileAPI,
+  updateUserAPI,
+  getAllUsersAPI,
+};

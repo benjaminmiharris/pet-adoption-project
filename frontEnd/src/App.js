@@ -16,8 +16,13 @@ import "./index.css";
 import AddPetView from "./views/AddPets/AddPetView";
 import UsersDashboard from "./views/Users/UsersDashboard";
 import AllPets from "./views/AllPets/AllPets";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+import { UserContext } from "./context/UserContext";
 
 function App() {
+  const { authToken } = useContext(AuthContext);
+  const { userRole } = useContext(UserContext);
   return (
     <div className="main-body">
       <Router>
@@ -25,18 +30,26 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/my-pets" element={<MyPets />} />
-          <Route path="/create-pet" element={<AddPetView />} />
-          <Route path="/create-pet/:id" element={<AddPetView />} />
-
-          <Route path="/users" element={<UsersDashboard />} />
-          <Route path="/all-pets" element={<AllPets />} />
-          <Route path="/pet/search" element={<Search />} />
-
-          <Route path="/search" element={<Search />} />
           <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/pet/:id" element={<PetDetails />} />
+
+          {authToken && (
+            <>
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/my-pets" element={<MyPets />} />
+              <Route path="/pet/search" element={<Search />} />
+
+              {userRole == "admin" && (
+                <>
+                  <Route path="/create-pet" element={<AddPetView />} />
+                  <Route path="/create-pet/:id" element={<AddPetView />} />
+                  <Route path="/users" element={<UsersDashboard />} />
+                  <Route path="/all-pets" element={<AllPets />} />
+                </>
+              )}
+            </>
+          )}
 
           <Route path="*" element={<Error />} />
         </Routes>

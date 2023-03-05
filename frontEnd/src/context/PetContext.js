@@ -28,7 +28,7 @@ const PetContextProvider = ({ children }) => {
   const [petImage, setpetImage] = useState([]);
   const [petsResults, setPetResults] = useState([]);
 
-  const createPetObject = () => {
+  const createPetObject = async () => {
     const petObject = {
       pet_type: petType,
       pet_name: petName,
@@ -44,9 +44,7 @@ const PetContextProvider = ({ children }) => {
       pet_breed: petBreed,
     };
 
-    console.log("AUTHTOEKN", authToken);
-
-    createPetAPI(authToken, petImage, petObject);
+    return await createPetAPI(authToken, petImage, petObject);
   };
 
   const updatePetObject = (id) => {
@@ -65,9 +63,6 @@ const PetContextProvider = ({ children }) => {
       pet_breed: petBreed,
       petImage: petImage,
     };
-
-    console.log("petObject", petObject);
-    console.log("petObjectId", id);
 
     updatePetObjectAPI(authToken, petObject, id);
   };

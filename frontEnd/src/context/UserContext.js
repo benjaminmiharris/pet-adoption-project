@@ -21,6 +21,7 @@ const UserContextProvider = ({ children }) => {
   const [userShortBio, setUserShortBio] = useState("");
   const [userSavedPets, setUserSavedPets] = useState([]);
   const [userRole, setUserRole] = useState("");
+  const [userMyPets, setUserMyPets] = useState([]);
 
   const setProfileState = async () => {
     try {
@@ -34,6 +35,7 @@ const UserContextProvider = ({ children }) => {
         setUserShortBio(userProfileData.user.userBio);
         setUserSavedPets(userProfileData.user.savedPets);
         setUserRole(userProfileData.user.role);
+        setUserMyPets(userProfileData.user.myPets);
       }
     } catch (error) {
       console.log(`There was an error getting user profile - ${error}`);
@@ -78,6 +80,7 @@ const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        userMyPets,
         userRole,
         setProfileState,
         userSavedPets,

@@ -52,8 +52,6 @@ module.exports = class UsersDAO {
   }
 
   static async adoptOrFosterPet(userId, petId) {
-    //update pet status in the
-
     const petObject = await PetsDAO.getPetById(petId);
 
     await usersCollection.updateOne(

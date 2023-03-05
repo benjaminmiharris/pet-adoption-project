@@ -9,6 +9,7 @@ const { S3PetUploadMiddleware } = require("./middlewares/S3PetImageUpload");
 const {
   AuthMiddleware,
   RoleCheckerMiddleware,
+  ValidatePetObjectMiddleware,
 } = require("./middlewares/AuthMiddlesware");
 
 initDB();
@@ -52,6 +53,7 @@ app.post(
     upload.single("image"),
     AuthMiddleware,
     RoleCheckerMiddleware,
+    ValidatePetObjectMiddleware,
     S3PetUploadMiddleware,
   ],
   PetsController.createPet

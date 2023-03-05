@@ -9,32 +9,18 @@ module.exports = class PetsController {
   static createPet = async (req, res) => {
     try {
       const petObject = req.body;
-      console.log(req.file);
 
       petObject.user_id = req.currentUser._id;
       petObject.petImage = req.petImage;
 
-      console.log("PETOBJECT", petObject);
-      console.log("petObject.user_id", petObject.user_id);
-
-      // const isValid = addPetValidation(petObject);
-
-      // if (!isValid) {
-      //   return res
-      //     .status(400)
-      //     .send({ success: false, message: "Please fill all fields" });
-      // }
-
       await PetsDAO.createPet(petObject);
 
-      return res.json({
-        pet: petObject,
-      });
+      return res.status(200).json({ success: true, message: "New pet added." });
     } catch (error) {
       console.log(`Error in PetsController.createPet ${e}`);
       return res.status(500).json({
         success: false,
-        message: "unknown error",
+        message: "Error creating pet.",
       });
     }
   };
