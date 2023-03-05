@@ -35,6 +35,12 @@ const upload = multer({ storage: storage });
 app.post("/register", UsersController.register);
 app.post("/login", UsersController.login);
 
+app.get(
+  "/users",
+  [AuthMiddleware, RoleCheckerMiddleware],
+  UsersController.getAllUsersFromDB
+);
+
 app.get("/user", AuthMiddleware, UsersController.getUserProfile);
 
 app.put("/user/:id", AuthMiddleware, UsersController.updateUserProfile);
