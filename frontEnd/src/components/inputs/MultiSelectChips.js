@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { ComponentContext } from "../../context/ComponentContext";
+import { FormHelperText } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -34,6 +35,7 @@ export default function MultiSelectChips({
   chipsArray,
   onChangeHandler,
   defaultTileValueProp,
+  requiredFiled,
 }) {
   const theme = useTheme();
 
@@ -73,6 +75,7 @@ export default function MultiSelectChips({
         <Select
           multiple={true}
           labelId="demo-multiple-chip-label"
+          required={requiredFiled}
           // id="demo-multiple-chip"
           value={personName.length > 0 ? personName : defaultValue}
           onChange={handleChange}
@@ -103,6 +106,9 @@ export default function MultiSelectChips({
             </MenuItem>
           ))}
         </Select>
+        {requiredFiled && (
+          <FormHelperText>This field is required.</FormHelperText>
+        )}
       </FormControl>
     </div>
   );

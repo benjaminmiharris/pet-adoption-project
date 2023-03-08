@@ -116,6 +116,7 @@ const AddPetForm = () => {
       <TextField
         value={petName || ""}
         label="Name"
+        required={true}
         //   id="outlined-start-adornment"
         sx={{ m: 1, width: fieldWidth }}
         onChange={(e) => setPetName(e.target.value)}
@@ -132,6 +133,7 @@ const AddPetForm = () => {
         chipsArray={PETS_ARRAY}
         onChangeHandler={handleChangePets}
         defaultTileValueProp={petType}
+        requiredFiled={true}
       />
 
       <MultiSelectChips
@@ -206,6 +208,7 @@ const AddPetForm = () => {
         value={petBreed || ""}
         label="Breed"
         //   id="outlined-start-adornment"
+        required={true}
         sx={{ m: 1, width: fieldWidth }}
         onChange={(e) => setPetBreed(e.target.value)}
       />
@@ -221,6 +224,7 @@ const AddPetForm = () => {
       />
       {/* <td title="tooltip"> 1200px x 700px</td> */}
       {/* </Box> */}
+      <br />
       <br />
 
       {id == null ? (

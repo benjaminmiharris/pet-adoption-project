@@ -24,6 +24,7 @@ const createAccountAPI = async (user) => {
 };
 
 const loginAPI = async (user) => {
+  console.log("user", user);
   try {
     const response = await fetch("http://localhost:3002/login", {
       method: "POST",

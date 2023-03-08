@@ -13,4 +13,4 @@ export const PETS_ARRAY = [
   "Lizards",
 ];
 
-export const GENDER_ARRAY = ["Male", "Female", "Unknown "];
+export const GENDER_ARRAY = ["Male", "Female", "Unknown"];
