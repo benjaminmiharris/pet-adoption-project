@@ -14,12 +14,12 @@ const PetContextProvider = ({ children }) => {
   const [petType, setPetType] = useState("");
   const [petName, setPetName] = useState("");
 
-  const [petAge, setPetAge] = useState(0);
+  const [petAge, setPetAge] = useState("");
   const [petGender, setPetGender] = useState("");
 
   const [petAdoptionStatus, setpetAdoptionStatus] = useState("");
-  const [petHeight, setPetHeight] = useState(0);
-  const [petWeight, setPetWeight] = useState(0);
+  const [petHeight, setPetHeight] = useState("");
+  const [petWeight, setPetWeight] = useState("");
   const [petColor, setPetColor] = useState("");
   const [petBio, setPetBio] = useState("");
   const [petHypoallergenic, setPetHypoallergenic] = useState(false);

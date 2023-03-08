@@ -29,9 +29,12 @@ const SearchFilters = () => {
   } = useContext(PetContext);
 
   const searchHandler = async () => {
+    console.log("petType", petType);
     const data = await getPetsAPI(
       `http://localhost:3002/pet?petType=${petType}&petStatus=${petAdoptionStatus}&petName=${petName}&petHeight=${petHeight}&petWeight=${petWeight}`
     );
+
+    console.log(data);
 
     return setPetResults(data);
   };
