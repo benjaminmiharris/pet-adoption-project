@@ -1,6 +1,6 @@
-const { addPetValidation } = require("../validations/pet-schemas");
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+// const { addPetValidation } = require("../validations/pet-schemas");
+// const multer = require("multer");
+// const upload = multer({ dest: "uploads/" });
 
 const PetsDAO = require("../models/PetsDAO");
 const UsersDAO = require("../models/UsersDAO");
@@ -48,11 +48,12 @@ module.exports = class PetsController {
 
     try {
       const results = await PetsDAO.getPets(query);
-      console.log(results);
       return res.status(200).json({
         results,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
 
     const results = await PetsDAO.getPets(query);
     console.log(results);

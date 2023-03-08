@@ -47,9 +47,19 @@ module.exports.RoleCheckerMiddleware = async function RoleCheckerMiddleware(
 
 module.exports.ValidatePetObjectMiddleware =
   async function ValidatePetObjectMiddleware(req, res, next) {
-    console.log("req", req);
+    const jsonString = req.body.text;
 
-    const isValid = addPetValidation(req.body);
+    const reviver = (key, value) => {
+      if (/^\d+$/.test(value)) {
+        return parseInt(value);
+      }
+      return value;
+    };
+
+    const petObject = JSON.parse(jsonString, reviver);
+
+    const isValid = addPetValidation(petObject);
+    console.log(addPetValidation.errors);
 
     if (!isValid) {
       return res

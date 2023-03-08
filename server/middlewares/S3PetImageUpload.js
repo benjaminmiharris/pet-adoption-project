@@ -15,8 +15,6 @@ module.exports.S3PetUploadMiddleware = async function S3PetUploadMiddleware(
   req.body = JSON.parse(text);
   const file = req.file;
 
-  console.log("empty file", file);
-
   try {
     if (typeof file === "undefined") {
       next();
@@ -36,37 +34,10 @@ module.exports.S3PetUploadMiddleware = async function S3PetUploadMiddleware(
       }
 
       req.petImage = data.Location;
-      console.log("text", text);
-
-      // console.log(data.Location);
-
-      // res.send(`Text: ${text}\nImage URL: ${data.Location}`);
 
       next();
     });
   } catch (e) {
     console.log(e);
   }
-
-  //   const s3Params = {
-  //     Bucket: process.env.BUCKET_NAME,
-  //     Key: `uploads/${uuid()}`,
-  //     Body: file.buffer,
-  //     ContentType: file.mimetype,
-  //   };
-
-  //   await s3.upload(s3Params, (err, data) => {
-  //     if (err) {
-  //       console.error(err);
-  //       return res.status(500).send(err);
-  //     }
-
-  //     req.petImage = data.Location;
-  //     console.log("text", text);
-
-  //     // console.log(data.Location);
-
-  //     // res.send(`Text: ${text}\nImage URL: ${data.Location}`);
-
-  //     next();
 };

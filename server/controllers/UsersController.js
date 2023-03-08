@@ -76,21 +76,22 @@ module.exports = class UsersController {
           success: false,
           message: "Error. Wrong password.",
         });
+      } else {
+        const token = jwt.sign(
+          {
+            user_id: exisitingUser._id,
+          },
+          process.env.JWT_SECERET
+        );
+
+        return res.status(200).send({
+          success: true,
+          message: "successful login.",
+          token: token,
+        });
       }
-
-      const token = jwt.sign(
-        {
-          user_id: exisitingUser._id,
-        },
-        process.env.JWT_SECERET
-      );
-
-      return res.status(200).send({
-        success: true,
-        message: "successful login.",
-        token: token,
-      });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
         success: false,
         message: "Error. Account does not match our records.",
