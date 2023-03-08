@@ -73,7 +73,7 @@ export default function MultiSelectChips({
       <FormControl sx={{ m: 1, width: 350, display: "flex", flexWrap: "wrap" }}>
         <InputLabel id="demo-multiple-chip-label">{chipLabel}</InputLabel>
         <Select
-          multiple={true}
+          multiple={false}
           labelId="demo-multiple-chip-label"
           required={requiredFiled}
           // id="demo-multiple-chip"
