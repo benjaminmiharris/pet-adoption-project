@@ -28,10 +28,12 @@ module.exports = class PetsController {
   static getPets = async (req, res) => {
     const params = req.query;
 
+    console.log(" req.query;", req.query);
+
     const query = {};
 
     if (params.petType) {
-      query.pet_type = { $regex: new RegExp(params.petType, "i") };
+      query.pet_type = params.petType;
     }
     if (params.petStatus) {
       query.pet_adoptionStatus = { $regex: new RegExp(params.petStatus, "i") };
@@ -46,8 +48,11 @@ module.exports = class PetsController {
       query.pet_weight = params.petWeight;
     }
 
+    console.log("query", query);
+
     try {
       const results = await PetsDAO.getPets(query);
+      console.log(results);
       return res.status(200).json({
         results,
       });
