@@ -60,18 +60,21 @@ const PetInfo = ({ petDetails }) => {
     const status = { status: "Adopted" };
     const response = await adoptOrFosterPetAPI(authToken, id, status);
     notify(response);
+    getProfileData();
   };
 
   const fosterClickHandler = async () => {
     const status = { status: "Foster" };
     const response = await adoptOrFosterPetAPI(authToken, id, status);
     notify(response);
+    getProfileData();
   };
 
   const returnClickHandler = async () => {
     const status = { status: "Looking for home" };
     const response = await adoptOrFosterPetAPI(authToken, id, status);
     notify(response);
+    getProfileData();
   };
 
   const notify = async (message) => await toast(message);
