@@ -1,4 +1,5 @@
 require("dotenv").config();
+const PORT = process.env.PORT || 3002;
 
 const express = require("express");
 const { initDB } = require("./models/init");
@@ -69,6 +70,6 @@ app.post("/pet/:id/save", AuthMiddleware, UsersController.savePetToUserProfile);
 
 app.post("/pet/:id/adopt", AuthMiddleware, UsersController.adoptOrFosterAPet);
 
-app.listen(3002, async () => {
+app.listen(PORT, async () => {
   console.log("Server is running on port 3002");
 });
