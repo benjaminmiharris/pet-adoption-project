@@ -1,4 +1,10 @@
 {
+  "name": "pet-adoption-project",
+  "description": "Pet adoption website",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "ajv": "^8.12.0",
     "aws-sdk": "^2.1313.0",
@@ -11,5 +17,9 @@
     "multer": "^1.4.5-lts.1",
     "uniqid": "^5.4.0",
     "uuid": "^9.0.0"
-  }
-}
+  },
+  "scripts": {
+    "start": "node app.js",
+    "build": "webpack",
+    "heroku-postbuild": "ng build --prod"
+  }}
