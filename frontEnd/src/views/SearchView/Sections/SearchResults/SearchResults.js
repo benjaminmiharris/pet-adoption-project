@@ -10,7 +10,9 @@ const SearchResults = () => {
   const { setPetResults, petsResults } = useContext(PetContext);
 
   async function getPetResultsFromPetsAPI() {
-    const data = await getPetsAPI("http://localhost:3002/pet");
+    const data = await getPetsAPI(
+      "https://pet-server-nodejs.herokuapp.com/pet"
+    );
     setPetResults(data);
   }
 

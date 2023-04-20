@@ -12,7 +12,9 @@ const AllPets = () => {
   const navPetLandingPage = useNavigate();
 
   const getAllPetsHandler = async () => {
-    const petsArray = await getPetsAPI("http://localhost:3002/pet");
+    const petsArray = await getPetsAPI(
+      "https://pet-server-nodejs.herokuapp.com/pet"
+    );
     setAllPets(petsArray.response.results);
   };
 

@@ -7,7 +7,7 @@ const createPetAPI = async (token, img, pet) => {
     formData.append("image", img);
 
     const response = await axios.post(
-      "http://localhost:3002/pet/create",
+      "https://pet-server-nodejs.herokuapp.com/pet/create",
       formData,
       {
         headers: {
@@ -31,15 +31,18 @@ const createPetAPI = async (token, img, pet) => {
 
 const updatePetObjectAPI = async (token, petObject, petId) => {
   try {
-    const response = await fetch(`http://localhost:3002/pet/${petId}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(petObject),
-    });
+    const response = await fetch(
+      `https://pet-server-nodejs.herokuapp.com/pet/${petId}`,
+      {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(petObject),
+      }
+    );
 
     if (response.ok) {
       return console.log("A new pet has been succesfully created");
@@ -75,7 +78,9 @@ const getPetsAPI = async (url) => {
 
 const getPetIdAPI = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3002/pet/${id}`);
+    const response = await fetch(
+      `https://pet-server-nodejs.herokuapp.com/pet/${id}`
+    );
     const results = await response.json();
 
     if (results.success === true) {
@@ -95,14 +100,17 @@ const getPetIdAPI = async (id) => {
 
 const savePetToMyPetsAPI = async (token, petId) => {
   try {
-    const response = await fetch(`http://localhost:3002/pet/${petId}/save`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `https://pet-server-nodejs.herokuapp.com/pet/${petId}/save`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (response.ok) {
       return console.log("Pet has been saved or deleted");
     }
@@ -116,14 +124,17 @@ const savePetToMyPetsAPI = async (token, petId) => {
 
 const getMyPetsAPI = async (token) => {
   try {
-    const response = await fetch(`http://localhost:3002/my-pets`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `https://pet-server-nodejs.herokuapp.com/my-pets`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const results = await response.json();
 
@@ -140,15 +151,18 @@ const getMyPetsAPI = async (token) => {
 
 const adoptOrFosterPetAPI = async (token, petId, status) => {
   try {
-    const response = await fetch(`http://localhost:3002/pet/${petId}/adopt`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(status),
-    });
+    const response = await fetch(
+      `https://pet-server-nodejs.herokuapp.com/pet/${petId}/adopt`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(status),
+      }
+    );
 
     const results = await response.json();
 

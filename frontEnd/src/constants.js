@@ -14,3 +14,5 @@ export const PETS_ARRAY = [
 ];
 
 export const GENDER_ARRAY = ["Male", "Female", "Unknown"];
+
+export const SERVER_URL = "https://pet-server-nodejs.herokuapp.com";
